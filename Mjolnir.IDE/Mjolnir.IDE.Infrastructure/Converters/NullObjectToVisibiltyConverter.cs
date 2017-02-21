@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Mjolnir.IDE.Core.Converters
+namespace Mjolnir.IDE.Infrastructure.Converters
 {
     public class NullObjectToVisibiltyConverter : IValueConverter
     {

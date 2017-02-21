@@ -8,7 +8,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        xmlns:Converter="clr-namespace:Mjolnir.IDE.Core.Converters;assembly=Mjolnir.IDE.Core"
+        xmlns:Converter="clr-namespace:Mjolnir.IDE.Infrastructure.Converters;assembly=Mjolnir.IDE.Infrastructure"
         xmlns:Infrastructure="clr-namespace:Mjolnir.IDE.Infrastructure;assembly=Mjolnir.IDE.Infrastructure"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"

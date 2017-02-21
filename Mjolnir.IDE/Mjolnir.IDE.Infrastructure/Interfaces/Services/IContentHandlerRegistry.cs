@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
 {
@@ -47,6 +48,6 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
         /// Gets the command which provides the option to create a new document.
         /// </summary>
         /// <value>The new command.</value>
-        ContentViewModel NewCommand { get; }
+        ICommand NewCommand { get; }
     }
 }

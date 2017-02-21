@@ -145,6 +145,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -173,6 +174,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mjolnir.IDE.Infrastructure\Mjolnir.IDE.Infrastructure.csproj">
+      <Project>{75853632-A8DA-4426-AEC2-A4F2AB34EE5A}</Project>
+      <Name>Mjolnir.IDE.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mjolnir.IDE.Shell\Mjolnir.IDE.Shell.csproj">
       <Project>{8afe257f-f351-47e7-b836-e90bb9a47460}</Project>
       <Name>Mjolnir.IDE.Shell</Name>

@@ -75,6 +75,7 @@
       <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -82,8 +83,28 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.16567.21060, Culture=neutral, PublicKeyToken=ba83ff368b7563c6, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xceed.Wpf.AvalonDock.3.2.16567.21060\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -91,8 +112,16 @@
     <Compile Include="AbstractCommandable.cs" />
     <Compile Include="AbstractMenuItem.cs" />
     <Compile Include="AbstractPrioritizedTree.cs" />
+    <Compile Include="AbstractSettings.cs" />
+    <Compile Include="AbstractSettingsItem.cs" />
     <Compile Include="AbstractToolbar.cs" />
     <Compile Include="AbstractWorkspace.cs" />
+    <Compile Include="Converters\ActiveDocumentConverter.cs" />
+    <Compile Include="Converters\BoolToInsertModeConverter.cs" />
+    <Compile Include="Converters\MenuVisibilityConverter.cs" />
+    <Compile Include="Converters\NullObjectToVisibiltyConverter.cs" />
+    <Compile Include="Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Converters\PercentToFontSizeConverter.cs" />
     <Compile Include="Enums\PaneLocation.cs" />
     <Compile Include="Events\ActiveContentChangedEvent.cs" />
     <Compile Include="Events\ClosedContentEvent.cs" />
@@ -102,6 +131,7 @@
     <Compile Include="Events\SplashScreenUpdateEvent.cs" />
     <Compile Include="Events\ThemeChangeEvent.cs" />
     <Compile Include="Events\WindowClosingEvent.cs" />
+    <Compile Include="Interfaces\IApplicationDefinition.cs" />
     <Compile Include="Interfaces\ICommandable.cs" />
     <Compile Include="Interfaces\IContentView.cs" />
     <Compile Include="Interfaces\IPrioritizedTree.cs" />
@@ -113,9 +143,16 @@
     <Compile Include="Interfaces\Services\IContentHandlerRegistry.cs" />
     <Compile Include="Interfaces\Services\ILoggerService.cs" />
     <Compile Include="Interfaces\Services\IMenuService.cs" />
+    <Compile Include="Interfaces\Services\IOpenDocumentService.cs" />
     <Compile Include="Interfaces\Services\IStatusbarService.cs" />
     <Compile Include="Interfaces\Services\IThemeManager.cs" />
     <Compile Include="Interfaces\Services\IToolbarService.cs" />
+    <Compile Include="Interfaces\Settings\IRecentViewItem.cs" />
+    <Compile Include="Interfaces\Settings\IRecentViewSettings.cs" />
+    <Compile Include="Interfaces\Settings\ISettingsManager.cs" />
+    <Compile Include="Interfaces\Settings\IThemeSettings.cs" />
+    <Compile Include="Interfaces\Settings\IToolbarPositionSettings.cs" />
+    <Compile Include="Interfaces\Settings\IWindowPositionSettings.cs" />
     <Compile Include="Interfaces\ViewModels\ISplashScreenViewModel.cs" />
     <Compile Include="LayoutInitializer.cs" />
     <Compile Include="PanesStyleSelector.cs" />

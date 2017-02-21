@@ -13,7 +13,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
     /// <summary>
     /// Class Wide Status bar
     /// </summary>
-    internal class MjolnirStatusbar : ValidatableBindableBase, IStatusbarService
+    public class MjolnirStatusbarViewModel : ValidatableBindableBase, IStatusbarService
     {
         #region Fields
         /// <summary>
@@ -70,7 +70,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="WideStatusbar"/> class.
         /// </summary>
-        public MjolnirStatusbar()
+        public MjolnirStatusbarViewModel()
         {
             Clear();
         }

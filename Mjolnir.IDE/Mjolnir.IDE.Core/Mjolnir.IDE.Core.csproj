@@ -82,12 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\ActiveDocumentConverter.cs" />
-    <Compile Include="Converters\BoolToInsertModeConverter.cs" />
-    <Compile Include="Converters\MenuVisibilityConverter.cs" />
-    <Compile Include="Converters\NullObjectToVisibiltyConverter.cs" />
-    <Compile Include="Converters\NullToBooleanConverter.cs" />
-    <Compile Include="Converters\PercentToFontSizeConverter.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,13 +89,37 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mjolnir.IDE.Core.Services\Mjolnir.IDE.Core.Services.csproj">
+      <Project>{52e3030a-1b03-4653-8bf3-37a5a328fc49}</Project>
+      <Name>Mjolnir.IDE.Core.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mjolnir.IDE.Infrastructure\Mjolnir.IDE.Infrastructure.csproj">
       <Project>{75853632-A8DA-4426-AEC2-A4F2AB34EE5A}</Project>
       <Name>Mjolnir.IDE.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mjolnir.IDE.Modules.Console\Mjolnir.IDE.Modules.Console.csproj">
+      <Project>{a21a90e6-3782-4d07-affa-6c74dcbfe7a8}</Project>
+      <Name>Mjolnir.IDE.Modules.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mjolnir.IDE.Modules.Error\Mjolnir.IDE.Modules.Error.csproj">
+      <Project>{be6ca375-cb86-45fa-b186-fba6df0a1b28}</Project>
+      <Name>Mjolnir.IDE.Modules.Error</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mjolnir.IDE.Modules.Settings\Mjolnir.IDE.Modules.Settings.csproj">
+      <Project>{01CB530C-2F82-41DA-8115-CE77B2CFF1D1}</Project>
+      <Name>Mjolnir.IDE.Modules.Settings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mjolnir.IDE.Modules.SplashScreen\Mjolnir.IDE.Modules.SplashScreen.csproj">
       <Project>{c4ef8cd8-a007-446b-889e-387f5b4300e1}</Project>
       <Name>Mjolnir.IDE.Modules.SplashScreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mjolnir.IDE.Modules.StatusBar\Mjolnir.IDE.Modules.Statusbar.csproj">
+      <Project>{6c031b53-760f-4eee-b3a4-4194a1c193f8}</Project>
+      <Name>Mjolnir.IDE.Modules.Statusbar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mjolnir.IDE.Modules.Toolbar\Mjolnir.IDE.Modules.Toolbar.csproj">
+      <Project>{cae68656-8366-4e2f-895a-1ad5957273d6}</Project>
+      <Name>Mjolnir.IDE.Modules.Toolbar</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

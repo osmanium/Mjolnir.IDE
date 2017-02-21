@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
                     xmlns:Interfaces="clr-namespace:Mjolnir.IDE.Infrastructure.Interfaces;assembly=Mjolnir.IDE.Infrastructure"
-                    xmlns:conv="clr-namespace:Mjolnir.IDE.Core.Converters;assembly=Mjolnir.IDE.Core"
+                    xmlns:conv="clr-namespace:Mjolnir.IDE.Infrastructure.Converters;assembly=Mjolnir.IDE.Infrastructure"
                     xmlns:ControlsViewModels="clr-namespace:Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;assembly=Mjolnir.IDE.Infrastructure"
                     xmlns:Infrastructure="clr-namespace:Mjolnir.IDE.Infrastructure;assembly=Mjolnir.IDE.Infrastructure"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">

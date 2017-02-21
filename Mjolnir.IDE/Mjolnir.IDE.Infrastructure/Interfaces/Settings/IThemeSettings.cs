@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mjolnir.IDE.Modules.Settings
+namespace Mjolnir.IDE.Infrastructure.Interfaces.Settings
 {
-    public class Class1
+    public interface IThemeSettings
     {
+        string SelectedTheme { get; }
     }
 }

@@ -23,6 +23,13 @@ namespace Mjolnir.IDE.Shell
     {
         public bool HideSplashWindow { get; set; }
 
+        private readonly Action _applicationDefinition;
+
+        public MjolnirBootstrapper(Action ApplicationDefinition)
+        {
+            _applicationDefinition = ApplicationDefinition;
+        }
+
         protected override void InitializeModules()
         {
             if (!HideSplashWindow)
@@ -32,10 +39,12 @@ namespace Mjolnir.IDE.Shell
                 splashModule.Initialize();
             }
 
-            IModule coreModule = Container.Resolve<CoreModule>();
-            coreModule.Initialize();
             
+            CoreModule coreModule = Container.Resolve<CoreModule>();
+            coreModule.ApplicationDefinition = _applicationDefinition;
+            coreModule.Initialize();
 
+            
             base.InitializeModules();
 
             if (HideSplashWindow)
@@ -68,5 +77,7 @@ namespace Mjolnir.IDE.Shell
             base.InitializeShell();
             Application.Current.MainWindow = (Window)Shell;
         }
+
+        
     }
 }

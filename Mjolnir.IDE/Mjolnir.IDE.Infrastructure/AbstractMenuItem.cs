@@ -80,7 +80,7 @@ namespace Mjolnir.IDE.Infrastructure
         /// Gets or sets a value indicating whether this instance is checkable.
         /// </summary>
         /// <value><c>true</c> if this instance is checkable; otherwise, <c>false</c>.</value>
-        public virtual bool IsCheckable { get; protected internal set; }
+        public virtual bool IsCheckable { get;  set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is visible.
@@ -101,7 +101,7 @@ namespace Mjolnir.IDE.Infrastructure
         public virtual bool IsChecked
         {
             get { return _isChecked; }
-            protected internal set
+            set
             {
                 SetProperty(ref _isChecked, value);
             }

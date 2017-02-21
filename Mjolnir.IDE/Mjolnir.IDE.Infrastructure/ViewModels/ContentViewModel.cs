@@ -245,7 +245,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         /// The content handler which does save and load of the file
         /// </summary>
         /// <value>The handler.</value>
-        public IContentHandler Handler { get; protected internal set; }
+        public IContentHandler Handler { get; set; }
 
         #endregion
 

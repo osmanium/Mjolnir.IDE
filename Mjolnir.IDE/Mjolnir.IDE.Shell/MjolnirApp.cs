@@ -7,13 +7,13 @@ using System.Windows;
 
 namespace Mjolnir.IDE.Shell
 {
-    public class MjolnirApp : Application
+    public abstract class MjolnirApp : Application
     {
         public MjolnirBootstrapper Bootstrapper { get; set; }
 
         public MjolnirApp()
         {
-            Bootstrapper = new MjolnirBootstrapper();
+            Bootstrapper = new MjolnirBootstrapper(ApplicationDefinition);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -27,5 +27,7 @@ namespace Mjolnir.IDE.Shell
             GC.Collect();
             base.OnExit(e);
         }
+
+        public abstract void ApplicationDefinition();
     }
 }

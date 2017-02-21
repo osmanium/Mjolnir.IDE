@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Mjolnir.IDE.Core.Converters
+namespace Mjolnir.IDE.Infrastructure.Converters
 {
     public class NullToBooleanConverter : IValueConverter
     {

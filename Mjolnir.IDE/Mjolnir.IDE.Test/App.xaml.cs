@@ -1,4 +1,6 @@
-﻿using Mjolnir.IDE.Shell;
+﻿using Microsoft.Practices.Unity;
+using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Shell;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,9 +16,9 @@ namespace Mjolnir.IDE.Test
     /// </summary>
     public partial class App : MjolnirApp
     {
-        protected override void OnStartup(StartupEventArgs e)
+        public override void ApplicationDefinition()
         {
-            //var container = base.Bootstrapper.Container;
+            var container = Bootstrapper.Container;
 
             //Register own splash screen view here
             //container.RegisterType<ISplashScreenView, DefaultSplashScreenView>(new ContainerControlledLifetimeManager());
@@ -24,7 +26,9 @@ namespace Mjolnir.IDE.Test
             //Register own splash screen view model here
             //container.RegisterType<ISplashScreenViewModel, DefaultSplashScreenViewModel>(new ContainerControlledLifetimeManager());
 
-            base.OnStartup(e);
+            container.RegisterType<IApplicationDefinition, CoreModule>(new ContainerControlledLifetimeManager());
+            container.Resolve<IApplicationDefinition>();
+
         }
     }
 }

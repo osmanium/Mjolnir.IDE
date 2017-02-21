@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Mjolnir.IDE.Infrastructure.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,20 +15,20 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces
         /// <summary>
         /// The list of documents which are open in the workspace
         /// </summary>
-        //TODO : Uncomment
-        //ObservableCollection<ContentViewModel> Documents { get; set; }
+        
+        ObservableCollection<ContentViewModel> Documents { get; set; }
 
         /// <summary>
         /// The list of tools that are available in the workspace
         /// </summary>
         //TODO : Uncomment
-        //ObservableCollection<ToolViewModel> Tools { get; set; }
+        ObservableCollection<ToolViewModel> Tools { get; set; }
 
         /// <summary>
         /// The current document which is active in the workspace
         /// </summary>
         //TODO : Uncomment
-        //ContentViewModel ActiveDocument { get; set; }
+        ContentViewModel ActiveDocument { get; set; }
 
         /// <summary>
         /// Gets the title of the application.
