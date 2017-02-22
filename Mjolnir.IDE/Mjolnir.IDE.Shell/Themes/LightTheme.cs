@@ -26,7 +26,7 @@ namespace Mjolnir.IDE.Shell.Themes
                               new Uri("pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"),
                               new Uri("pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/LightColors.xaml"),
                               new Uri("pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/LightTheme.xaml"),
-                              new Uri("pack://application:,,,/AvalonDock.Themes.VS2013;component/LightTheme.xaml"),
+                              new Uri("pack://application:,,,/Xceed.Wpf.AvalonDock.Themes.VS2013;component/LightTheme.xaml"),
                               new Uri("pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/Menu.xaml")
                           };
         }

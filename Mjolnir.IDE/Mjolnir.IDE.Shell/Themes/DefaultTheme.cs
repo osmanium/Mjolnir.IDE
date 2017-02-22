@@ -20,7 +20,7 @@ namespace Mjolnir.IDE.Shell.Themes
             UriList = new List<Uri>
                           {
                               new Uri("pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/DarkTheme.xaml"),
-                              new Uri("pack://application:,,,/AvalonDock.Themes.VS2013;component/DarkTheme.xaml")
+                              new Uri("pack://application:,,,/Xceed.Wpf.AvalonDock.Themes.VS2013;component/DarkTheme.xaml")
                           };
         }
 
