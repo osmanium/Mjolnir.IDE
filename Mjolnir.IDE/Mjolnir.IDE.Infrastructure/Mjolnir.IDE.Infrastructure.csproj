@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mjolnir.IDE.Infrastructure</RootNamespace>
     <AssemblyName>Mjolnir.IDE.Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -118,6 +119,7 @@
     <Compile Include="AbstractWorkspace.cs" />
     <Compile Include="Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Converters\BoolToInsertModeConverter.cs" />
+    <Compile Include="Converters\DocumentContextMenuMixingConverter.cs" />
     <Compile Include="Converters\MenuVisibilityConverter.cs" />
     <Compile Include="Converters\NullObjectToVisibiltyConverter.cs" />
     <Compile Include="Converters\NullToBooleanConverter.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
     <Compile Include="ViewModels\MjolnirStatusbarViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
+    <Compile Include="Workspace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

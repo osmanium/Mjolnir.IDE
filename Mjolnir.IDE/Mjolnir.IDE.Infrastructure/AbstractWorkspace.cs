@@ -132,7 +132,7 @@ namespace Mjolnir.IDE.Infrastructure
         public virtual ObservableCollection<ContentViewModel> Documents
         {
             get { return _docs; }
-            set { _docs = value; }
+            set { SetProperty(ref _docs, value); }
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Mjolnir.IDE.Infrastructure
         public virtual ObservableCollection<ToolViewModel> Tools
         {
             get { return _tools; }
-            set { _tools = value; }
+            set { SetProperty(ref _tools, value); }
         }
 
         /// <summary>

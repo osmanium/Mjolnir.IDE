@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Infrastructure.Converters;
 using Mjolnir.IDE.Infrastructure.Events;
 using Mjolnir.IDE.Infrastructure.Interfaces;
 using Mjolnir.IDE.Infrastructure.Interfaces.Services;
@@ -31,18 +32,8 @@ namespace Mjolnir.IDE.Shell.View
     /// </summary>
     public partial class ShellView : Window, IShellView
     {
-        private readonly IUnityContainer _container;
-        private IEventAggregator _eventAggregator;
-        private ILoggerService _logger;
-        private IWorkspace _workspace;
-        private ContextMenu _docContextMenu;
-        private MultiBinding _itemSourceBinding;
-
-
-        public ShellView(IUnityContainer container, IEventAggregator eventAggregator)
+        public ShellView()
         {
-            _container = container;
-            _eventAggregator = eventAggregator;
             InitializeComponent();
         }
 
@@ -63,7 +54,8 @@ namespace Mjolnir.IDE.Shell.View
             //docMenus.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
             //_itemSourceBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
             //_docContextMenu.SetBinding(ContextMenu.ItemsSourceProperty, _itemSourceBinding);
-            Loaded += ShellViewMetro_Loaded;
+
+            //Loaded += ShellViewMetro_Loaded;
         }
 
         private void ShellViewMetro_Loaded(object sender, RoutedEventArgs e)
@@ -138,91 +130,92 @@ namespace Mjolnir.IDE.Shell.View
 
         #region Events
 
-        private void _docContextMenu_Opened(object sender, RoutedEventArgs e)
-        {
-            RefreshMenuBinding();
-        }
+        //private void _docContextMenu_Opened(object sender, RoutedEventArgs e)
+        //{
+        //    RefreshMenuBinding();
+        //}
 
-        private void _docContextMenu_ContextMenuOpening(object sender, ContextMenuEventArgs e)
-        {
-            ///* When you right click a document - move the focus to that document, so that commands on the context menu
-            // * which are based on the ActiveDocument work correctly. Example: Save.
-            // */
-            //LayoutDocumentItem doc = _docContextMenu.DataContext as LayoutDocumentItem;
-            //if (doc != null)
-            //{
-            //    ContentViewModel model = doc.Model as ContentViewModel;
-            //    if (model != null && model != dockManager.ActiveContent)
-            //    {
-            //        dockManager.ActiveContent = model;
-            //    }
-            //}
-            //e.Handled = false;
-        }
+        //private void _docContextMenu_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        //{
+        //    ///* When you right click a document - move the focus to that document, so that commands on the context menu
+        //    // * which are based on the ActiveDocument work correctly. Example: Save.
+        //    // */
+        //    //LayoutDocumentItem doc = _docContextMenu.DataContext as LayoutDocumentItem;
+        //    //if (doc != null)
+        //    //{
+        //    //    ContentViewModel model = doc.Model as ContentViewModel;
+        //    //    if (model != null && model != dockManager.ActiveContent)
+        //    //    {
+        //    //        dockManager.ActiveContent = model;
+        //    //    }
+        //    //}
+        //    //e.Handled = false;
+        //}
 
-        private void RefreshMenuBinding()
-        {
-            MultiBindingExpression b = BindingOperations.GetMultiBindingExpression(_docContextMenu,
-                                                                                   ContextMenu.ItemsSourceProperty);
-            b.UpdateTarget();
-        }
+        //private void RefreshMenuBinding()
+        //{
+        //    MultiBindingExpression b = BindingOperations.GetMultiBindingExpression(_docContextMenu,
+        //                                                                           ContextMenu.ItemsSourceProperty);
+        //    b.UpdateTarget();
+        //}
 
-        private void ThemeChanged(ITheme theme)
-        {
-            //HACK: Reset the context menu or else old menu status is retained and does not theme correctly
-            dockManager.DocumentContextMenu = null;
-            dockManager.DocumentContextMenu = _docContextMenu;
-            _docContextMenu.Style = FindResource("MetroContextMenu") as Style;
-            _docContextMenu.ItemContainerStyle = FindResource("MetroMenuStyle") as Style;
-        }
+        //private void ThemeChanged(ITheme theme)
+        //{
+        //    //HACK: Reset the context menu or else old menu status is retained and does not theme correctly
+        //    //dockManager.DocumentContextMenu = null;
+        //    //dockManager.DocumentContextMenu = _docContextMenu;
+        //    _docContextMenu.Style = FindResource("MetroContextMenu") as Style;
+        //    _docContextMenu.ItemContainerStyle = FindResource("MetroMenuStyle") as Style;
+        //}
 
-        private void Window_Closing_1(object sender, CancelEventArgs e)
-        {
-            var workspace = DataContext as IWorkspace;
-            if (!workspace.Closing(e))
-            {
-                e.Cancel = true;
-                return;
-            }
-            _eventAggregator.GetEvent<WindowClosingEvent>().Publish(this);
-        }
+        //private void Window_Closing_1(object sender, CancelEventArgs e)
+        //{
+        //    var workspace = DataContext as IWorkspace;
+        //    if (!workspace.Closing(e))
+        //    {
+        //        e.Cancel = true;
+        //        return;
+        //    }
+        //    _eventAggregator.GetEvent<WindowClosingEvent>().Publish(this);
+        //}
 
-        private void dockManager_ActiveContentChanged(object sender, EventArgs e)
-        {
-            DockingManager manager = sender as DockingManager;
-            ContentViewModel cvm = manager.ActiveContent as ContentViewModel;
-            _eventAggregator.GetEvent<ActiveContentChangedEvent>().Publish(cvm);
-            if (cvm != null) Logger.Log("Active document changed to " + cvm.Title, LogCategory.Info, LogPriority.None);
-        }
+        //private void dockManager_ActiveContentChanged(object sender, EventArgs e)
+        //{
+        //    DockingManager manager = sender as DockingManager;
+        //    ContentViewModel cvm = manager.ActiveContent as ContentViewModel;
+        //    _eventAggregator.GetEvent<ActiveContentChangedEvent>().Publish(cvm);
+        //    if (cvm != null) Logger.Log("Active document changed to " + cvm.Title, LogCategory.Info, LogPriority.None);
+        //}
 
-        private void ContentControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            //HACK: Refresh the content control because in AutoHide mode this disappears. Needs to be fixed in AvalonDock.
-            ContentControl c = sender as ContentControl;
-            if (c != null)
-            {
-                var backup = c.Content;
-                c.Content = null;
-                c.Content = backup;
-            }
-        }
+        //private void ContentControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    //HACK: Refresh the content control because in AutoHide mode this disappears. Needs to be fixed in AvalonDock.
+        //    ContentControl c = sender as ContentControl;
+        //    if (c != null)
+        //    {
+        //        var backup = c.Content;
+        //        c.Content = null;
+        //        c.Content = backup;
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
-        #region Property
+        //#region Property
 
-        private ILoggerService Logger
-        {
-            get
-            {
-                if (_logger == null)
-                    _logger = _container.Resolve<ILoggerService>();
+        //private ILoggerService Logger
+        //{
+        //    get
+        //    {
+        //        if (_logger == null)
+        //            _logger = _container.Resolve<ILoggerService>();
 
-                return _logger;
-            }
-        }
+        //        return _logger;
+        //    }
+        //}
 
-        #endregion
+        //#endregion
 
     }
+    #endregion
 }

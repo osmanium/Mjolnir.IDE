@@ -16,6 +16,11 @@ using Mjolnir.IDE.Modules.SplashScreen.Views;
 using Mjolnir.IDE.Core;
 using Mjolnir.IDE.Modules.SplashScreen;
 using System.Threading;
+using Prism.Mvvm;
+using Mjolnir.IDE.Shell.ViewModel;
+using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+using Mjolnir.IDE.Shell.Themes;
 
 namespace Mjolnir.IDE.Shell
 {
@@ -44,7 +49,21 @@ namespace Mjolnir.IDE.Shell
             coreModule.ApplicationDefinition = _applicationDefinition;
             coreModule.Initialize();
 
+            //TODO : Improve here
+            var shellViewModel = Container.Resolve<IShellView>();
+            (shellViewModel.DataContext as ShellViewModel).Workspace = Container.Resolve<AbstractWorkspace>();
+
+
+
+        
+            var manager = Container.Resolve<IThemeManager>();
+            var win = Container.Resolve<IShellView>() as Window;
+            manager.AddTheme(new LightTheme());
+            manager.AddTheme(new DarkTheme());
+
+            win.Dispatcher.InvokeAsync(() => manager.SetCurrent("Dark"));
             
+
             base.InitializeModules();
 
             if (HideSplashWindow)
@@ -78,6 +97,14 @@ namespace Mjolnir.IDE.Shell
             Application.Current.MainWindow = (Window)Shell;
         }
 
-        
+        protected override void ConfigureViewModelLocator()
+        {
+            BindViewModelToView<ShellViewModel, ShellView>();
+        }
+
+        public void BindViewModelToView<TViewModel, TView>()
+        {
+            ViewModelLocationProvider.Register(typeof(TView).ToString(), () => Container.Resolve<TViewModel>());
+        }
     }
 }

@@ -52,5 +52,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Views
         /// </summary>
         /// <value>The height.</value>
         double Height { get; }
+
+        object DataContext { get; set; }
     }
 }

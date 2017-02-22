@@ -10,6 +10,8 @@
         xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
         xmlns:Converter="clr-namespace:Mjolnir.IDE.Infrastructure.Converters;assembly=Mjolnir.IDE.Infrastructure"
         xmlns:Infrastructure="clr-namespace:Mjolnir.IDE.Infrastructure;assembly=Mjolnir.IDE.Infrastructure"
+        xmlns:prism="http://prismlibrary.com/"             
+        prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
@@ -25,8 +27,9 @@
                         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                        <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2012/LightColors.xaml" />
-                        <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2012/LightTheme.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/LightColors.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/LightTheme.xaml" />
+                        <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/Controls.xaml" />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
@@ -40,7 +43,13 @@
     <Border>
         <DockPanel>
             <!--Menu-->
-            <Menu DockPanel.Dock="Top" IsMainMenu="True" x:Name="mainMenu" VerticalAlignment="Top" ItemsSource="{Binding Path=Menus, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{DynamicResource StandardMenuStyle}" />
+            <Menu x:Name="mainMenu"
+                  DockPanel.Dock="Top" 
+                  IsMainMenu="True" 
+                  VerticalAlignment="Top" 
+                  ItemsSource="{Binding Path=Workspace.Menus, UpdateSourceTrigger=PropertyChanged}" 
+                  ItemContainerStyle="{DynamicResource StandardMenuStyle}" />
+            
             <!--Toolbar (can we improve this?)-->
             <ContentControl Content="{Binding ToolBarTray}" DockPanel.Dock="Top" />
             <!--Status bar-->
@@ -93,20 +102,21 @@
                         <TextBlock Foreground="{Binding Path=StatusBar.Foreground, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Path=StatusBar.CharPosition, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </StatusBarItem>
-                <!--Insert-->
+                Insert
                 <StatusBarItem Grid.Column="6" HorizontalAlignment="Right" Visibility="{Binding Path=StatusBar.InsertMode, Converter={StaticResource ResourceKey=nullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
                     <TextBlock Foreground="{Binding Path=StatusBar.Foreground, UpdateSourceTrigger=PropertyChanged}" Text="{Binding Path=StatusBar.InsertMode, Converter={StaticResource ResourceKey=booleanToInsertModeConverter}, UpdateSourceTrigger=PropertyChanged}" />
                 </StatusBarItem>
             </StatusBar>
 
             <!--The magical avalon dock-->
-            <avalonDock:DockingManager x:Name="dockManager" AnchorablesSource="{Binding Tools}"
+            <avalonDock:DockingManager x:Name="dockManager" AnchorablesSource="{Binding Workspace.Tools}"
                                        DocumentsSource="{Binding Documents}"
                                        ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}" 
-                                       ActiveContentChanged="dockManager_ActiveContentChanged">
-                <avalonDock:DockingManager.Theme>
-                    <avalonDock:GenericTheme />
-                </avalonDock:DockingManager.Theme>
+                                       >
+                <!--<avalonDock:DockingManager.Theme>
+                    <avalonDock:VS2010Theme />
+                </avalonDock:DockingManager.Theme>-->
+
                 <avalonDock:DockingManager.LayoutItemTemplateSelector>
                     <Infrastructure:PanesTemplateSelector>
                         <Infrastructure:PanesTemplateSelector.ContentViewTemplate>
@@ -146,6 +156,7 @@
                         </Infrastructure:PanesStyleSelector.ContentStyle>
                     </Infrastructure:PanesStyleSelector>
                 </avalonDock:DockingManager.LayoutItemContainerStyleSelector>
+                
                 <avalonDock:DockingManager.LayoutUpdateStrategy>
                     <Infrastructure:LayoutInitializer />
                 </avalonDock:DockingManager.LayoutUpdateStrategy>

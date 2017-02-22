@@ -27,7 +27,12 @@ namespace Mjolnir.IDE.Test
             //container.RegisterType<ISplashScreenViewModel, DefaultSplashScreenViewModel>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IApplicationDefinition, CoreModule>(new ContainerControlledLifetimeManager());
-            container.Resolve<IApplicationDefinition>();
+            var core = container.Resolve<IApplicationDefinition>();
+
+
+            core.LoadMenus();
+            core.LoadToolbar();
+            
 
         }
     }

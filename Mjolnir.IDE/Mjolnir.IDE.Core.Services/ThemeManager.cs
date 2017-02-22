@@ -5,6 +5,7 @@ using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,19 +88,28 @@ namespace Mjolnir.IDE.Core.Services
                 }
                 foreach (Uri uri in newTheme.UriList)
                 {
-                    ResourceDictionary newDict = new ResourceDictionary { Source = uri };
-                    /*AvalonDock and menu style needs to move to the application
-                     * 1. AvalonDock needs global styles as floatable windows can be created
-                     * 2. Menu's need global style as context menu can be created
-                    */
-                    if (uri.ToString().Contains("AvalonDock") ||
-                        uri.ToString().Contains("Wide;component/Interfaces/Styles/VS2012/Menu.xaml"))
+                    try
                     {
-                        appTheme.MergedDictionaries.Add(newDict);
+                        ResourceDictionary newDict = new ResourceDictionary { Source = uri };
+                        /*AvalonDock and menu style needs to move to the application
+                         * 1. AvalonDock needs global styles as floatable windows can be created
+                         * 2. Menu's need global style as context menu can be created
+                        */
+                        if (uri.ToString().Contains("AvalonDock") ||
+                            uri.ToString().Contains("Mjolnir.IDE.Shell;component/Styles/VS2013/Menu.xaml"))
+                        {
+                            appTheme.MergedDictionaries.Add(newDict);
+                        }
+                        else
+                        {
+                            theme.MergedDictionaries.Add(newDict);
+                        }
+
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        theme.MergedDictionaries.Add(newDict);
+                        //TODO : Log error
+                        Debugger.Break();
                     }
                 }
                 appTheme.EndInit();

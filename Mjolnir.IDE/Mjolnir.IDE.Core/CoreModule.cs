@@ -92,7 +92,7 @@ namespace Mjolnir.IDE.Core
             }
             catch
             {
-                //_container.RegisterType<AbstractWorkspace, Workspace>(new ContainerControlledLifetimeManager());
+                _container.RegisterType<AbstractWorkspace, Workspace>(new ContainerControlledLifetimeManager());
             }
 
             // Try resolving a logger service - if not found, then register the NLog service
@@ -102,7 +102,7 @@ namespace Mjolnir.IDE.Core
             }
             catch
             {
-                //_container.RegisterType<ILoggerService, NLogService>(new ContainerControlledLifetimeManager());
+                _container.RegisterType<ILoggerService, DefaultLogService>(new ContainerControlledLifetimeManager());
             }
 
             //Register a default file opener
