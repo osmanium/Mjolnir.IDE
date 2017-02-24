@@ -10,8 +10,8 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces
 {
     public interface IApplicationDefinition
     {
-        string ApplicationName { get; }
-        ImageSource ApplicationIconSource { get; }
+        string ApplicationName { get; set; }
+        ImageSource ApplicationIconSource { get; set; }
 
         void InitalizeIDE();
 

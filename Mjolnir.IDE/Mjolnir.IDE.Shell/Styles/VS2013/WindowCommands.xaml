@@ -117,4 +117,9 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="MetroWindowStyle" TargetType="{x:Type Controls:MetroWindow}">
+        <Setter Property="TitleForeground" Value="{DynamicResource WindowTitleColorBrush}"/>
+    </Style>
+    
 </ResourceDictionary>

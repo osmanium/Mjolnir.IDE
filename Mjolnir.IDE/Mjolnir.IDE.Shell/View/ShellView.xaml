@@ -15,8 +15,11 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Title="{Binding Title}" 
-        Icon="{Binding Icon}">
+        Title="{Binding Workspace.Title}"
+        Icon="{Binding Workspace.Icon}"
+        ResizeMode="CanResizeWithGrip"
+        TitleForeground="#FF717171" 
+        TitleCaps="False" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -29,6 +32,7 @@
                         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                         <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/LightColors.xaml" />
                         <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/LightTheme.xaml" />
+                        
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>

@@ -27,10 +27,10 @@ namespace Mjolnir.IDE.Test
         private IUnityContainer _container;
 
         private string _applicationName;
-        public string ApplicationName { get { return _applicationName; } }
+        public string ApplicationName { get { return _applicationName; } set { _applicationName = value; } }
 
         private ImageSource _applicationIconSource;
-        public ImageSource ApplicationIconSource { get { return _applicationIconSource; } }
+        public ImageSource ApplicationIconSource { get { return _applicationIconSource; } set { _applicationIconSource = value; } }
 
         public App()
         {

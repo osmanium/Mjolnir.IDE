@@ -49,15 +49,26 @@ namespace Mjolnir.IDE.Modules.SplashScreen.ViewModel
             _applicationDefinition = applicationDefinition;
             _eventAggregator = eventAggregator;
 
-            if (!string.IsNullOrWhiteSpace(applicationDefinition?.ApplicationName))
+            if (!string.IsNullOrWhiteSpace(applicationDefinition.ApplicationName))
+            {
                 ApplicationName = applicationDefinition.ApplicationName;
+            }
             else
+            {
                 ApplicationName = "Mjolnir.IDE";
+                applicationDefinition.ApplicationName = ApplicationName;
+            }
+
 
             if (applicationDefinition?.ApplicationIconSource != null)
+            {
                 ApplicationIconSource = applicationDefinition.ApplicationIconSource;
+            }
             else
+            {
                 ApplicationIconSource = new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Shell;component/Assets/Mjolnir_Icon.png"));
+                applicationDefinition.ApplicationIconSource = ApplicationIconSource;
+            }
 
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Subscribe(e => UpdateMessage(e.Text));
         }
