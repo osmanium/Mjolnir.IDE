@@ -124,6 +124,7 @@
     <Compile Include="Converters\NullObjectToVisibiltyConverter.cs" />
     <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\PercentToFontSizeConverter.cs" />
+    <Compile Include="DefaultWorkspace.cs" />
     <Compile Include="Enums\PaneLocation.cs" />
     <Compile Include="Events\ActiveContentChangedEvent.cs" />
     <Compile Include="Events\ClosedContentEvent.cs" />
@@ -172,7 +173,6 @@
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
     <Compile Include="ViewModels\MjolnirStatusbarViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
-    <Compile Include="Workspace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

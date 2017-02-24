@@ -90,7 +90,7 @@ namespace Mjolnir.IDE.Core
             }
             catch
             {
-                _container.RegisterType<AbstractWorkspace, Workspace>(new ContainerControlledLifetimeManager());
+                _container.RegisterType<AbstractWorkspace, DefaultWorkspace>(new ContainerControlledLifetimeManager());
             }
 
             // Try resolving an output service - if not found, then register the NLog service

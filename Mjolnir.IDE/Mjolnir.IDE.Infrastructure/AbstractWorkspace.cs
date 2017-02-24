@@ -71,6 +71,24 @@ namespace Mjolnir.IDE.Infrastructure
         /// </summary>
         protected ObservableCollection<ToolViewModel> _tools = new ObservableCollection<ToolViewModel>();
 
+        private IApplicationDefinition _applicationDefinition;
+
+        public ImageSource Icon
+        {
+            get
+            {
+                return _applicationDefinition.ApplicationIconSource;
+            }
+        }
+
+        public string Title
+        {
+            get
+            {
+                return _applicationDefinition.ApplicationName;
+            }
+        }
+
         #endregion
 
         #region CTOR
@@ -80,10 +98,11 @@ namespace Mjolnir.IDE.Infrastructure
         /// </summary>
         /// <param name="container">The injected container.</param>
         /// <param name="eventAggregator">The event aggregator.</param>
-        protected AbstractWorkspace(IUnityContainer container, IEventAggregator eventAggregator)
+        protected AbstractWorkspace(IUnityContainer container, IEventAggregator eventAggregator, IApplicationDefinition applicationDefinition)
         {
             _container = container;
             _eventAggregator = eventAggregator;
+            _applicationDefinition = applicationDefinition;
             _docs = new ObservableCollection<ContentViewModel>();
             _docs.CollectionChanged += Docs_CollectionChanged;
             _tools = new ObservableCollection<ToolViewModel>();
@@ -164,21 +183,7 @@ namespace Mjolnir.IDE.Infrastructure
             }
         }
 
-        /// <summary>
-        /// Gets the title of the application.
-        /// </summary>
-        /// <value>The title.</value>
-        public virtual string Title
-        {
-            get { return "Wide"; }
-        }
-
-        /// <summary>
-        /// Gets the icon of the application.
-        /// </summary>
-        /// <value>The icon.</value>
-        public virtual ImageSource Icon { get; protected set; }
-
+        
         /// <summary>
         /// Closing this instance.
         /// </summary>
