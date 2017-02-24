@@ -9,7 +9,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
     /// <summary>
     /// Enum LogCategory
     /// </summary>
-    public enum LogCategory
+    public enum OutputCategory
     {
         Debug,
         Exception,
@@ -21,7 +21,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
     /// <summary>
     /// Enum LogPriority
     /// </summary>
-    public enum LogPriority
+    public enum OutputPriority
     {
         None,
         Low,
@@ -32,7 +32,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
     /// <summary>
     /// Interface ILoggerService - used for logging in the application
     /// </summary>
-    public interface ILoggerService
+    public interface IOutputService
     {
         /// <summary>
         /// Gets the message which just got logged.
@@ -44,13 +44,13 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
         /// Gets the category of logging.
         /// </summary>
         /// <value>The category.</value>
-        LogCategory Category { get; }
+        OutputCategory Category { get; }
 
         /// <summary>
         /// Gets the priority of logging.
         /// </summary>
         /// <value>The priority.</value>
-        LogPriority Priority { get; }
+        OutputPriority Priority { get; }
 
         /// <summary>
         /// Logs the specified message.
@@ -58,6 +58,6 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
         /// <param name="message">The message.</param>
         /// <param name="category">The logging category.</param>
         /// <param name="priority">The logging priority.</param>
-        void Log(string message, LogCategory category, LogPriority priority);
+        void LogOutput(string message, OutputCategory category, OutputPriority priority);
     }
 }

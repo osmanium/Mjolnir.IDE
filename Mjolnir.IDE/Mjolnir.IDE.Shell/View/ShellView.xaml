@@ -111,9 +111,6 @@
             <avalonDock:DockingManager x:Name="dockManager" AnchorablesSource="{Binding Workspace.Tools}"
                                        DocumentsSource="{Binding Documents}"
                                        ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}">
-                <!--<avalonDock:DockingManager.Theme>
-                    <avalonDock:VS2012Theme />
-                </avalonDock:DockingManager.Theme>-->
 
                 <!--<avalonDock:DockingManager.DocumentContextMenu>
                     <ContextMenu ItemsSource="{Binding Path=Model.Menus, Converter={StaticResource ResourceKey=bindDebug}}" Style="{StaticResource MetroContextMenu}" ItemContainerStyle="{StaticResource MetroMenuItem}" BorderBrush="{DynamicResource ControlOpenColorBrush}" Background="{DynamicResource ControlOpenColorBrush}" />

@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <TextBox Margin="5" Text="{Binding Path=Text, Mode=OneWay}" IsReadOnly="True" BorderBrush="White">
+        
+        <!--TODO : Create grid to show logs based on which module, severity, datetime-->
+        
         <TextBox.Style>
             <Style TargetType="TextBox">
                 <Style.Triggers>

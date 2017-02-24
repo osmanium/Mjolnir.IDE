@@ -2,9 +2,11 @@
 using Mjolnir.IDE.Core.Services;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Infrastructure.Events;
+using Mjolnir.IDE.Infrastructure.Interfaces;
 using Mjolnir.IDE.Infrastructure.Interfaces.Services;
 using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
 using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
+using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
 using Mjolnir.IDE.Modules.Output;
 using Mjolnir.IDE.Modules.Settings;
@@ -16,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -33,25 +36,16 @@ namespace Mjolnir.IDE.Core
             this._eventAggregator = eventAggregator;
         }
 
-        public Action ApplicationDefinition { get; set; }
 
         public void Initialize()
         {
-
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Components..." });
-            Thread.Sleep(1000);
 
-
-
-            //_container.RegisterType<TextViewModel>();
-            //_container.RegisterType<TextModel>();
-            //_container.RegisterType<TextView>();
-            //_container.RegisterType<AllFileHandler>();
             _container.RegisterType<IThemeSettings, ThemeSettings>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IRecentViewSettings, RecentViewSettings>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IWindowPositionSettings, WindowPositionSettings>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IToolbarPositionSettings, ToolbarPositionSettings>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ICommandManager, Mjolnir.IDE.Core.Services.CommandManager>(new ContainerControlledLifetimeManager());
+            //_container.RegisterType<ICommandManager, Mjolnir.IDE.Core.Services.CommandManager>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IContentHandlerRegistry, ContentHandlerRegistry>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IStatusbarService, MjolnirStatusbarViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IThemeManager, ThemeManager>(new ContainerControlledLifetimeManager());
@@ -82,9 +76,12 @@ namespace Mjolnir.IDE.Core
             _container.RegisterType<ISettingsManager, SettingsManager>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IOpenDocumentService, OpenDocumentService>(new ContainerControlledLifetimeManager());
 
-            //TODO : Check here
-            //AppCommands();
-            //LoadSettings();
+            var customApplication = _container.Resolve<IApplicationDefinition>();
+            if (customApplication != null)
+            {
+                customApplication.InitalizeIDE();
+                customApplication.RegisterTypes();
+            }
 
             //Try resolving a workspace
             try
@@ -96,14 +93,14 @@ namespace Mjolnir.IDE.Core
                 _container.RegisterType<AbstractWorkspace, Workspace>(new ContainerControlledLifetimeManager());
             }
 
-            // Try resolving a logger service - if not found, then register the NLog service
+            // Try resolving an output service - if not found, then register the NLog service
             try
             {
-                _container.Resolve<ILoggerService>();
+                _container.Resolve<IOutputService>();
             }
             catch
             {
-                _container.RegisterType<ILoggerService, DefaultLogService>(new ContainerControlledLifetimeManager());
+                _container.RegisterType<IOutputService, DefaultLogService>(new ContainerControlledLifetimeManager());
             }
 
             //Register a default file opener
@@ -111,39 +108,30 @@ namespace Mjolnir.IDE.Core
             //registry.Register(_container.Resolve<AllFileHandler>());
 
 
-
-
-
-
-
-            //Maybe load workspace first
-            //Application.Current.MainWindow.DataContext = Container.Resolve<AbstractWorkspace>();
-
-            //TODO : Load other modules here
-
-
-            //TODO : Settings
-            //TODO : Toolbar
-            //TODO : Statusbar
-
             //Below ones can be loaded with solution, does not require immediate load
             //TODO : Console
             //TODO : Error
 
             //Output
-
             OutputModule outputModule = _container.Resolve<OutputModule>();
             outputModule.Initialize();
 
+            
 
-
-
-
-            if (ApplicationDefinition != null)
+            if (customApplication != null)
             {
                 _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Application UI..." });
-                ApplicationDefinition.Invoke();
+
+                customApplication.LoadTheme();
+                customApplication.LoadMenus();
+                customApplication.LoadToolbar();
+                customApplication.LoadSettings();
+
+                customApplication.LoadModules();
             }
+
+            var shell = _container.Resolve<IShellView>();
+            shell.LoadLayout();
         }
     }
 }

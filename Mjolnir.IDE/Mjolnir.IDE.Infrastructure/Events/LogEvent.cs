@@ -11,7 +11,7 @@ namespace Mjolnir.IDE.Infrastructure.Events
     /// <summary>
     /// Class LogEvent - This event is used when a logging operation happens.
     /// </summary>
-    public class LogEvent : PubSubEvent<ILoggerService>
+    public class LogEvent : PubSubEvent<IOutputService>
     {
     }
 }

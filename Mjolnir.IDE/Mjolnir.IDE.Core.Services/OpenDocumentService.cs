@@ -34,7 +34,7 @@ namespace Mjolnir.IDE.Core.Services
         /// <summary>
         /// The injected logger
         /// </summary>
-        private readonly ILoggerService _logger;
+        private readonly IOutputService _output;
 
         /// <summary>
         /// The Open file dialog
@@ -61,14 +61,14 @@ namespace Mjolnir.IDE.Core.Services
         /// </summary>
         /// <param name="container">The injected container</param>
         /// <param name="eventAggregator">The injected event aggregator</param>
-        /// <param name="logger">The injected logger</param>
-        public OpenDocumentService(IUnityContainer container, IEventAggregator eventAggregator, ILoggerService logger,
+        /// <param name="output">The injected logger</param>
+        public OpenDocumentService(IUnityContainer container, IEventAggregator eventAggregator, IOutputService output,
                                    AbstractWorkspace workspace, IContentHandlerRegistry handler,
                                    IRecentViewSettings recentSettings)
         {
             _container = container;
             _eventAggregator = eventAggregator;
-            _logger = logger;
+            _output = output;
             _dialog = new OpenFileDialog();
             _workspace = workspace;
             _handler = handler as ContentHandlerRegistry;
@@ -128,17 +128,17 @@ namespace Mjolnir.IDE.Core.Services
                             {
                                 if (contentViewModel.Model.Location.Equals(openValue.Model.Location))
                                 {
-                                    _logger.Log(
+                                    _output.LogOutput(
                                         "Document " + contentViewModel.Model.Location +
                                         "already open - making it active",
-                                        LogCategory.Info, LogPriority.Low);
+                                        OutputCategory.Info, OutputPriority.Low);
                                     _workspace.ActiveDocument = contentViewModel;
                                     return contentViewModel;
                                 }
                             }
                         }
 
-                        _logger.Log("Opening file" + location + " !!", LogCategory.Info, LogPriority.Low);
+                        _output.LogOutput("Opening file" + location + " !!", OutputCategory.Info, OutputPriority.Low);
 
                         // Publish the event to the Application - subscribers can use this object
                         _eventAggregator.GetEvent<OpenContentEvent>().Publish(openValue);
@@ -156,14 +156,14 @@ namespace Mjolnir.IDE.Core.Services
                     }
                     else
                     {
-                        _logger.Log("Unable to find a IContentHandler to open " + location, LogCategory.Error,
-                                    LogPriority.High);
+                        _output.LogOutput("Unable to find a IContentHandler to open " + location, OutputCategory.Error,
+                                    OutputPriority.High);
                     }
                 }
             }
             else
             {
-                _logger.Log("Canceled out of open file dialog", LogCategory.Info, LogPriority.Low);
+                _output.LogOutput("Canceled out of open file dialog", OutputCategory.Info, OutputPriority.Low);
             }
             return returnValue;
         }
@@ -188,9 +188,9 @@ namespace Mjolnir.IDE.Core.Services
                     {
                         if (contentViewModel.Model.Location.Equals(openValue.Model.Location))
                         {
-                            _logger.Log("Document " + contentViewModel.Model.Location + "already open.",
-                                        LogCategory.Info,
-                                        LogPriority.Low);
+                            _output.LogOutput("Document " + contentViewModel.Model.Location + "already open.",
+                                        OutputCategory.Info,
+                                        OutputPriority.Low);
 
                             if (makeActive)
                                 _workspace.ActiveDocument = contentViewModel;
@@ -200,7 +200,7 @@ namespace Mjolnir.IDE.Core.Services
                     }
                 }
 
-                _logger.Log("Opening content with " + contentID + " !!", LogCategory.Info, LogPriority.Low);
+                _output.LogOutput("Opening content with " + contentID + " !!", OutputCategory.Info, OutputPriority.Low);
 
                 // Publish the event to the Application - subscribers can use this object
                 _eventAggregator.GetEvent<OpenContentEvent>().Publish(openValue);
@@ -216,8 +216,8 @@ namespace Mjolnir.IDE.Core.Services
                 return openValue;
             }
 
-            _logger.Log("Unable to find a IContentHandler to open content with ID = " + contentID, LogCategory.Error,
-                        LogPriority.High);
+            _output.LogOutput("Unable to find a IContentHandler to open content with ID = " + contentID, OutputCategory.Error,
+                        OutputPriority.High);
             return null;
         }
 

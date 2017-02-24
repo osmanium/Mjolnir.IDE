@@ -130,7 +130,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoreModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -179,6 +178,9 @@
     <Resource Include="Icons\Redo_16x.png" />
     <Resource Include="Icons\Save_6530.png" />
     <Resource Include="Icons\Undo_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\mjolnir_override.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -28,9 +28,9 @@ namespace Mjolnir.IDE.Shell
     {
         public bool HideSplashWindow { get; set; }
 
-        private readonly Action _applicationDefinition;
+        private readonly IApplicationDefinition _applicationDefinition;
 
-        public MjolnirBootstrapper(Action ApplicationDefinition)
+        public MjolnirBootstrapper(IApplicationDefinition ApplicationDefinition)
         {
             _applicationDefinition = ApplicationDefinition;
         }
@@ -39,22 +39,19 @@ namespace Mjolnir.IDE.Shell
         {
             if (!HideSplashWindow)
             {
-
                 IModule splashModule = Container.Resolve<ISplashScreenModule>();
                 splashModule.Initialize();
             }
 
             
             CoreModule coreModule = Container.Resolve<CoreModule>();
-            coreModule.ApplicationDefinition = _applicationDefinition;
             coreModule.Initialize();
 
             //TODO : Improve here
             var shellViewModel = Container.Resolve<IShellView>();
             (shellViewModel.DataContext as ShellViewModel).Workspace = Container.Resolve<AbstractWorkspace>();
 
-
-
+            
         
             var manager = Container.Resolve<IThemeManager>();
             var win = Container.Resolve<IShellView>() as Window;
@@ -82,6 +79,8 @@ namespace Mjolnir.IDE.Shell
 
             if (!Container.IsRegistered<ISplashScreenView>())
                 Container.RegisterType<ISplashScreenView, DefaultSplashScreenView>(new ContainerControlledLifetimeManager());
+
+            Container.RegisterInstance<IApplicationDefinition>(_applicationDefinition, new ContainerControlledLifetimeManager());
 
             base.ConfigureContainer();
         }

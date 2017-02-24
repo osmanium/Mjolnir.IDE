@@ -54,7 +54,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         /// <summary>
         /// The logger instance
         /// </summary>
-        protected ILoggerService _logger;
+        protected IOutputService _logger;
 
         /// <summary>
         /// The title of the document
@@ -86,7 +86,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         /// <param name="workspace">The injected workspace.</param>
         /// <param name="commandManager">The injected command manager.</param>
         /// <param name="logger">The injected logger.</param>
-        protected ContentViewModel(AbstractWorkspace workspace, ICommandManager commandManager, ILoggerService logger,
+        protected ContentViewModel(AbstractWorkspace workspace, ICommandManager commandManager, IOutputService logger,
                                    IMenuService menuService)
         {
             _workspace = workspace;

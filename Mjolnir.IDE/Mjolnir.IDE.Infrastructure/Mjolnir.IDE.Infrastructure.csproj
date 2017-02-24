@@ -143,7 +143,7 @@
     <Compile Include="Interfaces\Services\ICommandManager.cs" />
     <Compile Include="Interfaces\Services\IContentHandler.cs" />
     <Compile Include="Interfaces\Services\IContentHandlerRegistry.cs" />
-    <Compile Include="Interfaces\Services\ILoggerService.cs" />
+    <Compile Include="Interfaces\Services\IOutputService.cs" />
     <Compile Include="Interfaces\Services\IMenuService.cs" />
     <Compile Include="Interfaces\Services\IOpenDocumentService.cs" />
     <Compile Include="Interfaces\Services\IStatusbarService.cs" />

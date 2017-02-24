@@ -31,12 +31,12 @@ namespace Mjolnir.IDE.Modules.Output
         public void Initialize()
         {
             EventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Output Module" });
-            _container.RegisterType<OutputUserControl>();
+            _container.RegisterType<OutputViewModel>();
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
 
-            OutputUserControl view = _container.Resolve<OutputUserControl>();
+            OutputViewModel outputViewModel = _container.Resolve<OutputViewModel>();
 
-            workspace.Tools.Add(view.DataContext as OutputViewModel);
+            workspace.Tools.Add(outputViewModel);
         }
     }
 }

@@ -26,7 +26,8 @@ namespace Mjolnir.IDE.Modules.SplashScreen
 
         public SplashScreenModule(IUnityContainer container,
                                   IEventAggregator eventAggregator,
-                                  IShellView shell)
+                                  IShellView shell,
+                                  ISplashScreenViewModel splashScreenViewModel)
         {
             this.container = container;
             this.eventAggregator = eventAggregator;

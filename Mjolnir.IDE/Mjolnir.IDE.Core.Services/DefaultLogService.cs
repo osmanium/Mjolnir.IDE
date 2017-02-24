@@ -15,7 +15,7 @@ namespace Mjolnir.IDE.Core.Services
     /// <summary>
     /// The NLogService for logging purposes
     /// </summary>
-    public class DefaultLogService : ILoggerService
+    public class DefaultLogService : IOutputService
     {
         private static readonly Logger Logger = LogManager.GetLogger("Mjolnir.IDE");
         private readonly IEventAggregator _aggregator;
@@ -44,7 +44,7 @@ namespace Mjolnir.IDE.Core.Services
         /// <param name="message">A message to log</param>
         /// <param name="category">The category of logging</param>
         /// <param name="priority">The priority of logging</param>
-        public void Log(string message, LogCategory category, LogPriority priority)
+        public void LogOutput(string message, OutputCategory category, OutputPriority priority)
         {
             Message = message;
             Category = category;
@@ -68,12 +68,12 @@ namespace Mjolnir.IDE.Core.Services
         /// <summary>
         /// The log message's category
         /// </summary>
-        public LogCategory Category { get; internal set; }
+        public OutputCategory Category { get; internal set; }
 
         /// <summary>
         /// The log message's priority
         /// </summary>
-        public LogPriority Priority { get; internal set; }
+        public OutputPriority Priority { get; internal set; }
 
         #endregion
     }

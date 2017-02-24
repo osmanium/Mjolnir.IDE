@@ -16,28 +16,11 @@ namespace Mjolnir.IDE.Shell.ViewModel
 {
     public class ShellViewModel : ValidatableBindableBase
     {
-        private readonly IUnityContainer _container;
-        private IEventAggregator _eventAggregator;
-        private ILoggerService _logger;
-        private IWorkspace _workspace;
-        private ContextMenu _docContextMenu;
-        private MultiBinding _itemSourceBinding;
         private AbstractWorkspace _abstractWorkspace;
-
         public AbstractWorkspace Workspace
         {
             get { return _abstractWorkspace; }
-            set
-            {
-                SetProperty(ref _abstractWorkspace, value);
-            }
-        }
-
-        public ShellViewModel(IUnityContainer container,
-                              IEventAggregator eventAggregator)
-        {
-            _container = container;
-            _eventAggregator = eventAggregator;
+            set { SetProperty(ref _abstractWorkspace, value); }
         }
     }
 }

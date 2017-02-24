@@ -31,14 +31,14 @@ namespace Mjolnir.IDE.Core.Services
         /// <summary>
         /// The injected logger
         /// </summary>
-        private readonly ILoggerService _logger;
+        private readonly IOutputService _logger;
 
         /// <summary>
         /// The theme manager constructor
         /// </summary>
         /// <param name="eventAggregator">The injected event aggregator</param>
         /// <param name="logger">The injected logger</param>
-        public ThemeManager(IEventAggregator eventAggregator, ILoggerService logger)
+        public ThemeManager(IEventAggregator eventAggregator, IOutputService logger)
         {
             Themes = new ObservableCollection<ITheme>();
             _eventAggregator = eventAggregator;
@@ -114,7 +114,7 @@ namespace Mjolnir.IDE.Core.Services
                 }
                 appTheme.EndInit();
                 theme.EndInit();
-                _logger.Log("Theme set to " + name, LogCategory.Info, LogPriority.None);
+                _logger.LogOutput("Theme set to " + name, OutputCategory.Info, OutputPriority.None);
                 _eventAggregator.GetEvent<ThemeChangeEvent>().Publish(newTheme);
             }
             return false;

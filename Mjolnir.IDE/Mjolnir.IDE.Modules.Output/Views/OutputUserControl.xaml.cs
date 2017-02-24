@@ -1,4 +1,5 @@
-﻿using Mjolnir.IDE.Modules.Output.ViewModels;
+﻿using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Modules.Output.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,15 @@ namespace Mjolnir.IDE.Modules.Output.Views
     /// <summary>
     /// Interaction logic for OutputUserControl.xaml
     /// </summary>
-    public partial class OutputUserControl : UserControl
+    public partial class OutputUserControl : UserControl, IContentView
     {
-        public OutputUserControl(OutputViewModel viewModel)
+        public OutputUserControl(OutputModel viewModel)
         {
             InitializeComponent();
             this.DataContext = viewModel;
+
+            //TODO : Check XAML, Create grid to show logs based on which module, severity, datetime-- >
+
         }
     }
 }
