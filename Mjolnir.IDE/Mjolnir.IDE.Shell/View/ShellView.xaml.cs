@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using MahApps.Metro.Controls;
+using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Infrastructure.Converters;
 using Mjolnir.IDE.Infrastructure.Events;
@@ -30,7 +31,7 @@ namespace Mjolnir.IDE.Shell.View
     /// <summary>
     /// Interaction logic for ShellView.xaml
     /// </summary>
-    public partial class ShellView : Window, IShellView
+    public partial class ShellView : MetroWindow, IShellView
     {
         public ShellView()
         {

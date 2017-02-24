@@ -61,7 +61,7 @@ namespace Mjolnir.IDE.Shell
             manager.AddTheme(new LightTheme());
             manager.AddTheme(new DarkTheme());
 
-            win.Dispatcher.InvokeAsync(() => manager.SetCurrent("Dark"));
+            win.Dispatcher.InvokeAsync(() => manager.SetCurrent("Light"));
             
 
             base.InitializeModules();
