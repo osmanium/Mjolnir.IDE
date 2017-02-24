@@ -108,7 +108,7 @@
             </StatusBar>
 
             <!--The magical avalon dock-->
-            <avalonDock:DockingManager x:Name="dockManager" AnchorablesSource="{Binding Tools}"
+            <avalonDock:DockingManager x:Name="dockManager" AnchorablesSource="{Binding Workspace.Tools}"
                                        DocumentsSource="{Binding Documents}"
                                        ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}">
                 <!--<avalonDock:DockingManager.Theme>

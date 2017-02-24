@@ -1,15 +1,20 @@
 ﻿using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Infrastructure.Events;
 using Mjolnir.IDE.Infrastructure.Interfaces;
 using Mjolnir.IDE.Infrastructure.Interfaces.Services;
 using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
 using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
+using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
+using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -18,11 +23,12 @@ namespace Mjolnir.IDE.Test
     public class CoreModule : IApplicationDefinition
     {
         private IUnityContainer _container;
+        private IEventAggregator _eventAggregator;
 
-        public CoreModule(IUnityContainer container)
+        public CoreModule(IUnityContainer container, IEventAggregator eventAggregator)
         {
-
             _container = container;
+            _eventAggregator = eventAggregator;
         }
 
         public void LoadMenus()
@@ -32,8 +38,8 @@ namespace Mjolnir.IDE.Test
             var settingsManager = _container.Resolve<ISettingsManager>();
             var themeSettings = _container.Resolve<IThemeSettings>();
             var recentFiles = _container.Resolve<IRecentViewSettings>();
-            //IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
-            //ToolViewModel logger = workspace.Tools.First(f => f.ContentId == "Logger");
+            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            ToolViewModel logger = workspace.Tools.First(f => f.ContentId == "Logger");
 
             menuService.Add(new MenuItemViewModel("_File", 1));
 
@@ -103,14 +109,14 @@ namespace Mjolnir.IDE.Test
 
             menuService.Add(new MenuItemViewModel("_View", 3));
 
-//            if (logger != null)
-//                menuService.Get("_View").Add(new MenuItemViewModel("_Logger", 1,
-//                                                                   new BitmapImage(
-//                                                                       new Uri(
-//                                                                           @"pack://application:,,,/Mjolnir.IDE.Test
-//;component/Icons/Undo_16x.png")),
-//                                                                   manager.GetCommand("LOGSHOW"))
-//                { IsCheckable = true, IsChecked = logger.IsVisible });
+            if (logger != null)
+                menuService.Get("_View").Add(new MenuItemViewModel("_Logger", 1,
+                                                                   new BitmapImage(
+                                                                       new Uri(
+                                                                           @"pack://application:,,,/Mjolnir.IDE.Test
+;component/Icons/Undo_16x.png")),
+                                                                   manager.GetCommand("LOGSHOW"))
+                { IsCheckable = true, IsChecked = logger.IsVisible });
 
             menuService.Get("_View").Add(new MenuItemViewModel("Themes", 1));
 
@@ -179,6 +185,65 @@ namespace Mjolnir.IDE.Test
 
         public void LoadCommands()
         {
+            _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent() { Text = "Commands.." });
+            var manager = _container.Resolve<ICommandManager>();
+
+            //var openCommand = new DelegateCommand(OpenModule);
+            //var exitCommand = new DelegateCommand(CloseCommandExecute);
+            //var saveCommand = new DelegateCommand(SaveDocument, CanExecuteSaveDocument);
+            //var saveAsCommand = new DelegateCommand(SaveAsDocument, CanExecuteSaveAsDocument);
+            var themeCommand = new DelegateCommand<string>(ThemeChangeCommand);
+            var loggerCommand = new DelegateCommand(ToggleLogger);
+
+
+            //manager.RegisterCommand("OPEN", openCommand);
+            //manager.RegisterCommand("SAVE", saveCommand);
+            //manager.RegisterCommand("SAVEAS", saveAsCommand);
+            //manager.RegisterCommand("EXIT", exitCommand);
+            manager.RegisterCommand("LOGSHOW", loggerCommand);
+            manager.RegisterCommand("THEMECHANGE", themeCommand);
         }
+
+        #region Theme
+
+        private void ThemeChangeCommand(string s)
+        {
+            var manager = _container.Resolve<IThemeManager>();
+            var menuService = _container.Resolve<IMenuService>();
+            var win = _container.Resolve<IShellView>() as Window;
+            MenuItemViewModel mvm =
+                menuService.Get("_View").Get("Themes").Get(manager.CurrentTheme.Name) as MenuItemViewModel;
+
+            if (manager.CurrentTheme.Name != s)
+            {
+                if (mvm != null)
+                    mvm.IsChecked = false;
+                win.Dispatcher.InvokeAsync(() => manager.SetCurrent(s));
+            }
+            else
+            {
+                if (mvm != null)
+                    mvm.IsChecked = true;
+            }
+        }
+
+        #endregion
+
+        #region Logger click
+
+        private void ToggleLogger()
+        {
+            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            var menuService = _container.Resolve<IMenuService>();
+            ToolViewModel logger = workspace.Tools.First(f => f.ContentId == "Logger");
+            if (logger != null)
+            {
+                logger.IsVisible = !logger.IsVisible;
+                var mi = menuService.Get("_View").Get("_Logger") as MenuItemViewModel;
+                mi.IsChecked = logger.IsVisible;
+            }
+        }
+
+        #endregion
     }
 }

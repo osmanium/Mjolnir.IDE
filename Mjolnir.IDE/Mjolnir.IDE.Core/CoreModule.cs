@@ -6,6 +6,7 @@ using Mjolnir.IDE.Infrastructure.Interfaces.Services;
 using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
 using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
 using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Modules.Output;
 using Mjolnir.IDE.Modules.Settings;
 using Prism.Events;
 using Prism.Modularity;
@@ -128,6 +129,14 @@ namespace Mjolnir.IDE.Core
             //Below ones can be loaded with solution, does not require immediate load
             //TODO : Console
             //TODO : Error
+
+            //Output
+
+            OutputModule outputModule = _container.Resolve<OutputModule>();
+            outputModule.Initialize();
+
+
+
 
 
             if (ApplicationDefinition != null)

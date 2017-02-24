@@ -30,6 +30,8 @@ namespace Mjolnir.IDE.Test
             var core = container.Resolve<IApplicationDefinition>();
 
 
+            //TODO : Improve
+            core.LoadCommands();
             core.LoadMenus();
             core.LoadToolbar();
             
