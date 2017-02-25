@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mjolnir.IDE.Core.Services.Attributes
+namespace Mjolnir.IDE.Infrastructure.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class FileContentAttribute : Attribute

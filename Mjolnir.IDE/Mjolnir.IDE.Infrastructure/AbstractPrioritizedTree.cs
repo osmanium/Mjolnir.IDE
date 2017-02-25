@@ -28,6 +28,7 @@ namespace Mjolnir.IDE.Infrastructure
         protected AbstractPrioritizedTree()
         {
             _children = new ObservableCollection<T>();
+            IsValidationEnabled = false;
         }
 
         #region IPrioritizedTree<T> Members

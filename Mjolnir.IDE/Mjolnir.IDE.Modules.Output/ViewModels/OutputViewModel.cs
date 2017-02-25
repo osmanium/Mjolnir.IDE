@@ -30,7 +30,7 @@ namespace Mjolnir.IDE.Modules.Output.ViewModels
             _container = container;
             Name = "Output";
             Title = "Output";
-            ContentId = "Output";
+            ContentId = "Output";//TODO : Move to constants
             IsVisible = false;
 
             _model = new OutputModel();

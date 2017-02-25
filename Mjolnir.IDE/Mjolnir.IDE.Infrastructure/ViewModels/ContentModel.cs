@@ -33,10 +33,15 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         public virtual bool IsDirty
         {
             get { return _isDirty; }
-            protected internal set
+            set
             {
                 SetProperty(ref _isDirty, value);
             }
+        }
+
+        public ContentModel()
+        {
+            IsValidationEnabled = false;
         }
     }
 }

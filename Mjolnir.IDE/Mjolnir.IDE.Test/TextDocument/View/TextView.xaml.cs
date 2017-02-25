@@ -1,5 +1,4 @@
 ﻿using Mjolnir.IDE.Infrastructure.Interfaces;
-using Mjolnir.IDE.Modules.Output.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Mjolnir.IDE.Modules.Output.Views
+namespace Mjolnir.IDE.Test.TextDocument.View
 {
     /// <summary>
-    /// Interaction logic for OutputUserControl.xaml
+    /// Interaction logic for TextView.xaml
     /// </summary>
-    public partial class OutputUserControl : UserControl, IContentView
+    public partial class TextView : UserControl, IContentView
     {
-        public OutputUserControl(OutputModel viewModel)
+        public TextView()
         {
             InitializeComponent();
-            this.DataContext = viewModel;
-
-            //TODO : put scrollbar in xaml
-
         }
     }
 }

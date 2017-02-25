@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Mjolnir.IDE.Core.Services.Attributes
+namespace Mjolnir.IDE.Infrastructure.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class NewContentAttribute : Attribute

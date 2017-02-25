@@ -21,13 +21,11 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces
         /// <summary>
         /// The list of tools that are available in the workspace
         /// </summary>
-        //TODO : Uncomment
         ObservableCollection<ToolViewModel> Tools { get; set; }
 
         /// <summary>
         /// The current document which is active in the workspace
         /// </summary>
-        //TODO : Uncomment
         ContentViewModel ActiveDocument { get; set; }
 
         /// <summary>

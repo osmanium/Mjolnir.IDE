@@ -1,8 +1,8 @@
 ﻿using MahApps.Metro.Controls;
 using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Core.Services.Attributes;
 using Mjolnir.IDE.Core.Services.Views;
 using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Infrastructure.Attributes;
 using Mjolnir.IDE.Infrastructure.Interfaces;
 using Mjolnir.IDE.Infrastructure.Interfaces.Services;
 using Mjolnir.IDE.Infrastructure.ViewModels;

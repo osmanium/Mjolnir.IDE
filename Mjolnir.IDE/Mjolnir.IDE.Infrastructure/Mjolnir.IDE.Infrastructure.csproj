@@ -117,6 +117,8 @@
     <Compile Include="AbstractSettingsItem.cs" />
     <Compile Include="AbstractToolbar.cs" />
     <Compile Include="AbstractWorkspace.cs" />
+    <Compile Include="Attributes\FileContentAttribute.cs" />
+    <Compile Include="Attributes\NewContentAttribute.cs" />
     <Compile Include="Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Converters\BoolToInsertModeConverter.cs" />
     <Compile Include="Converters\DocumentContextMenuMixingConverter.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="Interfaces\Settings\IToolbarPositionSettings.cs" />
     <Compile Include="Interfaces\Settings\IWindowPositionSettings.cs" />
     <Compile Include="Interfaces\ViewModels\ISplashScreenViewModel.cs" />
+    <Compile Include="Interfaces\Views\INewFileWindowView.cs" />
     <Compile Include="LayoutInitializer.cs" />
     <Compile Include="PanesStyleSelector.cs" />
     <Compile Include="PanesTemplateSelector.cs" />

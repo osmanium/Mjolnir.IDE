@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using Microsoft.Win32;
-using Mjolnir.IDE.Core.Services.Attributes;
 using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Infrastructure.Attributes;
 using Mjolnir.IDE.Infrastructure.Events;
 using Mjolnir.IDE.Infrastructure.Interfaces.Services;
 using Mjolnir.IDE.Infrastructure.Interfaces.Settings;

@@ -159,5 +159,10 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         }
 
         #endregion
+
+        public ToolViewModel()
+        {
+            IsValidationEnabled = false;
+        }
     }
 }

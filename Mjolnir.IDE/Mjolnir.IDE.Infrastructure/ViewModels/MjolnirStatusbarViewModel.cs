@@ -73,6 +73,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         public MjolnirStatusbarViewModel()
         {
             Clear();
+            IsValidationEnabled = false;
         }
         #endregion
 

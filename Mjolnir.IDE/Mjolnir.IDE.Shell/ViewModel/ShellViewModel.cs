@@ -22,5 +22,10 @@ namespace Mjolnir.IDE.Shell.ViewModel
             get { return _abstractWorkspace; }
             set { SetProperty(ref _abstractWorkspace, value); }
         }
+
+        public ShellViewModel()
+        {
+            IsValidationEnabled = false;
+        }
     }
 }

@@ -54,7 +54,7 @@
             <!--Menu-->
             <Menu DockPanel.Dock="Top" IsMainMenu="True" x:Name="mainMenu" VerticalAlignment="Top" ItemsSource="{Binding Path=Workspace.Menus, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{DynamicResource MetroMenuStyle}" />
             <!--Toolbar (can we improve this?)-->
-            <ContentControl Content="{Binding ToolBarTray}" DockPanel.Dock="Top" />
+            <ContentControl Content="{Binding Workspace.ToolBarTray}" DockPanel.Dock="Top" />
             <!--Status bar-->
             <StatusBar x:Name="WideStatusBar" DockPanel.Dock="Bottom" Background="{Binding Path=StatusBar.Background}">
                 <StatusBar.ItemsPanel>
@@ -113,8 +113,8 @@
 
             <!--The magical avalon dock-->
             <avalonDock:DockingManager x:Name="dockManager" AnchorablesSource="{Binding Workspace.Tools}"
-                                       DocumentsSource="{Binding Documents}"
-                                       ActiveContent="{Binding ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}">
+                                       DocumentsSource="{Binding Workspace.Documents}"
+                                       ActiveContent="{Binding Workspace.ActiveDocument, Mode=TwoWay, Converter={StaticResource ActiveDocumentConverter}}">
 
                 <!--<avalonDock:DockingManager.DocumentContextMenu>
                     <ContextMenu ItemsSource="{Binding Path=Model.Menus, Converter={StaticResource ResourceKey=bindDebug}}" Style="{StaticResource MetroContextMenu}" ItemContainerStyle="{StaticResource MetroMenuItem}" BorderBrush="{DynamicResource ControlOpenColorBrush}" Background="{DynamicResource ControlOpenColorBrush}" />

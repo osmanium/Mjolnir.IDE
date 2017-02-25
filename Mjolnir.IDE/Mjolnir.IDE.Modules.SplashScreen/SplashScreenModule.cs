@@ -66,8 +66,7 @@ namespace Mjolnir.IDE.Modules.SplashScreen
 
                   Dispatcher.Run();
               };
-
-            //TODO : Move to constants
+            
             var thread = new Thread(showSplash) { Name = "Splash Thread", IsBackground = true };
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();

@@ -21,12 +21,12 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces
         void LoadMenus();
         void LoadToolbar();
         void LoadSettings();
-
+        void LoadCommands();
 
         void LoadModules();
 
         void OnIDELoaded();
-        void onIDEClosing();
+        bool onIDEClosing();
         void onIDEClosed();
     }
 }

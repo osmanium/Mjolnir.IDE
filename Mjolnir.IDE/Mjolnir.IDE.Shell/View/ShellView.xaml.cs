@@ -97,9 +97,37 @@ namespace Mjolnir.IDE.Shell.View
         public void SaveLayout()
         {
             var layoutSerializer = new XmlLayoutSerializer(dockManager);
-            layoutSerializer.Serialize(AppDomain.CurrentDomain.BaseDirectory  + "\\AvalonDock.Layout.config");
+            layoutSerializer.Serialize(AppDomain.CurrentDomain.BaseDirectory + "\\AvalonDock.Layout.config");
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            var applicationDefinition = _container.Resolve<IApplicationDefinition>();
+            if (applicationDefinition != null)
+            {
+                if (!applicationDefinition.onIDEClosing())
+                {
+                    var shell = _container.Resolve<IShellView>();
+                    shell.SaveLayout();
 
+                    applicationDefinition.onIDEClosing();
+                }
+                else
+                {
+                    e.Cancel = true;
+                    base.OnClosing(e);
+                }
+            }
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            var applicationDefinition = _container.Resolve<IApplicationDefinition>();
+            if (applicationDefinition != null)
+            {
+                applicationDefinition.onIDEClosed();
+            }
+
+            base.OnClosed(e);
+        }
     }
 }

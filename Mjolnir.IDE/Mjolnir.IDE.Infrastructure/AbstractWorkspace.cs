@@ -110,7 +110,9 @@ namespace Mjolnir.IDE.Infrastructure
             _menus.PropertyChanged += _menus_PropertyChanged;
             _toolbarService = _container.Resolve<IToolbarService>() as AbstractToolbar;
             _statusbarService = _container.Resolve<IStatusbarService>();
-            //_commandManager = _container.Resolve<ICommandManager>();
+            _commandManager = _container.Resolve<ICommandManager>();
+
+            IsValidationEnabled = false;
         }
 
         #endregion

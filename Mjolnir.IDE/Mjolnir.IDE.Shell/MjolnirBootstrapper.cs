@@ -47,7 +47,7 @@ namespace Mjolnir.IDE.Shell
             CoreModule coreModule = Container.Resolve<CoreModule>();
             coreModule.Initialize();
 
-            //TODO : Improve here
+            
             var shellViewModel = Container.Resolve<IShellView>();
             (shellViewModel.DataContext as ShellViewModel).Workspace = Container.Resolve<AbstractWorkspace>();
 
@@ -75,10 +75,16 @@ namespace Mjolnir.IDE.Shell
             Container.RegisterType<ISplashScreenModule, SplashScreenModule>(new ContainerControlledLifetimeManager());
 
             if (!Container.IsRegistered<ISplashScreenViewModel>())
+            {
                 Container.RegisterType<ISplashScreenViewModel, DefaultSplashScreenViewModel>(new ContainerControlledLifetimeManager());
 
+            }
+
+
             if (!Container.IsRegistered<ISplashScreenView>())
+            {
                 Container.RegisterType<ISplashScreenView, DefaultSplashScreenView>(new ContainerControlledLifetimeManager());
+            }
 
             Container.RegisterInstance<IApplicationDefinition>(_applicationDefinition, new ContainerControlledLifetimeManager());
 

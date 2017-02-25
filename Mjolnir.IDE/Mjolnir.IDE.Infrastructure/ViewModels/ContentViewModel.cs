@@ -94,6 +94,8 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
             _logger = logger;
             _menuService = menuService;
             CloseCommand = new DelegateCommand<object>(Close, CanClose);
+
+            IsValidationEnabled = false;
         }
 
         #endregion
@@ -113,7 +115,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         public virtual ContentModel Model
         {
             get { return _model; }
-            protected internal set
+            set
             {
                 if (_model != null)
                 {
@@ -131,7 +133,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         /// The content view
         /// </summary>
         /// <value>The view.</value>
-        public virtual UserControl View { get; protected internal set; }
+        public virtual UserControl View { get; set; }
 
         /// <summary>
         /// The content menu that should be available for the document pane
@@ -282,12 +284,13 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
 
         protected virtual void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(() => Model);
-            OnPropertyChanged(() => Title);
-            OnPropertyChanged(() => ContentId);
-            OnPropertyChanged(() => Tooltip);
-            OnPropertyChanged(() => IsSelected);
-            OnPropertyChanged(() => IsActive);
+            //TODO : Do not uncomment, slows down performance
+            //OnPropertyChanged(() => Model);
+            //OnPropertyChanged(() => Title);
+            //OnPropertyChanged(() => ContentId);
+            //OnPropertyChanged(() => Tooltip);
+            //OnPropertyChanged(() => IsSelected);
+            //OnPropertyChanged(() => IsActive);
         }
 
         #endregion

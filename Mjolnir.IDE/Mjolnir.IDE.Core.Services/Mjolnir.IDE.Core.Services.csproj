@@ -117,8 +117,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\FileContentAttribute.cs" />
-    <Compile Include="Attributes\NewContentAttribute.cs" />
     <Compile Include="CommandManager.cs" />
     <Compile Include="ContentHandlerRegistry.cs" />
     <Compile Include="DefaultLogService.cs" />

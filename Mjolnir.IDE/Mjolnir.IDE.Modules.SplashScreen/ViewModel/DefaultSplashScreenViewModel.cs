@@ -71,6 +71,7 @@ namespace Mjolnir.IDE.Modules.SplashScreen.ViewModel
             }
 
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Subscribe(e => UpdateMessage(e.Text));
+            IsValidationEnabled = false;
         }
 
         private void UpdateMessage(string message)

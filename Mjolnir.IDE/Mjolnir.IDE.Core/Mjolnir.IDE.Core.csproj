@@ -145,14 +145,6 @@
       <Project>{c4ef8cd8-a007-446b-889e-387f5b4300e1}</Project>
       <Name>Mjolnir.IDE.Modules.SplashScreen</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mjolnir.IDE.Modules.StatusBar\Mjolnir.IDE.Modules.Statusbar.csproj">
-      <Project>{6c031b53-760f-4eee-b3a4-4194a1c193f8}</Project>
-      <Name>Mjolnir.IDE.Modules.Statusbar</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mjolnir.IDE.Modules.Toolbar\Mjolnir.IDE.Modules.Toolbar.csproj">
-      <Project>{cae68656-8366-4e2f-895a-1ad5957273d6}</Project>
-      <Name>Mjolnir.IDE.Modules.Toolbar</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

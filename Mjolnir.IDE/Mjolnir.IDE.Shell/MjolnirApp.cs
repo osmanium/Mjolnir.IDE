@@ -22,12 +22,9 @@ namespace Mjolnir.IDE.Shell
             base.OnStartup(e);
             Bootstrapper.Run();
         }
-
+        
         protected override void OnExit(ExitEventArgs e)
         {
-            var shell = Bootstrapper.Container.Resolve<IShellView>();
-            shell.SaveLayout();
-
             GC.Collect();
             base.OnExit(e);
         }

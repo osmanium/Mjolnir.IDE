@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Mjolnir.IDE.Infrastructure.Interfaces.Views
 {
@@ -33,25 +34,27 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Views
         /// Gets the top.
         /// </summary>
         /// <value>The top.</value>
-        double Top { get; }
+        double Top { get; set; }
 
         /// <summary>
         /// Gets the left.
         /// </summary>
         /// <value>The left.</value>
-        double Left { get; }
+        double Left { get; set; }
 
         /// <summary>
         /// Gets the width.
         /// </summary>
         /// <value>The width.</value>
-        double Width { get; }
+        double Width { get; set; }
 
         /// <summary>
         /// Gets the height.
         /// </summary>
         /// <value>The height.</value>
-        double Height { get; }
+        double Height { get; set; }
+
+        WindowState WindowState { get; set; }
 
         object DataContext { get; set; }
     }

@@ -21,5 +21,10 @@ namespace Mjolnir.IDE.Modules.Output
             _text = output.Message + "\n" + _text;
             OnPropertyChanged(() => Text);
         }
+
+        public OutputModel()
+        {
+            IsValidationEnabled = false;
+        }
     }
 }
