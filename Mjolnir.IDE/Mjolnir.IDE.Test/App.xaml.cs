@@ -61,6 +61,7 @@ namespace Mjolnir.IDE.Test
             var openCommand = new DelegateCommand(OpenModule);
             var exitCommand = new DelegateCommand(CloseCommandExecute);
             var saveCommand = new DelegateCommand(SaveDocument, CanExecuteSaveDocument);
+            var saveAllCommand = new DelegateCommand(SaveAllDocuments, CanExecuteSaveAllDocument);
             var saveAsCommand = new DelegateCommand(SaveAsDocument, CanExecuteSaveAsDocument);
             var themeCommand = new DelegateCommand<string>(ThemeChangeCommand);
             var loggerCommand = new DelegateCommand(ToggleOutput);
@@ -68,6 +69,7 @@ namespace Mjolnir.IDE.Test
 
             manager.RegisterCommand("OPEN", openCommand);
             manager.RegisterCommand("SAVE", saveCommand);
+            manager.RegisterCommand("SAVEALL", saveAllCommand);
             manager.RegisterCommand("SAVEAS", saveAsCommand);
             manager.RegisterCommand("EXIT", exitCommand);
             manager.RegisterCommand("LOGSHOW", loggerCommand);
@@ -130,12 +132,21 @@ namespace Mjolnir.IDE.Test
                                                @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/OpenFileDialog_692.png")),
                                        manager.GetCommand("OPEN"),
                                        new KeyGesture(Key.O, ModifierKeys.Control, "Ctrl + O"))));
+
             menuService.Get("_File").Add(new MenuItemViewModel("_Save", 5,
                                                                new BitmapImage(
                                                                    new Uri(
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Save_6530.png")),
                                                                manager.GetCommand("SAVE"),
                                                                new KeyGesture(Key.S, ModifierKeys.Control, "Ctrl + S")));
+
+            menuService.Get("_File").Add(new MenuItemViewModel("_Save All", 6,
+                                                               new BitmapImage(
+                                                                   new Uri(
+                                                                       @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Saveall_6518.png")),
+                                                               manager.GetCommand("SAVEALL"),
+                                                               new KeyGesture(Key.A, ModifierKeys.Control, "Ctrl + A")));
+
 
             //menuService.Get("_File").Add(new SaveAsMenuItemViewModel("Save As..", 6,
             //                                       new BitmapImage(
@@ -179,12 +190,12 @@ namespace Mjolnir.IDE.Test
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Paste_6520.png")),
                                                                ApplicationCommands.Paste));
 
-            
+
 
             if (output != null)
                 menuService.Get("_View")
                            .Add(new MenuItemViewModel("_Output", 1,
-                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Undo_16x.png")),
+                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Output_16xLG.png")),
                                     new DelegateCommand(ToggleOutput) { IsActive = false }));
 
             menuService.Get("_View").Add(new MenuItemViewModel("Themes", 1));
@@ -207,7 +218,7 @@ namespace Mjolnir.IDE.Test
                 CommandParameter = "Light"
             });
 
-            
+
             menuService.Get("_Tools").Add(new MenuItemViewModel("Settings", 1, null, settingsManager.SettingsCommand));
 
 
@@ -239,6 +250,10 @@ namespace Mjolnir.IDE.Test
             toolbarService.Add(new ToolbarViewModel("Standard", 1) { Band = 1, BandIndex = 1 });
             toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_New"));
             toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Open"));
+            toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Save"));
+            toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Save All"));
+            
+
 
             toolbarService.Add(new ToolbarViewModel("Edit", 1) { Band = 1, BandIndex = 2 });
             toolbarService.Get("Edit").Add(menuService.Get("_Edit").Get("_Undo"));
@@ -258,12 +273,12 @@ namespace Mjolnir.IDE.Test
             //Initiate the position settings changes for toolbar
             _container.Resolve<IToolbarPositionSettings>();
         }
-        
+
         public void LoadModules()
         {
 
         }
-        
+
         public bool onIDEClosing()
         {
             return true;
@@ -314,19 +329,29 @@ namespace Mjolnir.IDE.Test
                 mi.IsChecked = output.IsVisible;
             }
         }
-        
+
         private void OpenModule()
         {
             var service = _container.Resolve<IOpenDocumentService>();
             service.Open();
         }
-        
+
         private bool CanExecuteSaveDocument()
         {
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
             if (workspace.ActiveDocument != null)
             {
                 return workspace.ActiveDocument.Model.IsDirty;
+            }
+            return false;
+        }
+
+        private bool CanExecuteSaveAllDocument()
+        {
+            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            if (workspace.Documents != null && workspace.Documents.Any())
+            {
+                return true;
             }
             return false;
         }
@@ -344,6 +369,19 @@ namespace Mjolnir.IDE.Test
             workspace.ActiveDocument.Handler.SaveContent(workspace.ActiveDocument);
             manager.Refresh();
         }
+
+        private void SaveAllDocuments()
+        {
+            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            ICommandManager manager = _container.Resolve<ICommandManager>();
+            workspace.ActiveDocument.Handler.SaveContent(workspace.ActiveDocument);
+            workspace.Documents.ToList().ForEach(f =>
+            {
+                f.Handler.SaveContent(f);
+            });
+            manager.Refresh();
+        }
+
 
         private void SaveAsDocument()
         {
