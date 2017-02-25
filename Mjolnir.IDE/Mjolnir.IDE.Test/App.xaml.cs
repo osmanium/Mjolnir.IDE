@@ -374,7 +374,6 @@ namespace Mjolnir.IDE.Test
         {
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
             ICommandManager manager = _container.Resolve<ICommandManager>();
-            workspace.ActiveDocument.Handler.SaveContent(workspace.ActiveDocument);
             workspace.Documents.ToList().ForEach(f =>
             {
                 f.Handler.SaveContent(f);
