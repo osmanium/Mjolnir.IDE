@@ -56,7 +56,7 @@ namespace Mjolnir.IDE.Test.TextDocument.Model
             get { return base.IsDirty; }
             set
             {
-                base.IsDirty = value;
+                SetProperty(ref base._isDirty, value);
                 if (value == false)
                 {
                     OldText = Document.Text;
@@ -64,12 +64,25 @@ namespace Mjolnir.IDE.Test.TextDocument.Model
             }
         }
 
+
+        private ICSharpCode.AvalonEdit.Document.TextDocument _document;
+
         /// <summary>
         /// Gets or sets the AvalonEdit's text document.
         /// </summary>
         /// <value>The document.</value>
         [Browsable(false)]
-        public ICSharpCode.AvalonEdit.Document.TextDocument Document { get; protected set; }
+        public ICSharpCode.AvalonEdit.Document.TextDocument Document
+        {
+            get
+            {
+                return _document;
+            }
+            set
+            {
+                SetProperty(ref _document, value);
+            }
+        }
 
         /// <summary>
         /// Documents the on text changed.
@@ -88,7 +101,7 @@ namespace Mjolnir.IDE.Test.TextDocument.Model
         /// <param name="e">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
         private void DocumentPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            //OnPropertyChanged(() => Document);
+            OnPropertyChanged(() => Document);
         }
 
         internal void SetLocation(object location)
