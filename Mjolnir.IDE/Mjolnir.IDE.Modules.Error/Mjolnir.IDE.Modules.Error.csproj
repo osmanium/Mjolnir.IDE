@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="Converters\ErrorListItemTypeToImageConverter.cs" />
     <Compile Include="ErrorModule.cs" />
+    <Compile Include="Events\ErrorDetected.cs" />
     <Compile Include="Interfaces\IErrorToolboxToolbarService.cs" />
     <Compile Include="Interfaces\IErrorService.cs" />
     <Compile Include="Models\ErrorListItem.cs" />
@@ -139,9 +140,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Error.png" />
-    <Content Include="Assets\Message.png" />
-    <Content Include="Assets\Warning.png" />
+    <Resource Include="Assets\Error.png" />
+    <Resource Include="Assets\Message.png" />
+    <Resource Include="Assets\Warning.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Styles\" />

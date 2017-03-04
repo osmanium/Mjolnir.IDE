@@ -7,6 +7,7 @@ using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
 using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
 using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Modules.Error.Events;
 using Mjolnir.IDE.Shell;
 using Mjolnir.IDE.Test.TextDocument;
 using Mjolnir.IDE.Test.TextDocument.Model;
@@ -99,7 +100,15 @@ namespace Mjolnir.IDE.Test
 
         public void OnIDELoaded()
         {
-
+            _eventAggregator.GetEvent<ErrorDetected>().Publish(new ErrorDetected()
+            {
+                Column = 1,
+                Description = "Test description",
+                ItemType = Infrastructure.Enums.ErrorListItemType.Error,
+                Line = 1,
+                OnClick = null,
+                Path = "Path"
+            });
         }
 
         public void LoadMenus()

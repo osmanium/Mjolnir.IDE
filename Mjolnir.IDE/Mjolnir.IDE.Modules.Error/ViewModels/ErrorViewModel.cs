@@ -13,6 +13,7 @@ using Mjolnir.IDE.Modules.Error.Models;
 using Mjolnir.IDE.Modules.Error.Views;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Modules.Error.Interfaces;
+using Mjolnir.IDE.Modules.Error.Events;
 
 namespace Mjolnir.IDE.Modules.Error.ViewModels
 {
@@ -23,7 +24,7 @@ namespace Mjolnir.IDE.Modules.Error.ViewModels
         private readonly ErrorUserControl _view;
         private readonly ObservableCollection<ErrorListItem> _items;
         private readonly IErrorToolboxToolbarService _errorToolbox;
-
+        private readonly IEventAggregator _eventAggregator;
 
 
         public override PaneLocation PreferredLocation
@@ -109,9 +110,16 @@ namespace Mjolnir.IDE.Modules.Error.ViewModels
         }
 
 
-        public ErrorViewModel(IUnityContainer container, AbstractWorkspace workspace, IErrorToolboxToolbarService errorToolbox)
+        public ErrorViewModel(IUnityContainer container,
+                              AbstractWorkspace workspace,
+                              IErrorToolboxToolbarService errorToolbox,
+                              IEventAggregator eventAggregator)
             : base(container, errorToolbox)
         {
+            _eventAggregator = eventAggregator;
+            _container = container;
+            _errorToolbox = errorToolbox;
+
             _items = new ObservableCollection<ErrorListItem>();
             _items.CollectionChanged += (sender, e) =>
             {
@@ -122,25 +130,24 @@ namespace Mjolnir.IDE.Modules.Error.ViewModels
             };
 
 
-            _container = container;
             Name = "Error";
             Title = "Error";
             ContentId = "Error";//TODO : Move to constants
             IsVisible = false;
 
-            _errorToolbox = errorToolbox;
 
             _view = new ErrorUserControl(this);
             View = _view;
+
+            _eventAggregator.GetEvent<ErrorDetected>().Subscribe(AddItem);
+
         }
 
-        public void AddItem(ErrorListItemType itemType, string description,
-            string path = null, int? line = null, int? column = null,
-            System.Action onClick = null)
+        public void AddItem(ErrorDetected error)
         {
-            Items.Add(new ErrorListItem(itemType, Items.Count + 1, description, path, line, column)
+            Items.Add(new ErrorListItem(error.ItemType, Items.Count + 1, error.Description, error.Path, error.Line, error.Column)
             {
-                OnClick = onClick
+                OnClick = error.OnClick
             });
         }
     }

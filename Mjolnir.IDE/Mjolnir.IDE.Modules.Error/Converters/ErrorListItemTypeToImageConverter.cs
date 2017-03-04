@@ -7,28 +7,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Mjolnir.IDE.Modules.Error.Converters
 {
     public class ErrorListItemTypeToImageConverter : IValueConverter
     {
-        public ImageSource ErrorImageSource { get; set; }
-        public ImageSource MessageImageSource { get; set; }
-        public ImageSource WarningImageSource { get; set; }
+        public string ErrorImageSource { get; set; }
+        public string MessageImageSource { get; set; }
+        public string WarningImageSource { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            BitmapImage bmp = new BitmapImage();
+            bmp.BeginInit();
+
+            var path = string.Empty;
+
             switch ((ErrorListItemType)value)
             {
                 case ErrorListItemType.Error:
-                    return ErrorImageSource;
+                    path = ErrorImageSource;
+                    break;
                 case ErrorListItemType.Warning:
-                    return WarningImageSource;
+                    path = WarningImageSource;
+                    break;
                 case ErrorListItemType.Message:
-                    return MessageImageSource;
+                    path = MessageImageSource;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException("value");
             }
+
+            bmp.UriSource = new Uri(path, UriKind.Relative);
+            bmp.EndInit();
+            
+            return bmp;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
