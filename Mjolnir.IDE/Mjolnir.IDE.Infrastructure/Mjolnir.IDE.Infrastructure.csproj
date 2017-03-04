@@ -127,6 +127,7 @@
     <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\PercentToFontSizeConverter.cs" />
     <Compile Include="DefaultWorkspace.cs" />
+    <Compile Include="Enums\ErrorListItemType.cs" />
     <Compile Include="Enums\PaneLocation.cs" />
     <Compile Include="Events\ActiveContentChangedEvent.cs" />
     <Compile Include="Events\ClosedContentEvent.cs" />
@@ -139,10 +140,13 @@
     <Compile Include="Interfaces\IApplicationDefinition.cs" />
     <Compile Include="Interfaces\ICommandable.cs" />
     <Compile Include="Interfaces\IContentView.cs" />
+    <Compile Include="Interfaces\IObservableCollection.cs" />
     <Compile Include="Interfaces\IPrioritizedTree.cs" />
     <Compile Include="Interfaces\ITheme.cs" />
     <Compile Include="Interfaces\ITool.cs" />
+    <Compile Include="Interfaces\IShellToolbar.cs" />
     <Compile Include="Interfaces\IToolbar.cs" />
+    <Compile Include="Interfaces\IToolboxToolbar.cs" />
     <Compile Include="Interfaces\Services\ICommandManager.cs" />
     <Compile Include="Interfaces\Services\IContentHandler.cs" />
     <Compile Include="Interfaces\Services\IContentHandlerRegistry.cs" />
@@ -151,7 +155,9 @@
     <Compile Include="Interfaces\Services\IOpenDocumentService.cs" />
     <Compile Include="Interfaces\Services\IStatusbarService.cs" />
     <Compile Include="Interfaces\Services\IThemeManager.cs" />
-    <Compile Include="Interfaces\Services\IToolbarService.cs" />
+    <Compile Include="Interfaces\Services\IShellToolbarService.cs" />
+    <Compile Include="Interfaces\Services\IToolbarServiceBase.cs" />
+    <Compile Include="Interfaces\Services\IToolboxToolbarServiceBase.cs" />
     <Compile Include="Interfaces\Settings\IRecentViewItem.cs" />
     <Compile Include="Interfaces\Settings\IRecentViewSettings.cs" />
     <Compile Include="Interfaces\Settings\ISettingsManager.cs" />
@@ -160,6 +166,7 @@
     <Compile Include="Interfaces\Settings\IWindowPositionSettings.cs" />
     <Compile Include="Interfaces\ViewModels\ISplashScreenViewModel.cs" />
     <Compile Include="Interfaces\Views\INewFileWindowView.cs" />
+    <Compile Include="Interfaces\Views\IToolBarView.cs" />
     <Compile Include="LayoutInitializer.cs" />
     <Compile Include="PanesStyleSelector.cs" />
     <Compile Include="PanesTemplateSelector.cs" />
@@ -175,6 +182,7 @@
     <Compile Include="ViewModels\ContentViewModel.cs" />
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
     <Compile Include="ViewModels\MjolnirStatusbarViewModel.cs" />
+    <Compile Include="ViewModels\ToolboxToolbarViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

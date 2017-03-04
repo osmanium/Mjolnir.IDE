@@ -17,13 +17,13 @@ namespace Mjolnir.IDE.Core.Services
     /// <summary>
     /// The Wide tool bar service
     /// </summary>
-    public sealed class ToolbarService : AbstractToolbar, IToolbarService
+    public sealed class ShellToolbarService : AbstractToolbar, IShellToolbarService
     {
         private static BoolToVisibilityConverter btv = new BoolToVisibilityConverter();
         private AbstractMenuItem menuItem;
         private ToolBarTray tray;
 
-        public ToolbarService() : base("$MAIN$", 0)
+        public ShellToolbarService() : base("$MAIN$", 0)
         {
         }
 

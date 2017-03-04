@@ -15,42 +15,48 @@ using System.Threading.Tasks;
 
 namespace Mjolnir.IDE.Modules.Output.ViewModels
 {
-    public  class OutputViewModel : ToolViewModel
+    public class OutputViewModel : ToolViewModel
     {
         private readonly IEventAggregator _aggregator;
         private readonly IUnityContainer _container;
-        private readonly OutputModel _model;
         private readonly OutputUserControl _view;
 
+        public override PaneLocation PreferredLocation
+        {
+            get { return PaneLocation.Bottom; }
+        }
 
-        
+
+        private string _text;
+        public string Text
+        {
+            get { return _text; }
+        }
+
 
         public OutputViewModel(IUnityContainer container, AbstractWorkspace workspace)
+            : base(container, null)
         {
+            IsValidationEnabled = false;
+
             _container = container;
             Name = "Output";
             Title = "Output";
             ContentId = "Output";//TODO : Move to constants
             IsVisible = false;
 
-            _model = new OutputModel();
-            Model = _model;
 
-            _view = new OutputUserControl(_model);
+            _view = new OutputUserControl(this);
             View = _view;
 
             _aggregator = _container.Resolve<IEventAggregator>();
-            _aggregator.GetEvent<LogEvent>().Subscribe(AddOutput);
+            _aggregator.GetEvent<LogEvent>().Subscribe(AddLog);
         }
 
-        private void AddOutput(IOutputService output)
+        public void AddLog(IOutputService output)
         {
-            _model.AddLog(output);
-        }
-
-        public override PaneLocation PreferredLocation
-        {
-            get { return PaneLocation.Bottom; }
+            _text = output.Message + "\n" + _text;
+            OnPropertyChanged(() => Text);
         }
     }
 }

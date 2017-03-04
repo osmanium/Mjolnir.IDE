@@ -110,6 +110,7 @@ namespace Mjolnir.IDE.Test
             var themeSettings = _container.Resolve<IThemeSettings>();
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
             ToolViewModel output = workspace.Tools.First(f => f.ContentId == "Output");
+            ToolViewModel error = workspace.Tools.First(f => f.ContentId == "Error");
 
             menuService.Add(new MenuItemViewModel("_File", 1));
             menuService.Add(new MenuItemViewModel("_Edit", 2));
@@ -198,6 +199,12 @@ namespace Mjolnir.IDE.Test
                                     new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Output_16xLG.png")),
                                     new DelegateCommand(ToggleOutput) { IsActive = false }));
 
+            if(error != null)
+                menuService.Get("_View")
+                           .Add(new MenuItemViewModel("_Error", 1,
+                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Output_16xLG.png")),
+                                    new DelegateCommand(ErrorOutput) { IsActive = false }));
+
             menuService.Get("_View").Add(new MenuItemViewModel("Themes", 1));
 
             //Set the checkmark of the theme menu's based on which is currently selected
@@ -243,7 +250,7 @@ namespace Mjolnir.IDE.Test
 
         public void LoadToolbar()
         {
-            var toolbarService = _container.Resolve<IToolbarService>();
+            var toolbarService = _container.Resolve<IShellToolbarService>();
             var menuService = _container.Resolve<IMenuService>();
             var manager = _container.Resolve<ICommandManager>();
 
@@ -329,7 +336,19 @@ namespace Mjolnir.IDE.Test
                 mi.IsChecked = output.IsVisible;
             }
         }
-
+        private void ErrorOutput()
+        {
+            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            var menuService = _container.Resolve<IMenuService>();
+            ToolViewModel output = workspace.Tools.First(f => f.ContentId == "Error");
+            if (output != null)
+            {
+                output.IsVisible = !output.IsVisible;
+                var mi = menuService.Get("_View").Get("_Error") as MenuItemViewModel;
+                mi.IsChecked = output.IsVisible;
+            }
+        }
+        
         private void OpenModule()
         {
             var service = _container.Resolve<IOpenDocumentService>();

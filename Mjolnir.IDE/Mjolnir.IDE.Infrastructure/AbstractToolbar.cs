@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Mjolnir.IDE.Infrastructure
 {
-    public abstract class AbstractToolbar : AbstractMenuItem, IToolbar
+    public abstract class AbstractToolbar : AbstractMenuItem, IToolbar, IShellToolbar, IToolboxToolbar
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolbarViewModel"/> class.

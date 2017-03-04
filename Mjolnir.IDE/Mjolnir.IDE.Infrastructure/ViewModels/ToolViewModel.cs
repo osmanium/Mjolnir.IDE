@@ -1,11 +1,14 @@
-﻿using Mjolnir.IDE.Infrastructure.Enums;
+﻿using Microsoft.Practices.Unity;
+using Mjolnir.IDE.Infrastructure.Enums;
 using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Infrastructure.Interfaces.Services;
 using Mjolnir.UI.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Mjolnir.IDE.Infrastructure.ViewModels
@@ -21,8 +24,9 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         protected bool _isActive = false;
         protected bool _isSelected = false;
         private bool _isVisible = false;
-
         protected string _title = null;
+
+        private readonly IUnityContainer _container;
 
         #endregion
 
@@ -75,7 +79,7 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         /// The content model
         /// </summary>
         /// <value>The model.</value>
-        public virtual ValidatableBindableBase Model { get; set; }
+        //public virtual ValidatableBindableBase Model { get; set; }
 
         /// <summary>
         /// The content view
@@ -157,11 +161,21 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
                 }
             }
         }
+        
 
+        public ToolBarTray ToolBarTray
+        {
+            get { return (_toolbarService as IToolbarServiceBase).ToolBarTray; }
+        }
+
+
+        private IToolboxToolbar _toolbarService;
         #endregion
 
-        public ToolViewModel()
+        public ToolViewModel(IUnityContainer container, IToolbarServiceBase toolbarService)
         {
+            _container = container;
+            _toolbarService = toolbarService as AbstractToolbar;
             IsValidationEnabled = false;
         }
     }

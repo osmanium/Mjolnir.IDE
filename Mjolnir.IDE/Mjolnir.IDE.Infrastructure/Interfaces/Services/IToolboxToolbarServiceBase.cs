@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mjolnir.IDE.Modules.Toolbar
+namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
 {
-    public class Class1
+    public interface IToolboxToolbarServiceBase : IToolbarServiceBase
     {
     }
 }

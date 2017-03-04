@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Test", "Mjolnir
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Modules.Output", "Mjolnir.IDE.Modules.Output\Mjolnir.IDE.Modules.Output.csproj", "{5E9312BD-4E44-49A7-AE6E-BFB8080D67E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Modules.Toolbar", "Mjolnir.IDE.Modules.Toolbar\Mjolnir.IDE.Modules.Toolbar.csproj", "{831921DF-1D3B-4A98-85A2-CCB0F26C2AAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{5E9312BD-4E44-49A7-AE6E-BFB8080D67E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E9312BD-4E44-49A7-AE6E-BFB8080D67E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E9312BD-4E44-49A7-AE6E-BFB8080D67E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{831921DF-1D3B-4A98-85A2-CCB0F26C2AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{831921DF-1D3B-4A98-85A2-CCB0F26C2AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{831921DF-1D3B-4A98-85A2-CCB0F26C2AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{831921DF-1D3B-4A98-85A2-CCB0F26C2AAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,5 +91,6 @@ Global
 		{BE6CA375-CB86-45FA-B186-FBA6DF0A1B28} = {265C6F86-48DC-4839-93CD-6D9FDC39B64B}
 		{01CB530C-2F82-41DA-8115-CE77B2CFF1D1} = {265C6F86-48DC-4839-93CD-6D9FDC39B64B}
 		{5E9312BD-4E44-49A7-AE6E-BFB8080D67E9} = {265C6F86-48DC-4839-93CD-6D9FDC39B64B}
+		{831921DF-1D3B-4A98-85A2-CCB0F26C2AAD} = {265C6F86-48DC-4839-93CD-6D9FDC39B64B}
 	EndGlobalSection
 EndGlobal

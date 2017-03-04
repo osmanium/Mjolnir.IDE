@@ -1,5 +1,5 @@
 ﻿using Mjolnir.IDE.Infrastructure.Interfaces;
-using Mjolnir.IDE.Modules.Output.ViewModels;
+using Mjolnir.IDE.Modules.Error.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +15,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Mjolnir.IDE.Modules.Output.Views
+namespace Mjolnir.IDE.Modules.Error.Views
 {
     /// <summary>
-    /// Interaction logic for OutputUserControl.xaml
+    /// Interaction logic for ErrorUserControl.xaml
     /// </summary>
-    public partial class OutputUserControl : UserControl, IContentView
+    public partial class ErrorUserControl : UserControl, IContentView
     {
-        //TODO : instead of mode, it should be view model, check here
-        public OutputUserControl(OutputViewModel viewModel)
+        public ErrorUserControl(ErrorViewModel viewModel)
         {
             InitializeComponent();
             this.DataContext = viewModel;
-
-            //TODO : put scrollbar in xaml
-
         }
     }
 }

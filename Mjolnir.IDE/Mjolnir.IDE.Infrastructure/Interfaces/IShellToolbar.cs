@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mjolnir.IDE.Modules.Error
+namespace Mjolnir.IDE.Infrastructure.Interfaces
 {
-    public class Class1
+    public interface IShellToolbar : IToolbar
     {
+        
     }
 }

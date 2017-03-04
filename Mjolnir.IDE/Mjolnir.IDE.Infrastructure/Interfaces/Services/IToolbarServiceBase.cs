@@ -10,7 +10,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
     /// <summary>
     /// Interface IToolbarService - the application's toolbar tray is returned by this service
     /// </summary>
-    public interface IToolbarService
+    public interface IToolbarServiceBase
     {
         /// <summary>
         /// Gets the tool bar tray of the application.

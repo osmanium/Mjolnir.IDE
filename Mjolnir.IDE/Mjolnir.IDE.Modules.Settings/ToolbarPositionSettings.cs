@@ -18,7 +18,7 @@ namespace Mjolnir.IDE.Modules.Settings
         private AbstractToolbar _toolTray;
         private Dictionary<string, ToolbarSettingItem> _loadDict;
 
-        public ToolbarPositionSettings(IEventAggregator eventAggregator, IToolbarService toolbarService)
+        public ToolbarPositionSettings(IEventAggregator eventAggregator, IShellToolbarService toolbarService)
         {
             eventAggregator.GetEvent<WindowClosingEvent>().Subscribe(SaveToolbarPositions);
             _toolTray = toolbarService as AbstractToolbar;

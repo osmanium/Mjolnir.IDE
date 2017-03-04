@@ -8,6 +8,7 @@ using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
 using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
 using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Modules.Error;
 using Mjolnir.IDE.Modules.Output;
 using Mjolnir.IDE.Modules.Settings;
 using Prism.Commands;
@@ -52,7 +53,7 @@ namespace Mjolnir.IDE.Core
             _container.RegisterType<IContentHandlerRegistry, ContentHandlerRegistry>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IStatusbarService, MjolnirStatusbarViewModel>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IThemeManager, ThemeManager>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<IToolbarService, ToolbarService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IShellToolbarService, ShellToolbarService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IMenuService, MenuItemViewModel>(new ContainerControlledLifetimeManager(),
                                                                      new InjectionConstructor(
                                                                          new InjectionParameter(typeof(string),
@@ -122,13 +123,19 @@ namespace Mjolnir.IDE.Core
             //Output
             OutputModule outputModule = _container.Resolve<OutputModule>();
             outputModule.Initialize();
-
-
+            
             if (isDefaultOutputService)
                 _outputService.LogOutput("DefaultLogService applied", OutputCategory.Info, OutputPriority.None);
 
             if (isDefaultWorkspace)
                 _outputService.LogOutput("DefaultWorkspace applied", OutputCategory.Info, OutputPriority.None);
+
+
+            ErrorModule errorModule = _container.Resolve<ErrorModule>();
+            errorModule.Initialize();
+
+
+
 
             var customApplication = _container.Resolve<IApplicationDefinition>();
             if (customApplication != null)

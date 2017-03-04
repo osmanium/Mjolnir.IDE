@@ -1,0 +1,39 @@
+﻿using Mjolnir.IDE.Infrastructure.Enums;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Media;
+
+namespace Mjolnir.IDE.Modules.Error.Converters
+{
+    public class ErrorListItemTypeToImageConverter : IValueConverter
+    {
+        public ImageSource ErrorImageSource { get; set; }
+        public ImageSource MessageImageSource { get; set; }
+        public ImageSource WarningImageSource { get; set; }
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((ErrorListItemType)value)
+            {
+                case ErrorListItemType.Error:
+                    return ErrorImageSource;
+                case ErrorListItemType.Warning:
+                    return WarningImageSource;
+                case ErrorListItemType.Message:
+                    return MessageImageSource;
+                default:
+                    throw new ArgumentOutOfRangeException("value");
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

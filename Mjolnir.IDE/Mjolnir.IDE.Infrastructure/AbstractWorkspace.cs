@@ -108,7 +108,7 @@ namespace Mjolnir.IDE.Infrastructure
             _tools = new ObservableCollection<ToolViewModel>();
             _menus = _container.Resolve<IMenuService>() as MenuItemViewModel;
             _menus.PropertyChanged += _menus_PropertyChanged;
-            _toolbarService = _container.Resolve<IToolbarService>() as AbstractToolbar;
+            _toolbarService = _container.Resolve<IShellToolbarService>() as AbstractToolbar;
             _statusbarService = _container.Resolve<IStatusbarService>();
             _commandManager = _container.Resolve<ICommandManager>();
 
@@ -134,7 +134,7 @@ namespace Mjolnir.IDE.Infrastructure
         /// <value>The tool bar tray.</value>
         public ToolBarTray ToolBarTray
         {
-            get { return (_toolbarService as IToolbarService).ToolBarTray; }
+            get { return (_toolbarService as IShellToolbarService).ToolBarTray; }
         }
 
         public IStatusbarService StatusBar

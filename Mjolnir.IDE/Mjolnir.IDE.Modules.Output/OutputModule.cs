@@ -5,6 +5,7 @@ using Mjolnir.IDE.Infrastructure.Interfaces;
 using Mjolnir.IDE.Modules.Output.ViewModels;
 using Mjolnir.IDE.Modules.Output.Views;
 using Prism.Events;
+using Prism.Modularity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Mjolnir.IDE.Modules.Output
 {
-    public class OutputModule
+    public class OutputModule : IModule
     {
 
         private readonly IUnityContainer _container;
