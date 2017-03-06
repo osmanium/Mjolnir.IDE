@@ -61,7 +61,7 @@ namespace Mjolnir.IDE.Infrastructure
         {
             get
             {
-                string value = Header.Replace("_", "");
+                string value = Key.Replace("_", "");
                 if (!string.IsNullOrEmpty(InputGestureText))
                 {
                     value += " " + InputGestureText;
@@ -70,17 +70,19 @@ namespace Mjolnir.IDE.Infrastructure
             }
         }
 
-        /// <summary>
-        /// Gets the header of the menu.
-        /// </summary>
-        /// <value>The header.</value>
-        public virtual string Header { get; protected internal set; }
+
+        private string _text;
+        public virtual string Text
+        {
+            get { return _text; }
+            set { SetProperty(ref _text, value); }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is checkable.
         /// </summary>
         /// <value><c>true</c> if this instance is checkable; otherwise, <c>false</c>.</value>
-        public virtual bool IsCheckable { get;  set; }
+        public virtual bool IsCheckable { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is visible.
@@ -93,6 +95,8 @@ namespace Mjolnir.IDE.Infrastructure
         /// </summary>
         /// <value><c>true</c> if this instance should be hidden when disabled; otherwise, <c>false</c>.</value>
         public virtual bool HideDisabled { get; protected internal set; }
+
+        public bool IsToggleButton { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is checked.
@@ -117,7 +121,7 @@ namespace Mjolnir.IDE.Infrastructure
         /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
         public override string ToString()
         {
-            return Header;
+            return Text;
         }
 
         /// <summary>
@@ -138,7 +142,7 @@ namespace Mjolnir.IDE.Infrastructure
 
         public virtual void Refresh()
         {
-            OnPropertyChanged(() => Header);
+            OnPropertyChanged(() => Key);
             OnPropertyChanged(() => Command);
             OnPropertyChanged(() => Children);
             OnPropertyChanged(() => Icon);
@@ -159,13 +163,16 @@ namespace Mjolnir.IDE.Infrastructure
         /// <param name="command">The command.</param>
         /// <param name="gesture">The gesture.</param>
         /// <param name="isCheckable">if set to <c>true</c> acts as a checkable menu.</param>
-        protected AbstractMenuItem(string header, int priority, ImageSource icon = null, ICommand command = null,
-                                   KeyGesture gesture = null, bool isCheckable = false, bool hideDisabled = false)
+        protected AbstractMenuItem(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
+                                   KeyGesture gesture = null, bool isCheckable = false, bool hideDisabled = false,
+                                   bool isToggleButton = false)
         {
+            Text = text;
+            IsToggleButton = isToggleButton;
             Priority = priority;
             IsSeparator = false;
-            Header = header;
-            Key = header;
+            Key = key;
+            base.Key = key;
             Command = command;
             IsCheckable = isCheckable;
             HideDisabled = hideDisabled;
@@ -179,10 +186,10 @@ namespace Mjolnir.IDE.Infrastructure
             {
                 IsChecked = false;
             }
-            if (Header == "SEP")
+            if (Key == "SEP")
             {
-                Key = "SEP" + sepCount.ToString();
-                Header = "";
+                base.Key = "SEP" + sepCount.ToString();
+                Key = "";
                 sepCount++;
                 IsSeparator = true;
             }

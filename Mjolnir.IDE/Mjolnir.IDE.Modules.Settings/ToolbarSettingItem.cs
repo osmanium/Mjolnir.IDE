@@ -20,7 +20,7 @@ namespace Mjolnir.IDE.Modules.Settings
         {
             this.BandIndex = toolbar.BandIndex;
             this.Band = toolbar.Band;
-            this.Header = toolbar.Header;
+            this.Key = toolbar.Key;
             this.IsChecked = toolbar.IsChecked;
         }
 
@@ -28,24 +28,24 @@ namespace Mjolnir.IDE.Modules.Settings
 
         public int BandIndex { get; set; }
 
-        public string Header { get; set; }
+        public string Key { get; set; }
 
         public bool IsChecked { get; set; }
 
         public override bool Equals(object obj)
         {
             ToolbarSettingItem item = obj as ToolbarSettingItem;
-            return (item != null) && Header.Equals(item.Header);
+            return (item != null) && Key.Equals(item.Key);
         }
 
         public override int GetHashCode()
         {
-            return Header.GetHashCode();
+            return Key.GetHashCode();
         }
 
         public override string ToString()
         {
-            return Header.ToString();
+            return Key.ToString();
         }
     }
 }

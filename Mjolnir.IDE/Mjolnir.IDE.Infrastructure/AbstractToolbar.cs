@@ -15,21 +15,22 @@ namespace Mjolnir.IDE.Infrastructure
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolbarViewModel"/> class.
         /// </summary>
-        /// <param name="header">The header.</param>
+        /// <param name="key">The header.</param>
         /// <param name="priority">The priority.</param>
         /// <param name="icon">The icon.</param>
         /// <param name="command">The command.</param>
         /// <param name="isCheckable">if set to <c>true</c> does nothing in the case of toolbar - default value is false.</param>
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentException">Header cannot be SEP for a Toolbar</exception>
-        protected AbstractToolbar(string header, int priority, ImageSource icon = null, ICommand command = null,
-                                  bool isCheckable = false, IUnityContainer container = null)
-            : base(header, priority, icon, command, null, isCheckable)
+        protected AbstractToolbar(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
+                                  bool isCheckable = false, IUnityContainer container = null, bool isToggleButton = false)
+            : base(key, text, priority, icon, command, null, isCheckable, false, isToggleButton)
         {
+            Text = text;
+            IsToggleButton = isToggleButton;
             Priority = priority;
             IsSeparator = false;
-            Header = header;
-            Key = header;
+            Key = key;
             Command = command;
             IsCheckable = isCheckable;
             Icon = icon;
@@ -37,7 +38,7 @@ namespace Mjolnir.IDE.Infrastructure
             {
                 IsChecked = false;
             }
-            if (Header == "SEP")
+            if (Key == "SEP")
             {
                 throw new ArgumentException("Header cannot be SEP for a Toolbar");
             }

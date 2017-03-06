@@ -36,7 +36,7 @@
             <xctk:SplitButton.Content>
                 <StackPanel Orientation="Horizontal" IsEnabled="False">
                     <Image Source="{Binding Icon}" Style="{StaticResource toolbarImageStyle}" Height="16" Width="16" />
-                    <TextBlock Text="{Binding Header}" Margin="5 0 0 0" />
+                    <TextBlock Text="{Binding Text}" Margin="5 0 0 0" />
                 </StackPanel>
             </xctk:SplitButton.Content>
             <xctk:SplitButton.DropDownContent>
@@ -48,7 +48,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <MenuItem Header="{Binding Header}" IsCheckable="{Binding IsCheckable}" 
+                            <MenuItem Header="{Binding Text}" IsCheckable="{Binding IsCheckable}" 
                                       IsChecked="{Binding IsChecked}" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" 
                                       ItemsSource="{Binding Children}" Visibility="{Binding ., Converter={StaticResource ResourceKey=cvc}}">
                                 <MenuItem.Icon>
@@ -62,8 +62,20 @@
         </xctk:SplitButton>
     </DataTemplate>
 
+    <DataTemplate x:Key="toggleButtonTemplate" DataType="{x:Type ControlsViewModels:MenuItemViewModel}">
+        <ToggleButton Command="{Binding Command}" Style="{DynamicResource ResourceKey={x:Static ToolBar.ToggleButtonStyleKey}}"
+                ToolTip="{Binding ToolTip}" Visibility="{Binding ., Converter={StaticResource ResourceKey=cvc}}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Icon}" Style="{StaticResource toolbarImageStyle}" Height="16" Width="16" />
+                <TextBlock Text="{Binding Text}" Margin="5 0 0 0" />
+            </StackPanel>
+        </ToggleButton>
+    </DataTemplate>
+
     <Infrastructure:ToolBarItemTemplateSelector ButtonTemplate="{StaticResource buttonTemplate}"
-                                            SeparatorTemplate="{StaticResource separatorTemplate}" 
-                                            ComboBoxTemplate="{StaticResource comboboxTemplate}" x:Key="toolBarItemTemplateSelector" />
+                                                SeparatorTemplate="{StaticResource separatorTemplate}" 
+                                                ComboBoxTemplate="{StaticResource comboboxTemplate}"
+                                                ToggleButtonTemplate="{StaticResource toggleButtonTemplate}"
+                                                x:Key="toolBarItemTemplateSelector" />
 
 </ResourceDictionary>

@@ -58,6 +58,8 @@ namespace Mjolnir.IDE.Core
                                                                      new InjectionConstructor(
                                                                          new InjectionParameter(typeof(string),
                                                                                                 "$MAIN$"),
+                                                                         new InjectionParameter(typeof(string),
+                                                                                                "$MAIN$"),
                                                                          new InjectionParameter(typeof(int), 1),
                                                                          new InjectionParameter(
                                                                              typeof(ImageSource), null),
@@ -68,9 +70,11 @@ namespace Mjolnir.IDE.Core
                                                                          new InjectionParameter(typeof(bool), false),
                                                                          new InjectionParameter(typeof(bool), false),
                                                                          new InjectionParameter(
-                                                                             typeof(IUnityContainer), _container)));
+                                                                             typeof(IUnityContainer), _container),
+                                                                         new InjectionParameter(typeof(bool), false)));
             _container.RegisterType<ToolbarViewModel>(
                 new InjectionConstructor(new InjectionParameter(typeof(string), "$MAIN$"),
+                                         new InjectionParameter(typeof(string), "$MAIN$"),
                                          new InjectionParameter(typeof(int), 1),
                                          new InjectionParameter(typeof(ImageSource), null),
                                          new InjectionParameter(typeof(ICommand), null),

@@ -28,15 +28,15 @@ namespace Mjolnir.IDE.Modules.Settings
             {
                 foreach (var setting in this.Toolbars)
                 {
-                    _loadDict[setting.Header] = setting;
+                    _loadDict[setting.Key] = setting;
                 }
 
                 for (int i = 0; i < _toolTray.Children.Count; i++)
                 {
                     AbstractToolbar tb = _toolTray.Children[i] as AbstractToolbar;
-                    if (_loadDict.ContainsKey(tb.Header))
+                    if (_loadDict.ContainsKey(tb.Key))
                     {
-                        ToolbarSettingItem item = _loadDict[tb.Header];
+                        ToolbarSettingItem item = _loadDict[tb.Key];
                         tb.Band = item.Band;
                         tb.BandIndex = item.BandIndex;
                         tb.IsChecked = item.IsChecked;

@@ -8,7 +8,7 @@
     <Image x:Key="imgCTX" x:Shared="false" Source="{Binding Path=Icon}" Height="12px" Width="12px" />
     <Style x:Key="StandardMenuStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="Icon" Value="{StaticResource imgCTX}" />
-        <Setter Property="Header" Value="{Binding Path=Header}" />
+        <Setter Property="Header" Value="{Binding Path=Key}" />
         <Setter Property="IsCheckable" Value="{Binding Path=IsCheckable}" />
         <Setter Property="IsChecked" Value="{Binding Path=IsChecked}" />
         <Setter Property="Command" Value="{Binding Path=Command}" />
@@ -33,7 +33,7 @@
     </Style>
 
     <Style x:Key="ToolbarContextMenu" TargetType="{x:Type MenuItem}"  BasedOn="{StaticResource {x:Type MenuItem}}">
-        <Setter Property="Header" Value="{Binding Path=Header}" />
+        <Setter Property="Header" Value="{Binding Path=Text}" />
         <Setter Property="IsCheckable" Value="True" />
         <Setter Property="IsChecked" Value="{Binding Path=IsChecked}" />
         <Setter Property="Command" Value="{Binding Path=Command}" />

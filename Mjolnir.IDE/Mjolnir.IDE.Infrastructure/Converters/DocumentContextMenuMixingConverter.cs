@@ -17,7 +17,7 @@ namespace Mjolnir.IDE.Infrastructure.Converters
         public object Convert(object[] values, Type targetType, object parameter,
                               System.Globalization.CultureInfo culture)
         {
-            AbstractMenuItem root = new MenuItemViewModel("$CROOT$", 1);
+            AbstractMenuItem root = new MenuItemViewModel("$CROOT$", "$CROOT$", 1);
             LayoutDocumentItem doc = values[0] as LayoutDocumentItem;
             int i = 1;
             IReadOnlyCollection<AbstractMenuItem> menus = values[1] as IReadOnlyCollection<AbstractMenuItem>;
@@ -107,7 +107,7 @@ namespace Mjolnir.IDE.Infrastructure.Converters
                     }
                 }
 
-                MenuItemViewModel model = new MenuItemViewModel(item.Header.ToString(), priority,
+                MenuItemViewModel model = new MenuItemViewModel(item.Header.ToString(), item.Header.ToString(), priority,
                                                                 item.Icon != null ? (item.Icon as Image).Source : null,
                                                                 cmd, null, false, hideDisabled);
                 return model;

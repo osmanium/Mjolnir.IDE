@@ -19,7 +19,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuItemViewModel"/> class.
         /// </summary>
-        /// <param name="header">The header.</param>
+        /// <param name="key">The key.</param>
         /// <param name="priority">The priority.</param>
         /// <param name="icon">The icon.</param>
         /// <param name="command">The command.</param>
@@ -27,10 +27,10 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.ViewModels
         /// <param name="isCheckable">if set to <c>true</c> this menu acts as a checkable menu.</param>
         /// <param name="hideDisabled">if set to <c>true</c> this menu is not visible when disabled.</param>
         /// <param name="container">The container.</param>
-        public MenuItemViewModel(string header, int priority, ImageSource icon = null, ICommand command = null,
+        public MenuItemViewModel(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
                                  KeyGesture gesture = null, bool isCheckable = false, bool hideDisabled = false,
-                                 IUnityContainer container = null)
-            : base(header, priority, icon, command, gesture, isCheckable, hideDisabled)
+                                 IUnityContainer container = null, bool isToggleButton = false)
+            : base(key, text, priority, icon, command, gesture, isCheckable, hideDisabled, isToggleButton)
         {
         }
 
@@ -45,7 +45,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.ViewModels
         /// <returns>AbstractMenuItem.</returns>
         public static AbstractMenuItem Separator(int priority)
         {
-            return new MenuItemViewModel("SEP", priority);
+            return new MenuItemViewModel("SEP", string.Empty, priority);
         }
 
         /// <summary>

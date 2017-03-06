@@ -12,7 +12,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces
         /// Gets the header of the toolbar.
         /// </summary>
         /// <value>The header.</value>
-        string Header { get; }
+        string Key { get; }
 
         /// <summary>
         /// Gets the band number for the toolbar in the toolbar tray.

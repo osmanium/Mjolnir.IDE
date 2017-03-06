@@ -114,6 +114,7 @@
     <Compile Include="Converters\ErrorListItemTypeToImageConverter.cs" />
     <Compile Include="ErrorModule.cs" />
     <Compile Include="Events\ErrorDetected.cs" />
+    <Compile Include="Events\ErrorListUpdated.cs" />
     <Compile Include="Interfaces\IErrorToolboxToolbarService.cs" />
     <Compile Include="Interfaces\IErrorService.cs" />
     <Compile Include="Models\ErrorListItem.cs" />

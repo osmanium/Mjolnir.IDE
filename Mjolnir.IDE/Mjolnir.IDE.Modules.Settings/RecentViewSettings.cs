@@ -24,7 +24,7 @@ namespace Mjolnir.IDE.Modules.Settings
 
         public RecentViewSettings(IUnityContainer container)
         {
-            recentMenu = new MenuItemViewModel("Recentl_y opened..", 100);
+            recentMenu = new MenuItemViewModel("Recentl_y opened..", "Recentl_y opened..", 100);
             menuGuids = new List<string>();
             recentOpen = new DelegateCommand<string>(ExecuteMethod);
             this._container = container;
@@ -97,7 +97,7 @@ namespace Mjolnir.IDE.Modules.Settings
                 {
                     int priority = RecentItems.Count - i + 1;
                     string number = "_" + priority.ToString() + " " + RecentItems[i - 1].DisplayValue;
-                    menuGuids.Add(recentMenu.Add(new MenuItemViewModel(number, priority, null, recentOpen, null)
+                    menuGuids.Add(recentMenu.Add(new MenuItemViewModel(number, number, priority, null, recentOpen, null)
                     { CommandParameter = RecentItems[i - 1].ContentID }));
                 }
                 return recentMenu;

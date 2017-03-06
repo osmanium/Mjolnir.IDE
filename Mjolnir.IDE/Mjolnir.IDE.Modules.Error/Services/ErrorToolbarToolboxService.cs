@@ -23,7 +23,7 @@ namespace Mjolnir.IDE.Modules.Error.Services
         private AbstractMenuItem menuItem;
         private ToolBarTray tray;
 
-        public ErrorToolbarToolboxService() : base("$ERROR$", 0)
+        public ErrorToolbarToolboxService() : base("$ERROR$", "$ERROR$", 0)
         {
         }
 
@@ -107,7 +107,7 @@ namespace Mjolnir.IDE.Modules.Error.Services
                 }
                 if (menuItem == null)
                 {
-                    menuItem = new MenuItemViewModel("_Toolbars", 100);
+                    menuItem = new MenuItemViewModel("_Toolbars", "_Toolbars", 100);
                     foreach (var value in tray.ContextMenu.ItemsSource)
                     {
                         var menu = value as AbstractMenuItem;

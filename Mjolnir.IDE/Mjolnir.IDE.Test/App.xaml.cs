@@ -109,6 +109,26 @@ namespace Mjolnir.IDE.Test
                 OnClick = null,
                 Path = "Path"
             });
+
+            _eventAggregator.GetEvent<ErrorDetected>().Publish(new ErrorDetected()
+            {
+                Column = 1,
+                Description = "Test description",
+                ItemType = Infrastructure.Enums.ErrorListItemType.Warning,
+                Line = 2,
+                OnClick = null,
+                Path = "Path"
+            });
+
+            _eventAggregator.GetEvent<ErrorDetected>().Publish(new ErrorDetected()
+            {
+                Column = 1,
+                Description = "Test description",
+                ItemType = Infrastructure.Enums.ErrorListItemType.Message,
+                Line = 3,
+                OnClick = null,
+                Path = "Path"
+            });
         }
 
         public void LoadMenus()
@@ -121,14 +141,14 @@ namespace Mjolnir.IDE.Test
             ToolViewModel output = workspace.Tools.First(f => f.ContentId == "Output");
             ToolViewModel error = workspace.Tools.First(f => f.ContentId == "Error");
 
-            menuService.Add(new MenuItemViewModel("_File", 1));
-            menuService.Add(new MenuItemViewModel("_Edit", 2));
-            menuService.Add(new MenuItemViewModel("_View", 3));
-            menuService.Add(new MenuItemViewModel("_Tools", 4));
-            menuService.Add(new MenuItemViewModel("_Help", 5));
+            menuService.Add(new MenuItemViewModel("_File", "_File", 1));
+            menuService.Add(new MenuItemViewModel("_Edit", "_Edit", 2));
+            menuService.Add(new MenuItemViewModel("_View", "_View", 3));
+            menuService.Add(new MenuItemViewModel("_Tools", "_Tools", 4));
+            menuService.Add(new MenuItemViewModel("_Help", "_Help", 5));
 
             menuService.Get("_File").Add(
-                (new MenuItemViewModel("_New", 3,
+                (new MenuItemViewModel("_New", "_New", 3,
                                        new BitmapImage(
                                            new Uri(
                                                @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/NewRequest_8796.png")),
@@ -136,21 +156,21 @@ namespace Mjolnir.IDE.Test
                                        new KeyGesture(Key.N, ModifierKeys.Control, "Ctrl + N"))));
 
             menuService.Get("_File").Add(
-                (new MenuItemViewModel("_Open", 4,
+                (new MenuItemViewModel("_Open", "_Open", 4,
                                        new BitmapImage(
                                            new Uri(
                                                @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/OpenFileDialog_692.png")),
                                        manager.GetCommand("OPEN"),
                                        new KeyGesture(Key.O, ModifierKeys.Control, "Ctrl + O"))));
 
-            menuService.Get("_File").Add(new MenuItemViewModel("_Save", 5,
+            menuService.Get("_File").Add(new MenuItemViewModel("_Save", "_Save", 5,
                                                                new BitmapImage(
                                                                    new Uri(
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Save_6530.png")),
                                                                manager.GetCommand("SAVE"),
                                                                new KeyGesture(Key.S, ModifierKeys.Control, "Ctrl + S")));
 
-            menuService.Get("_File").Add(new MenuItemViewModel("_Save All", 6,
+            menuService.Get("_File").Add(new MenuItemViewModel("_Save All", "_Save All", 6,
                                                                new BitmapImage(
                                                                    new Uri(
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Saveall_6518.png")),
@@ -164,37 +184,37 @@ namespace Mjolnir.IDE.Test
             //                                               @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Save_6530.png")),
             //                                       manager.GetCommand("SAVEAS"), null, false, false, _container));
 
-            menuService.Get("_File").Add(new MenuItemViewModel("Close", 8, null, manager.GetCommand("CLOSE"),
+            menuService.Get("_File").Add(new MenuItemViewModel("Close", "Close", 8, null, manager.GetCommand("CLOSE"),
                                                                new KeyGesture(Key.F4, ModifierKeys.Control, "Ctrl + F4")));
 
             //menuService.Get("_File").Add(recentFiles.RecentMenu);
 
-            menuService.Get("_File").Add(new MenuItemViewModel("E_xit", 101, null, manager.GetCommand("EXIT"),
+            menuService.Get("_File").Add(new MenuItemViewModel("E_xit", "E_xit", 101, null, manager.GetCommand("EXIT"),
                                                                new KeyGesture(Key.F4, ModifierKeys.Alt, "Alt + F4")));
 
 
-            menuService.Get("_Edit").Add(new MenuItemViewModel("_Undo", 1,
+            menuService.Get("_Edit").Add(new MenuItemViewModel("_Undo", "_Undo", 1,
                                                                new BitmapImage(
                                                                    new Uri(
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Undo_16x.png")),
                                                                ApplicationCommands.Undo));
-            menuService.Get("_Edit").Add(new MenuItemViewModel("_Redo", 2,
+            menuService.Get("_Edit").Add(new MenuItemViewModel("_Redo", "_Redo", 2,
                                                                new BitmapImage(
                                                                    new Uri(
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Redo_16x.png")),
                                                                ApplicationCommands.Redo));
             menuService.Get("_Edit").Add(MenuItemViewModel.Separator(15));
-            menuService.Get("_Edit").Add(new MenuItemViewModel("Cut", 20,
+            menuService.Get("_Edit").Add(new MenuItemViewModel("Cut", "Cut", 20,
                                                                new BitmapImage(
                                                                    new Uri(
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Cut_6523.png")),
                                                                ApplicationCommands.Cut));
-            menuService.Get("_Edit").Add(new MenuItemViewModel("Copy", 21,
+            menuService.Get("_Edit").Add(new MenuItemViewModel("Copy", "Copy", 21,
                                                                new BitmapImage(
                                                                    new Uri(
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Copy_6524.png")),
                                                                ApplicationCommands.Copy));
-            menuService.Get("_Edit").Add(new MenuItemViewModel("_Paste", 22,
+            menuService.Get("_Edit").Add(new MenuItemViewModel("_Paste", "_Paste", 22,
                                                                new BitmapImage(
                                                                    new Uri(
                                                                        @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Paste_6520.png")),
@@ -204,21 +224,21 @@ namespace Mjolnir.IDE.Test
 
             if (output != null)
                 menuService.Get("_View")
-                           .Add(new MenuItemViewModel("_Output", 1,
+                           .Add(new MenuItemViewModel("_Output", "_Output", 1,
                                     new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Output_16xLG.png")),
                                     new DelegateCommand(ToggleOutput) { IsActive = false }));
 
             if(error != null)
                 menuService.Get("_View")
-                           .Add(new MenuItemViewModel("_Error", 1,
+                           .Add(new MenuItemViewModel("_Error", "_Error", 1,
                                     new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Output_16xLG.png")),
                                     new DelegateCommand(ErrorOutput) { IsActive = false }));
 
-            menuService.Get("_View").Add(new MenuItemViewModel("Themes", 1));
+            menuService.Get("_View").Add(new MenuItemViewModel("Themes", "Themes", 1));
 
             //Set the checkmark of the theme menu's based on which is currently selected
             menuService.Get("_View").Get("Themes")
-                                    .Add(new MenuItemViewModel("Dark", 1,
+                                    .Add(new MenuItemViewModel("Dark", "Dark", 1,
                                              null,
                                              new DelegateCommand<string>(ThemeChangeCommand))
                                     {
@@ -226,7 +246,7 @@ namespace Mjolnir.IDE.Test
                                         IsChecked = (themeSettings.SelectedTheme == "Dark"),
                                         CommandParameter = "Dark"
                                     });
-            menuService.Get("_View").Get("Themes").Add(new MenuItemViewModel("Light", 2, null,
+            menuService.Get("_View").Get("Themes").Add(new MenuItemViewModel("Light", "Light", 2, null,
                                                                              new DelegateCommand<string>(ThemeChangeCommand))
             {
                 IsCheckable = true,
@@ -235,7 +255,7 @@ namespace Mjolnir.IDE.Test
             });
 
 
-            menuService.Get("_Tools").Add(new MenuItemViewModel("Settings", 1, null, settingsManager.SettingsCommand));
+            menuService.Get("_Tools").Add(new MenuItemViewModel("Settings", "Settings", 1, null, settingsManager.SettingsCommand));
 
 
         }
@@ -263,7 +283,7 @@ namespace Mjolnir.IDE.Test
             var menuService = _container.Resolve<IMenuService>();
             var manager = _container.Resolve<ICommandManager>();
 
-            toolbarService.Add(new ToolbarViewModel("Standard", 1) { Band = 1, BandIndex = 1 });
+            toolbarService.Add(new ToolbarViewModel("Standard", "Standard", 1) { Band = 1, BandIndex = 1 });
             toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_New"));
             toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Open"));
             toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Save"));
@@ -271,7 +291,7 @@ namespace Mjolnir.IDE.Test
             
 
 
-            toolbarService.Add(new ToolbarViewModel("Edit", 1) { Band = 1, BandIndex = 2 });
+            toolbarService.Add(new ToolbarViewModel("Edit", "Edit", 1) { Band = 1, BandIndex = 2 });
             toolbarService.Get("Edit").Add(menuService.Get("_Edit").Get("_Undo"));
             toolbarService.Get("Edit").Add(menuService.Get("_Edit").Get("_Redo"));
             toolbarService.Get("Edit").Add(menuService.Get("_Edit").Get("Cut"));

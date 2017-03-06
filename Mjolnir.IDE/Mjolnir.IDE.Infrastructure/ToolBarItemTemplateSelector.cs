@@ -31,6 +31,8 @@ namespace Mjolnir.IDE.Infrastructure
         /// <value>The separator template.</value>
         public DataTemplate SeparatorTemplate { get; set; }
 
+        public DataTemplate ToggleButtonTemplate { get; set; }
+
         /// <summary>
         /// When overridden in a derived class, returns a <see cref="T:System.Windows.DataTemplate" /> based on custom logic.
         /// Here, it looks at the item definition and determines if the toolbar item needs to be a button or combo box or a separator.
@@ -46,7 +48,10 @@ namespace Mjolnir.IDE.Infrastructure
                 if (toolBarItem.Children.Count > 0)
                     return ComboBoxTemplate;
 
-                return ButtonTemplate;
+                if (toolBarItem.IsToggleButton)
+                    return ToggleButtonTemplate;
+                else
+                    return ButtonTemplate;
             }
             return SeparatorTemplate;
         }

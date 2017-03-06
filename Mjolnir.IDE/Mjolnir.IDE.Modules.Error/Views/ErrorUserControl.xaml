@@ -14,14 +14,14 @@
 													  WarningImageSource="../Assets/Warning.png" />
     </UserControl.Resources>
     <DockPanel>
-        <ContentControl Content="{Binding ToolBarTray}" DockPanel.Dock="Top" />
+        <ContentControl Content="{Binding ToolBarTray}" DockPanel.Dock="Top" ToolBarTray.IsLocked="True"/>
         <DataGrid ItemsSource="{Binding FilteredItems}" 
                   AutoGenerateColumns="False" IsReadOnly="True"
 				  HorizontalGridLinesBrush="WhiteSmoke" VerticalGridLinesBrush="WhiteSmoke"
 				  BorderThickness="0"
                   Background="Transparent">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="SizeToCells">
+                <DataGridTemplateColumn Width="SizeToCells" CanUserResize="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Source="{Binding ItemType, Converter={StaticResource ErrorListItemTypeToImageConverter}}" />

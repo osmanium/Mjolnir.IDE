@@ -14,12 +14,12 @@ using Mjolnir.IDE.Modules.Error.Views;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Modules.Error.Interfaces;
 using Mjolnir.IDE.Modules.Error.Events;
+using System.Collections.Specialized;
 
 namespace Mjolnir.IDE.Modules.Error.ViewModels
 {
     public class ErrorViewModel : ToolViewModel
     {
-        private readonly IEventAggregator _aggregator;
         private readonly IUnityContainer _container;
         private readonly ErrorUserControl _view;
         private readonly ObservableCollection<ErrorListItem> _items;
@@ -52,7 +52,7 @@ namespace Mjolnir.IDE.Modules.Error.ViewModels
             }
         }
 
-        private bool _showErrors = true;
+        private bool _showErrors = false;
         public bool ShowErrors
         {
             get { return _showErrors; }
@@ -63,7 +63,7 @@ namespace Mjolnir.IDE.Modules.Error.ViewModels
             }
         }
 
-        private bool _showWarnings = true;
+        private bool _showWarnings = false;
         public bool ShowWarnings
         {
             get { return _showWarnings; }
@@ -74,7 +74,7 @@ namespace Mjolnir.IDE.Modules.Error.ViewModels
             }
         }
 
-        private bool _showMessages = true;
+        private bool _showMessages = false;
         public bool ShowMessages
         {
             get { return _showMessages; }
@@ -127,6 +127,8 @@ namespace Mjolnir.IDE.Modules.Error.ViewModels
                 OnPropertyChanged(() => ErrorItemCount);
                 OnPropertyChanged(() => WarningItemCount);
                 OnPropertyChanged(() => MessageItemCount);
+
+                _eventAggregator.GetEvent<ErrorListUpdated>().Publish(new ErrorListUpdated());
             };
 
 

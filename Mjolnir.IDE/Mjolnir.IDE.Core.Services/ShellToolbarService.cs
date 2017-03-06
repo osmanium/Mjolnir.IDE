@@ -23,7 +23,7 @@ namespace Mjolnir.IDE.Core.Services
         private AbstractMenuItem menuItem;
         private ToolBarTray tray;
 
-        public ShellToolbarService() : base("$MAIN$", 0)
+        public ShellToolbarService() : base("$MAIN$", string.Empty, 0)
         {
         }
 
@@ -107,7 +107,7 @@ namespace Mjolnir.IDE.Core.Services
                 }
                 if (menuItem == null)
                 {
-                    menuItem = new MenuItemViewModel("_Toolbars", 100);
+                    menuItem = new MenuItemViewModel("_Toolbars", string.Empty, 100);
                     foreach (var value in tray.ContextMenu.ItemsSource)
                     {
                         var menu = value as AbstractMenuItem;

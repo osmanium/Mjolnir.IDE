@@ -19,16 +19,16 @@ namespace Mjolnir.IDE.Infrastructure.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolbarViewModel"/> class.
         /// </summary>
-        /// <param name="header">The header.</param>
+        /// <param name="key">The header.</param>
         /// <param name="priority">The priority.</param>
         /// <param name="icon">The icon.</param>
         /// <param name="command">The command.</param>
         /// <param name="isCheckable">if set to <c>true</c> does nothing in the case of toolbar - default value is false.</param>
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentException">Header cannot be SEP for a Toolbar</exception>
-        public ToolbarViewModel(string header, int priority, ImageSource icon = null, ICommand command = null,
+        public ToolbarViewModel(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
                                 bool isCheckable = false, IUnityContainer container = null)
-            : base(header, priority, icon, command, isCheckable, container)
+            : base(key, text, priority, icon, command, isCheckable, container)
         {
         }
 
