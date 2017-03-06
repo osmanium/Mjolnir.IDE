@@ -78,7 +78,11 @@
                 </StatusBarItem>
                 <!--Progress bar-->
                 <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" Visibility="{Binding Path=Workspace.StatusBar.ShowProgressBar, Converter={StaticResource ResourceKey=booleanToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">
-                    <ProgressBar Width="Auto" Maximum="{Binding Path=Workspace.StatusBar.ProgressMaximum, UpdateSourceTrigger=PropertyChanged}" Value="{Binding Path=Workspace.StatusBar.ProgressValue, UpdateSourceTrigger=PropertyChanged}" />
+                    <ProgressBar Width="Auto" 
+                                 Maximum="{Binding Path=Workspace.StatusBar.ProgressMaximum, UpdateSourceTrigger=PropertyChanged}" 
+                                 Value="{Binding Path=Workspace.StatusBar.ProgressValue, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{x:Null}"
+                                 Height="10"/>
                 </StatusBarItem>
                 <!--Icon animation-->
                 <StatusBarItem Grid.Column="2" Visibility="{Binding Path=Workspace.StatusBar.AnimationImage, Converter={StaticResource ResourceKey=nullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}">

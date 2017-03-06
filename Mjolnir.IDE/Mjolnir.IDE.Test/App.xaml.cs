@@ -129,6 +129,15 @@ namespace Mjolnir.IDE.Test
                 OnClick = null,
                 Path = "Path"
             });
+
+
+            var _statusBar = _container.Resolve<IStatusbarService>();
+            _statusBar.CharPosition = 3;
+            _statusBar.ColPosition = 4;
+            _statusBar.LineNumber = 5;
+            _statusBar.Progress(true, 50, 100);
+            _statusBar.Text = "Building";
+            _statusBar.InsertMode = true;
         }
 
         public void LoadMenus()
