@@ -30,6 +30,7 @@
     <SolidColorBrush x:Key="ControlOpenColorBrush" Color="{DynamicResource ControlOpenColor}" />
     <SolidColorBrush x:Key="SeparatorColorBrush" Color="{DynamicResource SeparatorColor}" />
     <SolidColorBrush x:Key="SplitterColorBrush" Color="{DynamicResource SplitterColor}" />
+    <SolidColorBrush x:Key="OutputBrush" Color="White" />
 
     <SolidColorBrush x:Key="DragUnselectedBrush" Color="{DynamicResource DragUnselected}" />
     <SolidColorBrush x:Key="DragSelectedBrush" Color="{DynamicResource DragSelected}" />
