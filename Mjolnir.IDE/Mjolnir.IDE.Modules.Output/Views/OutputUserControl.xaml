@@ -6,9 +6,7 @@
              xmlns:local="clr-namespace:Mjolnir.IDE.Modules.Output.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <TextBox Margin="5" Text="{Binding Path=Text, Mode=OneWay}" IsReadOnly="True" BorderBrush="White">
-        
-        
+    <TextBox Margin="5" Text="{Binding Path=Text, Mode=OneWay}" IsReadOnly="True" BorderBrush="White" Background="Transparent">
         
         <TextBox.Style>
             <Style TargetType="TextBox">

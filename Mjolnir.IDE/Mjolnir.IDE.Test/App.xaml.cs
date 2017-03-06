@@ -238,21 +238,22 @@ namespace Mjolnir.IDE.Test
 
             //Set the checkmark of the theme menu's based on which is currently selected
             menuService.Get("_View").Get("Themes")
-                                    .Add(new MenuItemViewModel("Dark", "Dark", 1,
-                                             null,
+                                    .Add(new MenuItemViewModel("Dark", "Dark", 1, null,
                                              new DelegateCommand<string>(ThemeChangeCommand))
                                     {
                                         IsCheckable = true,
                                         IsChecked = (themeSettings.SelectedTheme == "Dark"),
                                         CommandParameter = "Dark"
                                     });
-            menuService.Get("_View").Get("Themes").Add(new MenuItemViewModel("Light", "Light", 2, null,
-                                                                             new DelegateCommand<string>(ThemeChangeCommand))
-            {
-                IsCheckable = true,
-                IsChecked = (themeSettings.SelectedTheme == "Light"),
-                CommandParameter = "Light"
-            });
+
+            menuService.Get("_View").Get("Themes")
+                                    .Add(new MenuItemViewModel("Light", "Light", 2, null,
+                                            new DelegateCommand<string>(ThemeChangeCommand))
+                                    {
+                                        IsCheckable = true,
+                                        IsChecked = (themeSettings.SelectedTheme == "Light"),
+                                        CommandParameter = "Light"
+                                    });
 
 
             menuService.Get("_Tools").Add(new MenuItemViewModel("Settings", "Settings", 1, null, settingsManager.SettingsCommand));
