@@ -231,7 +231,7 @@ namespace Mjolnir.IDE.Test
             if(error != null)
                 menuService.Get("_View")
                            .Add(new MenuItemViewModel("_Error", "_Error", 1,
-                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Output_16xLG.png")),
+                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Error_6206.png")),
                                     new DelegateCommand(ErrorOutput) { IsActive = false }));
 
             menuService.Get("_View").Add(new MenuItemViewModel("Themes", "Themes", 1));
