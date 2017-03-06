@@ -107,7 +107,7 @@ namespace Mjolnir.IDE.Modules.Error.Services
                 }
                 if (menuItem == null)
                 {
-                    menuItem = new MenuItemViewModel("_Toolbars", "_Toolbars", 100);
+                    menuItem = new MenuItemViewModel("_Toolbars", "Toolbars", 100);
                     foreach (var value in tray.ContextMenu.ItemsSource)
                     {
                         var menu = value as AbstractMenuItem;

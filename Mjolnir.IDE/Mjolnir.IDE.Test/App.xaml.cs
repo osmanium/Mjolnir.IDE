@@ -308,7 +308,7 @@ namespace Mjolnir.IDE.Test
             menuService.Get("_Tools").Add(toolbarService.RightClickMenu);
 
             //Initiate the position settings changes for toolbar
-            _container.Resolve<IToolbarPositionSettings>();
+            //_container.Resolve<IToolbarPositionSettings>();
         }
 
         public void LoadModules()
