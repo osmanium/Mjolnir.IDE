@@ -1,7 +1,7 @@
 ﻿<Mjolnir:MjolnirApp x:Class="Mjolnir.IDE.Test.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-            xmlns:Mjolnir="clr-namespace:Mjolnir.IDE.Shell;assembly=Mjolnir.IDE.Shell">
+            xmlns:Mjolnir="clr-namespace:Mjolnir.IDE.Core;assembly=Mjolnir.IDE.Core">
     <Application.Resources>
     </Application.Resources>
 </Mjolnir:MjolnirApp>

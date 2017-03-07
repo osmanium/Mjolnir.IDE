@@ -1,8 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/WindowCommands.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/ControlsMetro.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2013/SplitButton.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-</ResourceDictionary>

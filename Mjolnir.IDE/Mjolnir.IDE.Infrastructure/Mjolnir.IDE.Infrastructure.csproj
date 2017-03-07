@@ -129,6 +129,7 @@
     <Compile Include="DefaultWorkspace.cs" />
     <Compile Include="Enums\ErrorListItemType.cs" />
     <Compile Include="Enums\PaneLocation.cs" />
+    <Compile Include="ErrorListItem.cs" />
     <Compile Include="Events\ActiveContentChangedEvent.cs" />
     <Compile Include="Events\ClosedContentEvent.cs" />
     <Compile Include="Events\LogEvent.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Interfaces\Services\ICommandManager.cs" />
     <Compile Include="Interfaces\Services\IContentHandler.cs" />
     <Compile Include="Interfaces\Services\IContentHandlerRegistry.cs" />
+    <Compile Include="Interfaces\Services\IErrorToolboxToolbarService.cs" />
     <Compile Include="Interfaces\Services\IOutputService.cs" />
     <Compile Include="Interfaces\Services\IMenuService.cs" />
     <Compile Include="Interfaces\Services\IOpenDocumentService.cs" />
@@ -182,7 +184,6 @@
     <Compile Include="ViewModels\ContentViewModel.cs" />
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
     <Compile Include="ViewModels\MjolnirStatusbarViewModel.cs" />
-    <Compile Include="ViewModels\ToolboxToolbarViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

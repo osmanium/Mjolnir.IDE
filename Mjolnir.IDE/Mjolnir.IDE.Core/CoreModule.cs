@@ -1,4 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
+using Mjolnir.IDE.Core.Modules.ErrorList;
+using Mjolnir.IDE.Core.Modules.Output;
+using Mjolnir.IDE.Core.Modules.Settings;
 using Mjolnir.IDE.Core.Services;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Infrastructure.Events;
@@ -8,9 +11,6 @@ using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
 using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
 using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
-using Mjolnir.IDE.Modules.Error;
-using Mjolnir.IDE.Modules.Output;
-using Mjolnir.IDE.Modules.Settings;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Modularity;
@@ -135,7 +135,7 @@ namespace Mjolnir.IDE.Core
                 _outputService.LogOutput("DefaultWorkspace applied", OutputCategory.Info, OutputPriority.None);
 
 
-            ErrorModule errorModule = _container.Resolve<ErrorModule>();
+            ErrorListModule errorModule = _container.Resolve<ErrorListModule>();
             errorModule.Initialize();
 
 

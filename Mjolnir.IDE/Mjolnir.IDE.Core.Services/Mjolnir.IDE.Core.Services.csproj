@@ -117,16 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandManager.cs" />
-    <Compile Include="ContentHandlerRegistry.cs" />
-    <Compile Include="DefaultLogService.cs" />
-    <Compile Include="OpenDocumentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThemeManager.cs" />
-    <Compile Include="ShellToolbarService.cs" />
-    <Compile Include="Views\DefaultNewFileWindow.xaml.cs">
-      <DependentUpon>DefaultNewFileWindow.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -136,16 +127,6 @@
       <Project>{75853632-A8DA-4426-AEC2-A4F2AB34EE5A}</Project>
       <Name>Mjolnir.IDE.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mjolnir.IDE.Modules.Settings\Mjolnir.IDE.Modules.Settings.csproj">
-      <Project>{01CB530C-2F82-41DA-8115-CE77B2CFF1D1}</Project>
-      <Name>Mjolnir.IDE.Modules.Settings</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\DefaultNewFileWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

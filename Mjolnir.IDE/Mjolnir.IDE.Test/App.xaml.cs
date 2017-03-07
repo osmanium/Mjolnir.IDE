@@ -1,4 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
+using Mjolnir.IDE.Core;
+using Mjolnir.IDE.Core.Modules.ErrorList.Events;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Infrastructure.Events;
 using Mjolnir.IDE.Infrastructure.Interfaces;
@@ -7,8 +9,6 @@ using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
 using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
 using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
-using Mjolnir.IDE.Modules.Error.Events;
-using Mjolnir.IDE.Shell;
 using Mjolnir.IDE.Test.TextDocument;
 using Mjolnir.IDE.Test.TextDocument.Model;
 using Mjolnir.IDE.Test.TextDocument.View;
@@ -136,7 +136,7 @@ namespace Mjolnir.IDE.Test
             _statusBar.ColPosition = 4;
             _statusBar.LineNumber = 5;
             _statusBar.Progress(true, 50, 100);
-            _statusBar.Text = "Building";
+            _statusBar.Text = "Building...";
             _statusBar.InsertMode = true;
         }
 
