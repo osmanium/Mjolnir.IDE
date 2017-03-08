@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Services\ErrorListToolboxToolbarService.cs" />
     <Compile Include="Services\OpenDocumentService.cs" />
+    <Compile Include="Services\OutputToolboxToolbarService.cs" />
     <Compile Include="Services\ShellToolbarService.cs" />
     <Compile Include="Services\ThemeManager.cs" />
     <Compile Include="Themes\DarkTheme.cs" />
@@ -285,6 +286,11 @@
     <Resource Include="Assets\Error.png" />
     <Resource Include="Assets\Message.png" />
     <Resource Include="Assets\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Clearwindowcontent_6304.png" />
+    <Resource Include="Assets\Output_16xLG.png" />
+    <Resource Include="Assets\Error_6206.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -155,6 +155,7 @@
     <Compile Include="Interfaces\Services\IOutputService.cs" />
     <Compile Include="Interfaces\Services\IMenuService.cs" />
     <Compile Include="Interfaces\Services\IOpenDocumentService.cs" />
+    <Compile Include="Interfaces\Services\IOutputToolboxToolbarService.cs" />
     <Compile Include="Interfaces\Services\IStatusbarService.cs" />
     <Compile Include="Interfaces\Services\IThemeManager.cs" />
     <Compile Include="Interfaces\Services\IShellToolbarService.cs" />

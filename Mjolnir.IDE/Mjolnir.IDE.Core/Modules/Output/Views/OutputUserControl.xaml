@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:Mjolnir.IDE.Core.Modules.Output.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <TextBox Margin="5" Text="{Binding Path=Text, Mode=OneWay}" 
+    <DockPanel>
+        <ContentControl Content="{Binding ToolBarTray}" DockPanel.Dock="Top" ToolBarTray.IsLocked="True"/>
+        <TextBox Margin="5" Text="{Binding Path=Text, Mode=OneWay}" 
              IsReadOnly="True" 
              BorderBrush="White" 
              Background="Transparent"
@@ -17,5 +19,6 @@
 			 FontFamily="Consolas"
              BorderThickness="0"
              ScrollViewer.VerticalScrollBarVisibility="Visible">
-    </TextBox>
+        </TextBox>
+    </DockPanel>
 </UserControl>

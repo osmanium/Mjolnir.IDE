@@ -50,19 +50,15 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList
             _container.RegisterType<IErrorToolboxToolbarService, ErrorListToolboxToolbarService>(new ContainerControlledLifetimeManager());
 
             _errorViewModel = _container.Resolve<ErrorViewModel>();
-
-            _workspace.Tools.Add(_errorViewModel);
-
             _errorToolbarService = _container.Resolve<IErrorToolboxToolbarService>();
 
-
-
+            
             LoadCommands();
             LoadToolbar();
 
+            _workspace.Tools.Add(_errorViewModel);
+
             _eventAggregator.GetEvent<ErrorListUpdated>().Subscribe(UpdateToggleBarTexts);
-
-
         }
 
         private void LoadCommands()

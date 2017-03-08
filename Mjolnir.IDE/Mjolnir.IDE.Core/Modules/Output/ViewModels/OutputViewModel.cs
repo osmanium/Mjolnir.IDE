@@ -34,8 +34,10 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
         }
 
 
-        public OutputViewModel(IUnityContainer container, AbstractWorkspace workspace)
-            : base(container, null)
+        public OutputViewModel(IUnityContainer container, 
+                               AbstractWorkspace workspace,
+                               IOutputToolboxToolbarService outputToolbox)
+            : base(container, outputToolbox)
         {
             IsValidationEnabled = false;
 
@@ -56,6 +58,12 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
         public void AddLog(IOutputService output)
         {
             _text = output.Message + "\n" + _text;
+            OnPropertyChanged(() => Text);
+        }
+
+        public void ClearLog()
+        {
+            _text = string.Empty;
             OnPropertyChanged(() => Text);
         }
     }

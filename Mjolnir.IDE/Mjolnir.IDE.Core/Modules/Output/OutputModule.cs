@@ -11,6 +11,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+using Prism.Commands;
+using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
+using System.Windows.Media.Imaging;
+using Mjolnir.IDE.Core.Services;
 
 namespace Mjolnir.IDE.Core.Modules.Output
 {
@@ -18,26 +24,68 @@ namespace Mjolnir.IDE.Core.Modules.Output
     {
 
         private readonly IUnityContainer _container;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IWorkspace _workspace;
+        private readonly ICommandManager _commandManager;
+        private OutputViewModel _outputViewModel;
+
+        private IOutputToolboxToolbarService _outputToolbarService;
+
 
         public OutputModule(IUnityContainer container)
         {
             _container = container;
-        }
-
-        private IEventAggregator EventAggregator
-        {
-            get { return _container.Resolve<IEventAggregator>(); }
+            _eventAggregator = _container.Resolve<IEventAggregator>();
+            _workspace = _container.Resolve<AbstractWorkspace>();
+            _commandManager = _container.Resolve<ICommandManager>();
         }
         
         public void Initialize()
         {
-            EventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Output Module" });
+            _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Output Module" });
+
             _container.RegisterType<OutputViewModel>();
+            _container.RegisterType<IOutputToolboxToolbarService, OutputToolboxToolbarService>(new ContainerControlledLifetimeManager());
+
+
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
 
-            OutputViewModel outputViewModel = _container.Resolve<OutputViewModel>();
+            
+            _outputViewModel = _container.Resolve<OutputViewModel>();
+            _outputToolbarService = _container.Resolve<IOutputToolboxToolbarService>();
 
-            workspace.Tools.Add(outputViewModel);
+            LoadCommands();
+            LoadToolbar();
+
+            workspace.Tools.Add(_outputViewModel);
+        }
+
+        private void LoadCommands()
+        {
+            var manager = _container.Resolve<ICommandManager>();
+
+            var clearOutputCommand = new DelegateCommand(ClearOutput);
+            
+            manager.RegisterCommand("CLEAROUTPUT", clearOutputCommand);
+        }
+
+        private void LoadToolbar()
+        {
+            _outputToolbarService.Add(new ToolbarViewModel("Standard", "Standard", 1) { Band = 1, BandIndex = 1 });
+
+            var menu = _outputToolbarService.Get("Standard");
+
+            var errorToggleButton = new MenuItemViewModel(
+                             "_Clear All", "Clear All", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")),
+                             _commandManager.GetCommand("CLEAROUTPUT"), null, false, false, null, false
+                                         );
+            menu.Add(errorToggleButton);
+
+        }
+
+        private void ClearOutput()
+        {
+            _outputViewModel.ClearLog();
         }
     }
 }

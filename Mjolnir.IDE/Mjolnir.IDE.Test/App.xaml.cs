@@ -234,13 +234,13 @@ namespace Mjolnir.IDE.Test
             if (output != null)
                 menuService.Get("_View")
                            .Add(new MenuItemViewModel("_Output", "_Output", 1,
-                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Output_16xLG.png")),
+                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Output_16xLG.png")),
                                     new DelegateCommand(ToggleOutput) { IsActive = false }));
 
             if(error != null)
                 menuService.Get("_View")
                            .Add(new MenuItemViewModel("_Error", "_Error", 1,
-                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/Error_6206.png")),
+                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Error_6206.png")),
                                     new DelegateCommand(ErrorOutput) { IsActive = false }));
 
             menuService.Get("_View").Add(new MenuItemViewModel("Themes", "Themes", 1));
