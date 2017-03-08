@@ -17,13 +17,13 @@ using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
 
 namespace Mjolnir.IDE.Core.Services
 {
-    public class ErrorToolbarToolboxService : AbstractToolbar, IErrorToolboxToolbarService
+    public class ErrorListToolboxToolbarService : AbstractToolbar, IErrorToolboxToolbarService
     {
         private static BoolToVisibilityConverter btv = new BoolToVisibilityConverter();
         private AbstractMenuItem menuItem;
         private ToolBarTray tray;
 
-        public ErrorToolbarToolboxService() : base("$ERROR$", "$ERROR$", 0)
+        public ErrorListToolboxToolbarService() : base("$ERROR$", "$ERROR$", 0)
         {
         }
 

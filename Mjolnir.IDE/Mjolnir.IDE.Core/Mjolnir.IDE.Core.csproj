@@ -164,7 +164,7 @@
     <Compile Include="Services\DefaultServiceViews\DefaultNewFileWindow.xaml.cs">
       <DependentUpon>DefaultNewFileWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\ErrorToolbarToolboxService.cs" />
+    <Compile Include="Services\ErrorListToolboxToolbarService.cs" />
     <Compile Include="Services\OpenDocumentService.cs" />
     <Compile Include="Services\ShellToolbarService.cs" />
     <Compile Include="Services\ThemeManager.cs" />

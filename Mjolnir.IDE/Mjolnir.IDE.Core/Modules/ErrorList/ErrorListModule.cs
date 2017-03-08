@@ -47,7 +47,7 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Error Module..." });
 
             _container.RegisterType<ErrorViewModel>();
-            _container.RegisterType<IErrorToolboxToolbarService, ErrorToolbarToolboxService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IErrorToolboxToolbarService, ErrorListToolboxToolbarService>(new ContainerControlledLifetimeManager());
 
             _errorViewModel = _container.Resolve<ErrorViewModel>();
 
