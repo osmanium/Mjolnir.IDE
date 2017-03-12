@@ -44,7 +44,7 @@ namespace Mjolnir.IDE.Core.Services
         /// <param name="message">A message to log</param>
         /// <param name="category">The category of logging</param>
         /// <param name="priority">The priority of logging</param>
-        public void LogOutput(string message, OutputCategory category, OutputPriority priority)
+        public void LogOutput(string message, OutputCategory category, OutputPriority priority, string outputSource = null)
         {
             Message = message;
             Category = category;
@@ -57,8 +57,19 @@ namespace Mjolnir.IDE.Core.Services
             Logger.Log(LogLevel.Info, method.DeclaringType + ": " + message);
 
             _aggregator.GetEvent<LogEvent>().Publish(new DefaultLogService
-            { Message = Message, Category = Category, Priority = Priority });
+            { Message = Message, Category = Category, Priority = Priority, OutputSource = outputSource });
         }
+
+        public void AddOutputSource(string outputSource)
+        {
+            _aggregator.GetEvent<OutputSourceAddedEvent>().Publish(new OutputSourceAddedEvent() { OutputSourceName = outputSource });
+        }
+
+        public void RemoveOutputSource(string outputSource)
+        {
+            _aggregator.GetEvent<OutputSourceAddedEvent>().Publish(new OutputSourceAddedEvent() { OutputSourceName = outputSource });
+        }
+
 
         /// <summary>
         /// The message which was last logged using the service
@@ -74,6 +85,8 @@ namespace Mjolnir.IDE.Core.Services
         /// The log message's priority
         /// </summary>
         public OutputPriority Priority { get; internal set; }
+
+        public string OutputSource { get; set; }
 
         #endregion
     }

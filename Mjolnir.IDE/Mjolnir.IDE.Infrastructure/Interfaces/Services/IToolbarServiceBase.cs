@@ -44,5 +44,7 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
         /// </summary>
         /// <value>The right click menu.</value>
         AbstractMenuItem RightClickMenu { get; }
+
+        void RefreshToolBar();
     }
 }

@@ -138,6 +138,21 @@ namespace Mjolnir.IDE.Test
             _statusBar.Progress(true, 50, 100);
             _statusBar.Text = "Building...";
             _statusBar.InsertMode = true;
+
+
+            //Dynamically toolbar item can be added
+            //var _outputToolboxService = _container.Resolve<IOutputToolboxToolbarService>();
+            //var manager = _container.Resolve<ICommandManager>();
+            //_outputToolboxService.Get("Standard").Add(new MenuItemViewModel("_Clear All 2", "Clear All 2", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")), manager.GetCommand("CLEAROUTPUT"), null, false, false, null, false));
+
+
+            var _outputService = _container.Resolve<IOutputService>();
+
+            _outputService.AddOutputSource("TestOutputSource");
+
+            _outputService.LogOutput("TestOutputSource message", OutputCategory.Info, OutputPriority.High, "TestOutputSource");
+
+
         }
 
         public void LoadMenus()
@@ -237,7 +252,7 @@ namespace Mjolnir.IDE.Test
                                     new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Output_16xLG.png")),
                                     new DelegateCommand(ToggleOutput) { IsActive = false }));
 
-            if(error != null)
+            if (error != null)
                 menuService.Get("_View")
                            .Add(new MenuItemViewModel("_Error", "_Error", 1,
                                     new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Error_6206.png")),
@@ -298,7 +313,7 @@ namespace Mjolnir.IDE.Test
             toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Open"));
             toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Save"));
             toolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Save All"));
-            
+
 
 
             toolbarService.Add(new ToolbarViewModel("Edit", "Edit", 1) { Band = 1, BandIndex = 2 });
@@ -387,7 +402,7 @@ namespace Mjolnir.IDE.Test
                 mi.IsChecked = output.IsVisible;
             }
         }
-        
+
         private void OpenModule()
         {
             var service = _container.Resolve<IOpenDocumentService>();

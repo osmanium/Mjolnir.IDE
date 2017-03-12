@@ -117,5 +117,11 @@ namespace Mjolnir.IDE.Core.Services
                 return menuItem;
             }
         }
+
+        public void RefreshToolBar()
+        {
+            tray = null;
+            OnPropertyChanged(() => ToolBarTray);
+        }
     }
 }

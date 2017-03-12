@@ -29,8 +29,8 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.ViewModels
         /// <param name="container">The container.</param>
         public MenuItemViewModel(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
                                  KeyGesture gesture = null, bool isCheckable = false, bool hideDisabled = false,
-                                 IUnityContainer container = null, bool isToggleButton = false)
-            : base(key, text, priority, icon, command, gesture, isCheckable, hideDisabled, isToggleButton)
+                                 IUnityContainer container = null, bool isToggleButton = false, bool isSplitButton = true)
+            : base(key, text, priority, icon, command, gesture, isCheckable, hideDisabled, isToggleButton, isSplitButton)
         {
         }
 

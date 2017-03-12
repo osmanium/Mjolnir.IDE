@@ -134,6 +134,9 @@
     <Compile Include="Events\ClosedContentEvent.cs" />
     <Compile Include="Events\LogEvent.cs" />
     <Compile Include="Events\OpenContentEvent.cs" />
+    <Compile Include="Events\OutputSourceAddedEvent.cs" />
+    <Compile Include="Events\OutputSourceChangedEvent.cs" />
+    <Compile Include="Events\OutputSourceRemovedEvent.cs" />
     <Compile Include="Events\SplashScreenCloseEvent.cs" />
     <Compile Include="Events\SplashScreenUpdateEvent.cs" />
     <Compile Include="Events\ThemeChangeEvent.cs" />

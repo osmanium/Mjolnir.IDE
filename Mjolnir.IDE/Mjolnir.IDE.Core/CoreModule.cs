@@ -71,6 +71,7 @@ namespace Mjolnir.IDE.Core
                                                                          new InjectionParameter(typeof(bool), false),
                                                                          new InjectionParameter(
                                                                              typeof(IUnityContainer), _container),
+                                                                         new InjectionParameter(typeof(bool), false),
                                                                          new InjectionParameter(typeof(bool), false)));
             _container.RegisterType<ToolbarViewModel>(
                 new InjectionConstructor(new InjectionParameter(typeof(string), "$MAIN$"),

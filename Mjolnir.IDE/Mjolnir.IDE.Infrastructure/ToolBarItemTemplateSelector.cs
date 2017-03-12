@@ -25,6 +25,8 @@ namespace Mjolnir.IDE.Infrastructure
         /// <value>The combo box template.</value>
         public DataTemplate ComboBoxTemplate { get; set; }
 
+        public DataTemplate SplitButtonTemplate { get; set; }
+
         /// <summary>
         /// Gets or sets the separator template.
         /// </summary>
@@ -46,12 +48,15 @@ namespace Mjolnir.IDE.Infrastructure
             if (toolBarItem != null && !toolBarItem.IsSeparator)
             {
                 if (toolBarItem.Children.Count > 0)
-                    return ComboBoxTemplate;
+                    if (toolBarItem.IsSplitButton == true)
+                        return SplitButtonTemplate;
+                    else
+                        return ComboBoxTemplate;
 
                 if (toolBarItem.IsToggleButton)
-                    return ToggleButtonTemplate;
-                else
-                    return ButtonTemplate;
+                        return ToggleButtonTemplate;
+                    else
+                        return ButtonTemplate;
             }
             return SeparatorTemplate;
         }

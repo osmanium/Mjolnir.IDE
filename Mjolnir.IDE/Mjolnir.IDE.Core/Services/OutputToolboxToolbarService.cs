@@ -115,5 +115,11 @@ namespace Mjolnir.IDE.Core.Services
             }
         }
 
+
+        public void RefreshToolBar()
+        {
+            tray = null;
+            OnPropertyChanged(() => ToolBarTray);
+        }
     }
 }

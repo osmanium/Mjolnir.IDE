@@ -8,5 +8,6 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
 {
     public interface IOutputToolboxToolbarService : IToolbarServiceBase
     {
+
     }
 }

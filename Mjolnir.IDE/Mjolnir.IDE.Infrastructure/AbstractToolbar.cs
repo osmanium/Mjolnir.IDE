@@ -23,11 +23,12 @@ namespace Mjolnir.IDE.Infrastructure
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentException">Header cannot be SEP for a Toolbar</exception>
         protected AbstractToolbar(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
-                                  bool isCheckable = false, IUnityContainer container = null, bool isToggleButton = false)
-            : base(key, text, priority, icon, command, null, isCheckable, false, isToggleButton)
+                                  bool isCheckable = false, IUnityContainer container = null, bool isToggleButton = false, bool isSplitButton = true)
+            : base(key, text, priority, icon, command, null, isCheckable, false, isToggleButton, isSplitButton)
         {
             Text = text;
             IsToggleButton = isToggleButton;
+            IsSplitButton = isSplitButton;
             Priority = priority;
             IsSeparator = false;
             Key = key;

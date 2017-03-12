@@ -43,6 +43,7 @@ namespace Mjolnir.IDE.Core.Services
             return base.Add(item);
         }
 
+        
         /// <summary>
         /// The toolbar tray which will be used in the application
         /// </summary>
@@ -116,6 +117,12 @@ namespace Mjolnir.IDE.Core.Services
                 }
                 return menuItem;
             }
+        }
+
+        public void RefreshToolBar()
+        {
+            tray = null;
+            OnPropertyChanged(() => ToolBarTray);
         }
     }
 }

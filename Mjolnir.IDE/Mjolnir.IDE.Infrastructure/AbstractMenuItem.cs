@@ -98,6 +98,8 @@ namespace Mjolnir.IDE.Infrastructure
 
         public bool IsToggleButton { get; set; }
 
+        public bool IsSplitButton { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether this instance is checked.
         /// </summary>
@@ -110,6 +112,13 @@ namespace Mjolnir.IDE.Infrastructure
                 SetProperty(ref _isChecked, value);
             }
         }
+
+        //private object _tag;
+        //public object Tag
+        //{
+        //    get { return _tag; }
+        //    set { SetProperty(ref _tag, value); }
+        //}
 
         #endregion
 
@@ -165,10 +174,11 @@ namespace Mjolnir.IDE.Infrastructure
         /// <param name="isCheckable">if set to <c>true</c> acts as a checkable menu.</param>
         protected AbstractMenuItem(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
                                    KeyGesture gesture = null, bool isCheckable = false, bool hideDisabled = false,
-                                   bool isToggleButton = false)
+                                   bool isToggleButton = false, bool isSplitButton = true)
         {
             Text = text;
             IsToggleButton = isToggleButton;
+            IsSplitButton = isSplitButton;
             Priority = priority;
             IsSeparator = false;
             Key = key;

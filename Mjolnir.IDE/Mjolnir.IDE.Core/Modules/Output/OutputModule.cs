@@ -39,7 +39,7 @@ namespace Mjolnir.IDE.Core.Modules.Output
             _workspace = _container.Resolve<AbstractWorkspace>();
             _commandManager = _container.Resolve<ICommandManager>();
         }
-        
+
         public void Initialize()
         {
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Output Module" });
@@ -50,7 +50,7 @@ namespace Mjolnir.IDE.Core.Modules.Output
 
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
 
-            
+
             _outputViewModel = _container.Resolve<OutputViewModel>();
             _outputToolbarService = _container.Resolve<IOutputToolboxToolbarService>();
 
@@ -65,21 +65,25 @@ namespace Mjolnir.IDE.Core.Modules.Output
             var manager = _container.Resolve<ICommandManager>();
 
             var clearOutputCommand = new DelegateCommand(ClearOutput);
-            
+            var doNothingCommand = new DelegateCommand(DoNothing);
+
             manager.RegisterCommand("CLEAROUTPUT", clearOutputCommand);
+            manager.RegisterCommand("DONOTHING", doNothingCommand);
         }
 
         private void LoadToolbar()
         {
-            _outputToolbarService.Add(new ToolbarViewModel("Standard", "Standard", 1) { Band = 1, BandIndex = 1 });
 
-            var menu = _outputToolbarService.Get("Standard");
+            _outputToolbarService.Add(new ToolbarViewModel("OutputSource", "Output Source", 1) { Band = 1, BandIndex = 1 });
+            _outputToolbarService.Get("OutputSource").Add(new MenuItemViewModel("_Output_Source", "Output Source", 3, null, _commandManager.GetCommand("DONOTHING"), null, false, false, null, false, false));
 
-            var errorToggleButton = new MenuItemViewModel(
-                             "_Clear All", "Clear All", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")),
-                             _commandManager.GetCommand("CLEAROUTPUT"), null, false, false, null, false
-                                         );
-            menu.Add(errorToggleButton);
+
+            _outputToolbarService.Get("OutputSource").Get("_Output_Source").Add(new MenuItemViewModel("General", "General", 1, null, _commandManager.GetCommand("DONOTHING"), null, false, false, null, false, false));
+
+
+            _outputToolbarService.Add(new ToolbarViewModel("Standard", "Standard", 1) { Band = 1, BandIndex = 2 });
+            _outputToolbarService.Get("Standard").Add(new MenuItemViewModel("_Clear All", "Clear All", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")), _commandManager.GetCommand("CLEAROUTPUT"), null, false, false, null, false));
+
 
         }
 
@@ -87,5 +91,8 @@ namespace Mjolnir.IDE.Core.Modules.Output
         {
             _outputViewModel.ClearLog();
         }
+
+        private void DoNothing()
+        { }
     }
 }

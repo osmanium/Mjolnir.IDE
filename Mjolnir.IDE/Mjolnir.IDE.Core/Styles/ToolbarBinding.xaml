@@ -4,7 +4,9 @@
                     xmlns:conv="clr-namespace:Mjolnir.IDE.Infrastructure.Converters;assembly=Mjolnir.IDE.Infrastructure"
                     xmlns:ControlsViewModels="clr-namespace:Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;assembly=Mjolnir.IDE.Infrastructure"
                     xmlns:Infrastructure="clr-namespace:Mjolnir.IDE.Infrastructure;assembly=Mjolnir.IDE.Infrastructure"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:core="clr-namespace:Mjolnir.IDE.Core.Modules.Output.Views">
 
     <conv:MenuVisibilityConverter x:Key="cvc" />
 
@@ -31,7 +33,27 @@
         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
     </DataTemplate>
 
+
     <DataTemplate x:Key="comboboxTemplate" DataType="{x:Type Infrastructure:AbstractMenuItem}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Output Source" VerticalAlignment="Center" TextAlignment="Center"/>
+            <ComboBox Background="{DynamicResource WindowTitleColorBrush}" 
+                  IsEnabled="True" ToolTip="{Binding ToolTip}" 
+                  Visibility="{Binding ., Converter={StaticResource ResourceKey=cvc}}"
+                  ItemsSource="{Binding Path=Children}" 
+                  DisplayMemberPath="Text"
+                  SelectedItem="{Binding Path=DataContext.CurrentOutputContext ,RelativeSource={RelativeSource AncestorType={x:Type core:OutputUserControl}}, Mode=TwoWay}"
+                  Width="200" Margin="10 0 0 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Command}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="splitButtonTemplate" DataType="{x:Type Infrastructure:AbstractMenuItem}">
         <xctk:SplitButton Background="{DynamicResource WindowTitleColorBrush}" IsEnabled="True" Command="{Binding Command}" ToolTip="{Binding ToolTip}" Visibility="{Binding ., Converter={StaticResource ResourceKey=cvc}}">
             <xctk:SplitButton.Content>
                 <StackPanel Orientation="Horizontal" IsEnabled="False">
@@ -75,6 +97,7 @@
     <Infrastructure:ToolBarItemTemplateSelector ButtonTemplate="{StaticResource buttonTemplate}"
                                                 SeparatorTemplate="{StaticResource separatorTemplate}" 
                                                 ComboBoxTemplate="{StaticResource comboboxTemplate}"
+                                                SplitButtonTemplate="{StaticResource splitButtonTemplate}"
                                                 ToggleButtonTemplate="{StaticResource toggleButtonTemplate}"
                                                 x:Key="toolBarItemTemplateSelector" />
 

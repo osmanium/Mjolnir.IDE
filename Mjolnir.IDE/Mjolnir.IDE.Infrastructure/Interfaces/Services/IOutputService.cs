@@ -52,12 +52,19 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
         /// <value>The priority.</value>
         OutputPriority Priority { get; }
 
+
+        string OutputSource { get; }
+
+
         /// <summary>
         /// Logs the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="category">The logging category.</param>
         /// <param name="priority">The logging priority.</param>
-        void LogOutput(string message, OutputCategory category, OutputPriority priority);
+        void LogOutput(string message, OutputCategory category, OutputPriority priority, string outputSource = null);
+
+        void AddOutputSource(string outputSource);
+        void RemoveOutputSource(string outputSource);
     }
 }
