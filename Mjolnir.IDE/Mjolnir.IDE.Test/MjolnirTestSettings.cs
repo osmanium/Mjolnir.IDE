@@ -1,0 +1,103 @@
+﻿using Mjolnir.IDE.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+
+namespace Mjolnir.IDE.Test
+{
+    public class MjolnirTestSettings : AbstractSettings
+    {
+        private static MjolnirTestSettings settings = new MjolnirTestSettings();
+
+        private MjolnirTestSettings()
+        {
+        }
+
+        [Browsable(false)]
+        public static MjolnirTestSettings Default
+        {
+            get { return settings; }
+        }
+
+        
+        [UserScopedSetting()]
+        [DefaultSettingValue("White")]
+        [Category("Colors")]
+        [DisplayName("Background Color")]
+        [Description("The background color of the text editor")]
+        public SolidColorBrush BackgroundColor
+        {
+            get { return (SolidColorBrush)this["BackgroundColor"]; }
+            set { this["BackgroundColor"] = value; }
+        }
+
+        [UserScopedSetting()]
+        [DefaultSettingValue("Black")]
+        [Category("Colors")]
+        [DisplayName("Foreground Color")]
+        [Description("The foreground color of the text editor")]
+        public SolidColorBrush ForegroundColor
+        {
+            get { return (SolidColorBrush)this["ForegroundColor"]; }
+            set { this["ForegroundColor"] = value; }
+        }
+
+        [UserScopedSetting()]
+        [DefaultSettingValue("true")]
+        [Category("Format")]
+        [DisplayName("Display line numbers?")]
+        [Description("Set to Yes to show line numbers on the text editor")]
+        public bool ShowLineNumbers
+        {
+            get { return (bool)this["ShowLineNumbers"]; }
+            set { this["ShowLineNumbers"] = value; }
+        }
+
+        [UserScopedSetting()]
+        [DefaultSettingValue("false")]
+        [Category("Format")]
+        [DisplayName("Word wrap?")]
+        [Description("Set to Yes to wrap words in a line on the text editor")]
+        public bool WordWrap
+        {
+            get { return (bool)this["WordWrap"]; }
+            set { this["WordWrap"] = value; }
+        }
+
+        [UserScopedSetting()]
+        [DefaultSettingValue("Consolas")]
+        [Category("Format")]
+        [DisplayName("Font")]
+        [Description("Select the font to use in the text editor")]
+        public FontFamily FontFamily
+        {
+            get { return (FontFamily)this["FontFamily"]; }
+            set { this["FontFamily"] = value; }
+        }
+
+        [UserScopedSetting()]
+        [DefaultSettingValue("14")]
+        [Category("Format")]
+        [DisplayName("Size")]
+        [Description("Select the size to use for the font in the text editor")]
+        public int FontSize
+        {
+            get { return (int)this["FontSize"]; }
+            set { this["FontSize"] = value; }
+        }
+
+        [UserScopedSetting()]
+        [DefaultSettingValue("true")]
+        [Browsable(false)]
+        public bool LivePreview
+        {
+            get { return (bool)this["LivePreview"]; }
+            set { this["LivePreview"] = value; }
+        }
+    }
+}

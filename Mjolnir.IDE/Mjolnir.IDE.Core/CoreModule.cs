@@ -2,6 +2,7 @@
 using Mjolnir.IDE.Core.Modules.ErrorList;
 using Mjolnir.IDE.Core.Modules.Output;
 using Mjolnir.IDE.Core.Modules.Settings;
+using Mjolnir.IDE.Core.Modules.Toolbox;
 using Mjolnir.IDE.Core.Services;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Infrastructure.Events;
@@ -141,6 +142,10 @@ namespace Mjolnir.IDE.Core
 
 
 
+            ToolboxModule toolboxModule = _container.Resolve<ToolboxModule>();
+            toolboxModule.Initialize();
+
+
 
             var customApplication = _container.Resolve<IApplicationDefinition>();
             if (customApplication != null)
@@ -153,7 +158,6 @@ namespace Mjolnir.IDE.Core
 
             //Below ones can be loaded with solution, does not require immediate load
             //TODO : Console
-            //TODO : Error
 
 
             if (customApplication != null)
@@ -184,8 +188,8 @@ namespace Mjolnir.IDE.Core
 
             //TODO: Check if you can hook up to the Workspace.ActiveDocument.CloseCommand
             var closeCommand = new DelegateCommand<object>(CloseDocument, CanExecuteCloseDocument);
-            manager.RegisterCommand("CLOSE", closeCommand);
-            manager.RegisterCommand("NEW", registry.NewCommand);
+            manager.RegisterCommand(CommandManagerConstants.CloseCommand, closeCommand);
+            manager.RegisterCommand(CommandManagerConstants.New, registry.NewCommand);
         }
 
         private void LoadSettings()

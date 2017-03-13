@@ -77,4 +77,9 @@
         </DrawingBrush.Drawing>
     </DrawingBrush>
 
+    <!-- ExpanderEx -->
+    <SolidColorBrush x:Key="ExpanderExBackground" Color="#E3E3E3" />
+    <SolidColorBrush x:Key="ExpanderExDisabledForeground" Color="#888" />
+    <SolidColorBrush x:Key="ExpanderExGlyph" Color="#444" />
+
 </ResourceDictionary>

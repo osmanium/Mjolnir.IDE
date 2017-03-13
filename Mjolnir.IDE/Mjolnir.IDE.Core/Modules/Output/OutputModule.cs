@@ -67,8 +67,8 @@ namespace Mjolnir.IDE.Core.Modules.Output
             var clearOutputCommand = new DelegateCommand(ClearOutput);
             var doNothingCommand = new DelegateCommand(DoNothing);
 
-            manager.RegisterCommand("CLEAROUTPUT", clearOutputCommand);
-            manager.RegisterCommand("DONOTHING", doNothingCommand);
+            manager.RegisterCommand(CommandManagerConstants.ClearOutputCommand, clearOutputCommand);
+            manager.RegisterCommand(CommandManagerConstants.DoNothingCommand, doNothingCommand);
         }
 
         private void LoadToolbar()

@@ -132,8 +132,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MjolnirTestSettings.cs" />
     <Compile Include="TextDocument\AllFileHandler.cs" />
     <Compile Include="TextDocument\Model\TextModel.cs" />
+    <Compile Include="TextDocument\Toolbox\TestToolboxItem.cs" />
     <Compile Include="TextDocument\ViewModel\TextViewModel.cs" />
     <Compile Include="TextDocument\View\TextView.xaml.cs">
       <DependentUpon>TextView.xaml</DependentUpon>

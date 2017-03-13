@@ -119,6 +119,7 @@
     <Compile Include="AbstractWorkspace.cs" />
     <Compile Include="Attributes\FileContentAttribute.cs" />
     <Compile Include="Attributes\NewContentAttribute.cs" />
+    <Compile Include="Attributes\ToolboxItemAttribute.cs" />
     <Compile Include="Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Converters\BoolToInsertModeConverter.cs" />
     <Compile Include="Converters\DocumentContextMenuMixingConverter.cs" />
@@ -163,6 +164,8 @@
     <Compile Include="Interfaces\Services\IThemeManager.cs" />
     <Compile Include="Interfaces\Services\IShellToolbarService.cs" />
     <Compile Include="Interfaces\Services\IToolbarServiceBase.cs" />
+    <Compile Include="Interfaces\Services\IToolboxService.cs" />
+    <Compile Include="Interfaces\Services\IToolboxToolbarService.cs" />
     <Compile Include="Interfaces\Services\IToolboxToolbarServiceBase.cs" />
     <Compile Include="Interfaces\Settings\IRecentViewItem.cs" />
     <Compile Include="Interfaces\Settings\IRecentViewSettings.cs" />
@@ -176,6 +179,7 @@
     <Compile Include="LayoutInitializer.cs" />
     <Compile Include="PanesStyleSelector.cs" />
     <Compile Include="PanesTemplateSelector.cs" />
+    <Compile Include="ToolboxItem.cs" />
     <Compile Include="ViewModels\MenuItemViewModel.cs" />
     <Compile Include="Interfaces\Views\IShellView.cs" />
     <Compile Include="Interfaces\Views\ISplashScreenModule.cs" />

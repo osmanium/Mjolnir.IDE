@@ -79,6 +79,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.4.3\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -121,6 +123,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ExpanderEx.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="MjolnirApp.cs" />
     <Compile Include="MjolnirBootstrapper.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="Modules\Settings\RecentViewItem.cs" />
     <Compile Include="Modules\Settings\RecentViewSettings.cs" />
     <Compile Include="Modules\Settings\SettingsManager.cs" />
+    <Compile Include="Modules\Settings\MjolnirSettingsItem.cs" />
     <Compile Include="Modules\Settings\ThemeSettings.cs" />
     <Compile Include="Modules\Settings\ToolbarPositionSettings.cs" />
     <Compile Include="Modules\Settings\ToolbarSettingItem.cs" />
@@ -157,8 +161,15 @@
     <Compile Include="Modules\SplashScreen\Views\DefaultSplashScreenView.xaml.cs">
       <DependentUpon>DefaultSplashScreenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Toolbox\ToolboxModule.cs" />
+    <Compile Include="Modules\Toolbox\ViewModels\ToolboxItemViewModel.cs" />
+    <Compile Include="Modules\Toolbox\ViewModels\ToolboxViewModel.cs" />
+    <Compile Include="Modules\Toolbox\Views\ToolboxUserControl.xaml.cs">
+      <DependentUpon>ToolboxUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CommandManager.cs" />
+    <Compile Include="Services\CommandManagerConstants.cs" />
     <Compile Include="Services\ContentHandlerRegistry.cs" />
     <Compile Include="Services\DefaultLogService.cs" />
     <Compile Include="Services\DefaultServiceViews\DefaultNewFileWindow.xaml.cs">
@@ -169,6 +180,7 @@
     <Compile Include="Services\OutputToolboxToolbarService.cs" />
     <Compile Include="Services\ShellToolbarService.cs" />
     <Compile Include="Services\ThemeManager.cs" />
+    <Compile Include="Services\ToolboxToolbarService.cs" />
     <Compile Include="Themes\DarkTheme.cs" />
     <Compile Include="Themes\DefaultTheme.cs" />
     <Compile Include="Themes\LightTheme.cs" />
@@ -212,6 +224,10 @@
     <Page Include="Modules\SplashScreen\Views\DefaultSplashScreenView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Toolbox\Views\ToolboxUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Services\DefaultServiceViews\DefaultNewFileWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -291,6 +307,9 @@
     <Resource Include="Assets\Clearwindowcontent_6304.png" />
     <Resource Include="Assets\Output_16xLG.png" />
     <Resource Include="Assets\Error_6206.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\toolbox_16xLG.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

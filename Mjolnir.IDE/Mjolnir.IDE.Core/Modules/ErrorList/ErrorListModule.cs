@@ -33,12 +33,15 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList
 
         private IErrorToolboxToolbarService _errorToolbarService;
 
-        public ErrorListModule(IUnityContainer container)
+        public ErrorListModule(IUnityContainer container,
+                             IEventAggregator eventAggregaor,
+                             AbstractWorkspace abstractWorkspace,
+                             ICommandManager commandManager)
         {
             _container = container;
-            _eventAggregator = _container.Resolve<IEventAggregator>();
-            _workspace = _container.Resolve<AbstractWorkspace>();
-            _commandManager = _container.Resolve<ICommandManager>();
+            _eventAggregator = eventAggregaor;
+            _workspace = abstractWorkspace;
+            _commandManager = commandManager;
         }
 
 
@@ -70,9 +73,9 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList
             var toggleInformationCommand = new DelegateCommand(ToggleInformationList);
 
 
-            manager.RegisterCommand("TOGGLEERRORLIST", toggleErrorCommand);
-            manager.RegisterCommand("TOGGLEEWARNINGLIST", toggleWarningCommand);
-            manager.RegisterCommand("TOGGLEINFORMATIONLIST", toggleInformationCommand);
+            manager.RegisterCommand(CommandManagerConstants.ToggleErrorListCommand, toggleErrorCommand);
+            manager.RegisterCommand(CommandManagerConstants.ToggleWarningListCommand, toggleWarningCommand);
+            manager.RegisterCommand(CommandManagerConstants.ToggleInformationListCommand, toggleInformationCommand);
         }
 
         public void ToggleErrorList()
@@ -100,19 +103,19 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList
 
             var errorToggleButton = new MenuItemViewModel(
                              "_Error", ErrorCountText(), 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Error.png")),
-                             _commandManager.GetCommand("TOGGLEERRORLIST"), null, false, false, null, true
+                             _commandManager.GetCommand(CommandManagerConstants.ToggleErrorListCommand), null, false, false, null, true
                                          );
             menu.Add(errorToggleButton);
 
             var warningToggleButton = new MenuItemViewModel(
                              "_Warning", WarningCountText(), 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Warning.png")),
-                             _commandManager.GetCommand("TOGGLEEWARNINGLIST"), null, false, false, null, true
+                             _commandManager.GetCommand(CommandManagerConstants.ToggleWarningListCommand), null, false, false, null, true
                                          );
             menu.Add(warningToggleButton);
 
             var informationToggleButton = new MenuItemViewModel(
                              "_Information", InformationCountText(), 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Message.png")),
-                             _commandManager.GetCommand("TOGGLEINFORMATIONLIST"), null, false, false, null, true
+                             _commandManager.GetCommand(CommandManagerConstants.ToggleInformationListCommand), null, false, false, null, true
                                          );
             menu.Add(informationToggleButton);
         }

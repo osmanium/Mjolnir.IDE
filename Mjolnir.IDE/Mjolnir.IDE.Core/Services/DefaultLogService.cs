@@ -46,7 +46,7 @@ namespace Mjolnir.IDE.Core.Services
         /// <param name="priority">The priority of logging</param>
         public void LogOutput(string message, OutputCategory category, OutputPriority priority, string outputSource = null)
         {
-            Message = message;
+            Message = string.Format("{0} - {1}", DateTime.Now.ToLongTimeString(), message);
             Category = category;
             Priority = priority;
 

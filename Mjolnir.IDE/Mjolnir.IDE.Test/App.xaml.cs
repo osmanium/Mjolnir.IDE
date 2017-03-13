@@ -1,6 +1,8 @@
 ﻿using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Core;
 using Mjolnir.IDE.Core.Modules.ErrorList.Events;
+using Mjolnir.IDE.Core.Modules.Settings;
+using Mjolnir.IDE.Core.Services;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Infrastructure.Events;
 using Mjolnir.IDE.Infrastructure.Interfaces;
@@ -66,16 +68,20 @@ namespace Mjolnir.IDE.Test
             var saveAsCommand = new DelegateCommand(SaveAsDocument, CanExecuteSaveAsDocument);
             var themeCommand = new DelegateCommand<string>(ThemeChangeCommand);
             var loggerCommand = new DelegateCommand(ToggleOutput);
+            var toolboxCommand = new DelegateCommand(ToggleToolbox);
 
 
-            manager.RegisterCommand("OPEN", openCommand);
-            manager.RegisterCommand("SAVE", saveCommand);
-            manager.RegisterCommand("SAVEALL", saveAllCommand);
-            manager.RegisterCommand("SAVEAS", saveAsCommand);
-            manager.RegisterCommand("EXIT", exitCommand);
-            manager.RegisterCommand("LOGSHOW", loggerCommand);
-            manager.RegisterCommand("THEMECHANGE", themeCommand);
+            manager.RegisterCommand(CommandManagerConstants.OpenCommand, openCommand);
+            manager.RegisterCommand(CommandManagerConstants.SaveCommand, saveCommand);
+            manager.RegisterCommand(CommandManagerConstants.SaveAllCommand, saveAllCommand);
+            manager.RegisterCommand(CommandManagerConstants.SaveAsCommand, saveAsCommand);
+            manager.RegisterCommand(CommandManagerConstants.ExitCommand, exitCommand);
+            manager.RegisterCommand(CommandManagerConstants.LogShowCommand, loggerCommand);
+            manager.RegisterCommand(CommandManagerConstants.ThemeChangeCommand, themeCommand);
+            manager.RegisterCommand(CommandManagerConstants.ToggleToolboxCommand, toolboxCommand);
         }
+
+        
 
         public void RegisterTypes()
         {
@@ -164,6 +170,7 @@ namespace Mjolnir.IDE.Test
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
             ToolViewModel output = workspace.Tools.First(f => f.ContentId == "Output");
             ToolViewModel error = workspace.Tools.First(f => f.ContentId == "Error");
+            ToolViewModel toolbox = workspace.Tools.First(f => f.ContentId == "Toolbox");
 
             menuService.Add(new MenuItemViewModel("_File", "_File", 1));
             menuService.Add(new MenuItemViewModel("_Edit", "_Edit", 2));
@@ -258,6 +265,14 @@ namespace Mjolnir.IDE.Test
                                     new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Error_6206.png")),
                                     new DelegateCommand(ErrorOutput) { IsActive = false }));
 
+
+            if (toolbox != null)
+                menuService.Get("_View")
+                           .Add(new MenuItemViewModel("_Toolbox", "_Toolbox", 1,
+                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/toolbox_16xLG.png")),
+                                    new DelegateCommand(ToggleToolbox) { IsActive = false }));
+
+
             menuService.Get("_View").Add(new MenuItemViewModel("Themes", "Themes", 1));
 
             //Set the checkmark of the theme menu's based on which is currently selected
@@ -287,7 +302,9 @@ namespace Mjolnir.IDE.Test
 
         public void LoadSettings()
         {
-
+            ISettingsManager manager = _container.Resolve<ISettingsManager>();
+            manager.Add(new MjolnirSettingsItem("Mjolnir Settings", 1, null));
+            manager.Get("Mjolnir Settings").Add(new MjolnirSettingsItem("General", 1, MjolnirTestSettings.Default));
         }
 
         public void LoadTheme()
@@ -472,6 +489,18 @@ namespace Mjolnir.IDE.Test
             shell.Close();
         }
 
+        private void ToggleToolbox()
+        {
+            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            var menuService = _container.Resolve<IMenuService>();
+            ToolViewModel toolbox = workspace.Tools.First(f => f.ContentId == "Toolbox");
+            if (toolbox != null)
+            {
+                toolbox.IsVisible = !toolbox.IsVisible;
+                var mi = menuService.Get("_View").Get("_Toolbox") as MenuItemViewModel;
+                mi.IsChecked = toolbox.IsVisible;
+            }
+        }
         #endregion
     }
 }
