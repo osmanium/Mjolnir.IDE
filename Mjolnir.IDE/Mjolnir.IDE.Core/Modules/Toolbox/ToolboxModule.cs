@@ -41,7 +41,9 @@ namespace Mjolnir.IDE.Core.Modules.Toolbox
         {
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Toolbox..." });
 
-            _container.RegisterType<ToolboxViewModel>();
+            _container.RegisterType<IToolboxService,ToolboxViewModel>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ToolboxViewModel>(new ContainerControlledLifetimeManager());
+
             _container.RegisterType<IToolboxToolbarService, ToolboxToolbarService>(new ContainerControlledLifetimeManager());
 
             _toolboxViewModel = _container.Resolve<ToolboxViewModel>();

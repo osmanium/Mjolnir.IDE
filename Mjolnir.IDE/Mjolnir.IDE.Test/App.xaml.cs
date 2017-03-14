@@ -13,6 +13,7 @@ using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
 using Mjolnir.IDE.Test.TextDocument;
 using Mjolnir.IDE.Test.TextDocument.Model;
+using Mjolnir.IDE.Test.TextDocument.Toolbox;
 using Mjolnir.IDE.Test.TextDocument.View;
 using Mjolnir.IDE.Test.TextDocument.ViewModel;
 using Prism.Commands;
@@ -81,7 +82,7 @@ namespace Mjolnir.IDE.Test
             manager.RegisterCommand(CommandManagerConstants.ToggleToolboxCommand, toolboxCommand);
         }
 
-        
+
 
         public void RegisterTypes()
         {
@@ -153,11 +154,48 @@ namespace Mjolnir.IDE.Test
 
 
             var _outputService = _container.Resolve<IOutputService>();
-
             _outputService.AddOutputSource("TestOutputSource");
-
             _outputService.LogOutput("TestOutputSource message", OutputCategory.Info, OutputPriority.High, "TestOutputSource");
 
+
+            var _toolboxService = _container.Resolve<IToolboxService>();
+
+            _toolboxService.AddToolboxItems(typeof(TextViewModel).Name, new List<ToolboxItem>()
+            {
+                new ToolboxItem()
+                {
+                    Category = "Manually Added Items",
+                    DocumentType = typeof(TextViewModel),
+                    ItemType = typeof(TestToolboxItem),
+                    Name = "Manual Item 1"
+                },
+                new ToolboxItem()
+                {
+                    Category = "Manually Added Items",
+                    DocumentType = typeof(TextViewModel),
+                    ItemType = typeof(TestToolboxItem),
+                    Name = "Manual Item 2"
+                },
+                new ToolboxItem()
+                {
+                    Category = "Manually Added Items",
+                    DocumentType = typeof(TextViewModel),
+                    ItemType = typeof(TestToolboxItem),
+                    Name = "Manual Item 3"
+                }
+            });
+
+
+            _toolboxService.RemoveToolboxItems(typeof(TextViewModel).Name, new List<ToolboxItem>()
+            {
+                new ToolboxItem()
+                {
+                    Category = "Manually Added Items",
+                    DocumentType = typeof(TextViewModel),
+                    ItemType = typeof(TestToolboxItem),
+                    Name = "Manual Item 3"
+                }
+            });
 
         }
 

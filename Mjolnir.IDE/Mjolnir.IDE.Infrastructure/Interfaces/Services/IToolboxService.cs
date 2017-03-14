@@ -8,6 +8,12 @@ namespace Mjolnir.IDE.Infrastructure.Interfaces.Services
 {
     public interface IToolboxService
     {
-        IEnumerable<ToolboxItem> GetToolboxItems(Type documentType);
+        List<ToolboxItem> GetToolboxItems(string documentTypeName);
+
+        void AddToolboxItems(string documentTypeName, List<ToolboxItem> newItems);
+
+        void RemoveToolboxItems(string documentTypeName, List<ToolboxItem> newItems);
+
+        void RefreshToolboxItems();
     }
 }

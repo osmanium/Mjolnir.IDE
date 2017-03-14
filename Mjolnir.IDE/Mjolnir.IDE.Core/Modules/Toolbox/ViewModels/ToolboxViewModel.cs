@@ -29,7 +29,7 @@ namespace Mjolnir.IDE.Core.Modules.Toolbox.ViewModels
         private readonly IWorkspace _workspace;
 
 
-        private readonly Dictionary<Type, IEnumerable<ToolboxItem>> _toolboxItems;
+        private readonly Dictionary<string, List<ToolboxItem>> _toolboxItems;
 
 
         private readonly ObservableCollection<ToolboxItemViewModel> _items;
@@ -84,7 +84,7 @@ namespace Mjolnir.IDE.Core.Modules.Toolbox.ViewModels
                     };
                 })
                 .GroupBy(x => x.DocumentType)
-                .ToDictionary(x => x.Key, x => x.AsEnumerable());
+                .ToDictionary(x => x.Key.Name, x => x.AsEnumerable().ToList());
 
             RefreshToolboxItems();
 
@@ -96,28 +96,69 @@ namespace Mjolnir.IDE.Core.Modules.Toolbox.ViewModels
             RefreshToolboxItems();
         }
 
-        
 
-        private void RefreshToolboxItems()
+
+        public void RefreshToolboxItems()
         {
             _items.Clear();
 
             if (_workspace.ActiveDocument == null)
                 return;
 
-            _items.AddRange(GetToolboxItems(_workspace.ActiveDocument.GetType())
+            _items.AddRange(GetToolboxItems(_workspace.ActiveDocument.GetType().Name)
                 .Select(x => new ToolboxItemViewModel(x)));
 
 
             OnPropertyChanged(() => Items);
         }
 
-        public IEnumerable<ToolboxItem> GetToolboxItems(Type documentType)
+        public List<ToolboxItem> GetToolboxItems(string documentTypeName)
         {
-            IEnumerable<ToolboxItem> result;
-            if (_toolboxItems.TryGetValue(documentType, out result))
+            List<ToolboxItem> result;
+            if (_toolboxItems.TryGetValue(documentTypeName, out result))
                 return result;
-            return new ObservableCollection<ToolboxItem>();
+            return new List<ToolboxItem>();
+        }
+
+        public void AddToolboxItems(string documentTypeName, List<ToolboxItem> newItems)
+        {
+            if (!_toolboxItems.ContainsKey(documentTypeName))
+                _toolboxItems[documentTypeName] = newItems;
+            else
+            {
+                var existingItems = _toolboxItems[documentTypeName] as List<ToolboxItem>;
+
+                if (existingItems != null)
+                {
+                    existingItems.AddRange(newItems.Where(w => !existingItems.Contains(w)));
+                    _toolboxItems[documentTypeName] = existingItems;
+                }
+            }
+
+            RefreshToolboxItems();
+        }
+
+        public void RemoveToolboxItems(string documentTypeName, List<ToolboxItem> removedItems)
+        {
+            if (_toolboxItems.ContainsKey(documentTypeName))
+            {
+                var existingItems = _toolboxItems[documentTypeName];
+
+                if (existingItems != null)
+                {
+
+                    var itemsToBeDeleted = _toolboxItems[documentTypeName].Where(w => w.DocumentType.Name == documentTypeName && removedItems.Where(r => r.Name == w.Name).Any()).ToList();
+
+                    if (itemsToBeDeleted != null)
+                        itemsToBeDeleted.ForEach(f =>
+                        {
+                            _toolboxItems[documentTypeName].Remove(f);
+                        });
+
+                }
+            }
+
+            RefreshToolboxItems();
         }
     }
 }
