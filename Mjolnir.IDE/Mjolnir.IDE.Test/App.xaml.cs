@@ -14,6 +14,7 @@ using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
 using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
 using Mjolnir.IDE.Test.ProjectExplorer;
+using Mjolnir.IDE.Test.ProjectExplorer.Interfaces;
 using Mjolnir.IDE.Test.TextDocument;
 using Mjolnir.IDE.Test.TextDocument.Model;
 using Mjolnir.IDE.Test.TextDocument.Toolbox;
@@ -402,8 +403,14 @@ namespace Mjolnir.IDE.Test
 
             menuService.Get("_Tools").Add(toolbarService.RightClickMenu);
 
-            //Initiate the position settings changes for toolbar
-            //_container.Resolve<IToolbarPositionSettings>();
+            var projectExplorerToolbarService = _container.Resolve<IProjectExplorerToolboxToolbarService>();
+
+
+            projectExplorerToolbarService.Add(new ToolbarViewModel("Standard", "Standard", 1) { Band = 1, BandIndex = 1 });
+            projectExplorerToolbarService.Get("Standard").Add(menuService.Get("_File").Get("_New"));
+            projectExplorerToolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Open"));
+            
+
         }
 
         public void LoadModules()

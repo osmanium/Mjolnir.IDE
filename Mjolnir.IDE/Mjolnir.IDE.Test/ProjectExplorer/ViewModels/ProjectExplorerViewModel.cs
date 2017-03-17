@@ -22,6 +22,8 @@ namespace Mjolnir.IDE.Test.ProjectExplorer.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly ProjectExplorerView _view;
 
+        public ProjectTreeViewItem Root { get; set; }
+
         public ProjectExplorerViewModel(IUnityContainer container, 
                                         IProjectExplorerToolboxToolbarService toolbarService,
                                         IEventAggregator eventAggregator) 
@@ -41,7 +43,7 @@ namespace Mjolnir.IDE.Test.ProjectExplorer.ViewModels
 
 
 
-            ProjectTreeViewItem Root = new ProjectTreeViewItem(null, false) { DisplayName = "Project A" };
+            Root = new ProjectTreeViewItem(null, false) { DisplayName = "Project A" };
 
             var pluginsFolder = new FolderTreeViewItem(Root, false) { DisplayName = "Plugins Folder" };
             var pluginCs = new CsCodeTreeViewItem(pluginsFolder, false) { DisplayName = "Plugin.cs" };
@@ -57,8 +59,7 @@ namespace Mjolnir.IDE.Test.ProjectExplorer.ViewModels
             var tempCs = new CsCodeTreeViewItem(Root, false) { DisplayName = "Temp.cs" };
 
 
-
-            _view.ExplorerItemsSource = Root.Children;
+            OnPropertyChanged(() => Root);
         }
 
         public override PaneLocation PreferredLocation => PaneLocation.Right;

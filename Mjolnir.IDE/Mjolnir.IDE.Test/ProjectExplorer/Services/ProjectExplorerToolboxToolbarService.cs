@@ -20,7 +20,7 @@ namespace Mjolnir.IDE.Test.ProjectExplorer.Services
         private AbstractMenuItem menuItem;
         private ToolBarTray tray;
 
-        public ProjectExplorerToolboxToolbarService() : base("$SOLUTIONEXPLORER$", "$SOLUTIONEXPLORER$", 0)
+        public ProjectExplorerToolboxToolbarService() : base("$PROJECTEXPLORER$", "$PROJECTEXPLORER$", 0)
         {
         }
 

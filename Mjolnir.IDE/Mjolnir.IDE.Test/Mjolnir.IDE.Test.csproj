@@ -136,6 +136,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MjolnirTestSettings.cs" />
+    <Compile Include="ProjectExplorer\Controls\ProjectExplorerTreeViewControl.xaml.cs">
+      <DependentUpon>ProjectExplorerTreeViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectExplorer\Interfaces\IProjectExplorerToolboxToolbarService.cs" />
     <Compile Include="ProjectExplorer\Interfaces\IProjectExplorerToolboxService.cs" />
     <Compile Include="ProjectExplorer\ProjectItems\CsCodeTreeViewItem.cs" />
@@ -214,6 +217,10 @@
     <Resource Include="Icons\mjolnir_override.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ProjectExplorer\Controls\ProjectExplorerTreeViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProjectExplorer\Views\ProjectExplorerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

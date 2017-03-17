@@ -1,0 +1,140 @@
+﻿<UserControl x:Class="Mjolnir.IDE.Test.ProjectExplorer.Controls.ProjectExplorerTreeViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ProjectExplorer="clr-namespace:Mjolnir.IDE.Test.ProjectExplorer"
+			 xmlns:ProjectExplorerVM="clr-namespace:Mjolnir.IDE.Test.ProjectExplorer.ViewModels"
+             xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+             xmlns:local="clr-namespace:Mjolnir.IDE.Test.ProjectExplorer.ProjectItems"
+			 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="ProjectExplorerUC">
+    <UserControl.Resources>
+        <BitmapImage x:Key="folderOpenIcon" UriSource="../../Icons/folder_Open_16xMD.png"/>
+        <BitmapImage x:Key="folderClosedIcon" UriSource="../../Icons/folder_Closed_16xLG.png"/>
+        <BitmapImage x:Key="csFileIcon" UriSource="../../Icons/CSharpFile_SolutionExplorerNode.png"/>
+        <BitmapImage x:Key="designerIcon" UriSource="../../Icons/ViewCode(Markup)_6279.png"/>
+
+
+        <HierarchicalDataTemplate DataType="{x:Type local:CsCodeTreeViewItem}"
+                                  ItemsSource="{Binding Children}">
+
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="TreeViewIcon" Source="{StaticResource csFileIcon}"/>
+                <TextBlock x:Name="textBlockHeader"
+                           Text="{Binding DisplayName}" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center" 
+                           Margin="5 0 0 0" 
+                           KeyDown="editableTextBoxHeader_KeyDown"/>
+                <TextBox x:Name="editableTextBoxHeader" Visibility="Hidden" MinWidth="100"
+                             Text="{Binding DisplayName, UpdateSourceTrigger=LostFocus}"
+                             LostFocus="editableTextBoxHeader_LostFocus"
+                             IsVisibleChanged="editableTextBoxHeader_IsVisibleChanged"
+                             KeyDown="editableTextBoxHeader_KeyDown"/>
+            </StackPanel>
+
+            <HierarchicalDataTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}}" Value="True"/>
+                        <Condition Binding="{Binding IsInEditMode, ElementName=treeViewUC}" Value="True"/>
+                        <Condition Binding="{Binding IsEditable}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter TargetName="editableTextBoxHeader" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="textBlockHeader" Property="Visibility" Value="Collapsed" />
+                </MultiDataTrigger>
+            </HierarchicalDataTemplate.Triggers>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate DataType="{x:Type local:ExecutionTreeViewItem}" 
+                                  ItemsSource="{Binding Children}">
+
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{StaticResource csFileIcon}"/>
+                <TextBlock Text="{Binding DisplayName}" TextAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"/>
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate DataType="{x:Type local:ExecutionDesignerTreeViewItem}"
+                                  ItemsSource="{Binding Children}">
+
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="TreeViewIcon" Source="{StaticResource designerIcon}"/>
+                <TextBlock x:Name="textBlockHeader"
+                           Text="{Binding DisplayName}" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center" 
+                           Margin="5 0 0 0" 
+                           KeyDown="editableTextBoxHeader_KeyDown"/>
+                <TextBox x:Name="editableTextBoxHeader" Visibility="Hidden" MinWidth="100"
+                             Text="{Binding DisplayName, UpdateSourceTrigger=LostFocus}"
+                             LostFocus="editableTextBoxHeader_LostFocus"
+                             IsVisibleChanged="editableTextBoxHeader_IsVisibleChanged"
+                             KeyDown="editableTextBoxHeader_KeyDown"/>
+            </StackPanel>
+
+            <HierarchicalDataTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}}" Value="True"/>
+                        <Condition Binding="{Binding IsInEditMode, ElementName=treeViewUC}" Value="True"/>
+                        <Condition Binding="{Binding IsEditable}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter TargetName="editableTextBoxHeader" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="textBlockHeader" Property="Visibility" Value="Collapsed" />
+                </MultiDataTrigger>
+            </HierarchicalDataTemplate.Triggers>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate DataType="{x:Type local:FolderTreeViewItem}"
+                                  ItemsSource="{Binding Children}">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="TreeViewIcon" Source="{StaticResource folderOpenIcon}"/>
+                <TextBlock x:Name="textBlockHeader"
+                           Text="{Binding DisplayName}" 
+                           TextAlignment="Left" 
+                           VerticalAlignment="Center" 
+                           Margin="5 0 0 0" 
+                           KeyDown="editableTextBoxHeader_KeyDown"/>
+
+                <TextBox x:Name="editableTextBoxHeader" Visibility="Hidden" MinWidth="100"
+                             Text="{Binding DisplayName, UpdateSourceTrigger=LostFocus}"
+                             LostFocus="editableTextBoxHeader_LostFocus"
+                             IsVisibleChanged="editableTextBoxHeader_IsVisibleChanged"
+                             KeyDown="editableTextBoxHeader_KeyDown"/>
+
+            </StackPanel>
+
+
+            <HierarchicalDataTemplate.Triggers>
+                <DataTrigger Value="False" Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=TreeViewItem}}">
+                    <DataTrigger.Setters>
+                        <Setter TargetName="TreeViewIcon" Property="Source" Value="{StaticResource folderClosedIcon}"/>
+                    </DataTrigger.Setters>
+                </DataTrigger>
+
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}}" Value="True"/>
+                        <Condition Binding="{Binding IsInEditMode, ElementName=treeViewUC}" Value="True"/>
+                        <Condition Binding="{Binding IsEditable}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter TargetName="editableTextBoxHeader" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="textBlockHeader" Property="Visibility" Value="Collapsed" />
+                </MultiDataTrigger>
+            </HierarchicalDataTemplate.Triggers>
+        </HierarchicalDataTemplate>
+
+    </UserControl.Resources>
+    <TreeView x:Name="treeView"
+              KeyDown="treeView_KeyDown"
+              SelectedItemChanged="treeView_SelectedItemChanged"
+              ItemsSource="{Binding Path=ExplorerItemsSource, ElementName=ProjectExplorerUC}"
+              dd:DragDrop.IsDragSource="True"
+              dd:DragDrop.IsDropTarget="True"
+              Background="Transparent">
+    </TreeView>
+</UserControl>
