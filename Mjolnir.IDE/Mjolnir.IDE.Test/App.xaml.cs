@@ -1,7 +1,9 @@
 ﻿using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Core;
+using Mjolnir.IDE.Core.Modules.ErrorList;
 using Mjolnir.IDE.Core.Modules.ErrorList.Events;
 using Mjolnir.IDE.Core.Modules.Settings;
+using Mjolnir.IDE.Core.Modules.Toolbox;
 using Mjolnir.IDE.Core.Services;
 using Mjolnir.IDE.Infrastructure;
 using Mjolnir.IDE.Infrastructure.Events;
@@ -11,6 +13,7 @@ using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
 using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
 using Mjolnir.IDE.Infrastructure.Interfaces.Views;
 using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Test.ProjectExplorer;
 using Mjolnir.IDE.Test.TextDocument;
 using Mjolnir.IDE.Test.TextDocument.Model;
 using Mjolnir.IDE.Test.TextDocument.Toolbox;
@@ -70,6 +73,7 @@ namespace Mjolnir.IDE.Test
             var themeCommand = new DelegateCommand<string>(ThemeChangeCommand);
             var loggerCommand = new DelegateCommand(ToggleOutput);
             var toolboxCommand = new DelegateCommand(ToggleToolbox);
+            var solutionExplorerCommand = new DelegateCommand(ToggleProjectExplorer);
 
 
             manager.RegisterCommand(CommandManagerConstants.OpenCommand, openCommand);
@@ -80,6 +84,7 @@ namespace Mjolnir.IDE.Test
             manager.RegisterCommand(CommandManagerConstants.LogShowCommand, loggerCommand);
             manager.RegisterCommand(CommandManagerConstants.ThemeChangeCommand, themeCommand);
             manager.RegisterCommand(CommandManagerConstants.ToggleToolboxCommand, toolboxCommand);
+            manager.RegisterCommand(CommandManagerConstants.ToggleProjectExplorerCommand, solutionExplorerCommand);
         }
 
 
@@ -196,6 +201,7 @@ namespace Mjolnir.IDE.Test
                     Name = "Manual Item 3"
                 }
             });
+            
 
         }
 
@@ -206,9 +212,13 @@ namespace Mjolnir.IDE.Test
             var settingsManager = _container.Resolve<ISettingsManager>();
             var themeSettings = _container.Resolve<IThemeSettings>();
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+
             ToolViewModel output = workspace.Tools.First(f => f.ContentId == "Output");
             ToolViewModel error = workspace.Tools.First(f => f.ContentId == "Error");
             ToolViewModel toolbox = workspace.Tools.First(f => f.ContentId == "Toolbox");
+            ToolViewModel projectExplorer = workspace.Tools.First(f => f.ContentId == "Project Explorer");
+            
+
 
             menuService.Add(new MenuItemViewModel("_File", "_File", 1));
             menuService.Add(new MenuItemViewModel("_Edit", "_Edit", 2));
@@ -310,6 +320,12 @@ namespace Mjolnir.IDE.Test
                                     new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/toolbox_16xLG.png")),
                                     new DelegateCommand(ToggleToolbox) { IsActive = false }));
 
+            if (projectExplorer != null)
+                menuService.Get("_View")
+                           .Add(new MenuItemViewModel("_Project_Explorer", "_Project_Explorer", 1,
+                                    new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/toolbox_16xLG.png")),
+                                    new DelegateCommand(ToggleProjectExplorer) { IsActive = false }));
+
 
             menuService.Get("_View").Add(new MenuItemViewModel("Themes", "Themes", 1));
 
@@ -392,7 +408,19 @@ namespace Mjolnir.IDE.Test
 
         public void LoadModules()
         {
+            ErrorListModule errorModule = _container.Resolve<ErrorListModule>();
+            errorModule.Initialize();
+            
 
+            ToolboxModule toolboxModule = _container.Resolve<ToolboxModule>();
+            toolboxModule.Initialize();
+
+
+            //Load properties
+
+            //Load project explorer
+            ProjectExplorerModule projectExplorerModule = _container.Resolve<ProjectExplorerModule>();
+            projectExplorerModule.Initialize();
         }
 
         public bool onIDEClosing()
@@ -509,7 +537,6 @@ namespace Mjolnir.IDE.Test
             manager.Refresh();
         }
 
-
         private void SaveAsDocument()
         {
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
@@ -532,6 +559,19 @@ namespace Mjolnir.IDE.Test
             IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
             var menuService = _container.Resolve<IMenuService>();
             ToolViewModel toolbox = workspace.Tools.First(f => f.ContentId == "Toolbox");
+            if (toolbox != null)
+            {
+                toolbox.IsVisible = !toolbox.IsVisible;
+                var mi = menuService.Get("_View").Get("_Toolbox") as MenuItemViewModel;
+                mi.IsChecked = toolbox.IsVisible;
+            }
+        }
+
+        private void ToggleProjectExplorer()
+        {
+            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            var menuService = _container.Resolve<IMenuService>();
+            ToolViewModel toolbox = workspace.Tools.First(f => f.ContentId == "Project Explorer");
             if (toolbox != null)
             {
                 toolbox.IsVisible = !toolbox.IsVisible;

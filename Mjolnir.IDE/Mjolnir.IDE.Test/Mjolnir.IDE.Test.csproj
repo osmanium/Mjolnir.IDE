@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GongSolutions.Wpf.DragDrop, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\gong-wpf-dragdrop.1.1.0\lib\net45\GongSolutions.Wpf.DragDrop.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.5.0.3\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
       <Private>True</Private>
@@ -133,6 +136,21 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MjolnirTestSettings.cs" />
+    <Compile Include="ProjectExplorer\Interfaces\IProjectExplorerToolboxToolbarService.cs" />
+    <Compile Include="ProjectExplorer\Interfaces\IProjectExplorerToolboxService.cs" />
+    <Compile Include="ProjectExplorer\ProjectItems\CsCodeTreeViewItem.cs" />
+    <Compile Include="ProjectExplorer\ProjectItems\ExecutionDesignerTreeViewItem.cs" />
+    <Compile Include="ProjectExplorer\ProjectItems\ExecutionTreeViewItem.cs" />
+    <Compile Include="ProjectExplorer\ProjectItems\FolderTreeViewItem.cs" />
+    <Compile Include="ProjectExplorer\ProjectItems\ProjectTreeViewItem.cs" />
+    <Compile Include="ProjectExplorer\Services\ProjectExplorerToolboxService.cs" />
+    <Compile Include="ProjectExplorer\Services\ProjectExplorerToolboxToolbarService.cs" />
+    <Compile Include="ProjectExplorer\ProjectExplorerModule.cs" />
+    <Compile Include="ProjectExplorer\ViewModels\ProjectExplorerViewModel.cs" />
+    <Compile Include="ProjectExplorer\ViewModels\TreeItemViewModel.cs" />
+    <Compile Include="ProjectExplorer\Views\ProjectExplorerView.xaml.cs">
+      <DependentUpon>ProjectExplorerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TextDocument\AllFileHandler.cs" />
     <Compile Include="TextDocument\Model\TextModel.cs" />
     <Compile Include="TextDocument\Toolbox\TestToolboxItem.cs" />
@@ -196,6 +214,10 @@
     <Resource Include="Icons\mjolnir_override.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ProjectExplorer\Views\ProjectExplorerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TextDocument\View\TextView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,6 +228,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Saveall_6518.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ProjectExplorer\Styles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\CSharpFile_SolutionExplorerNode.png" />
+    <Resource Include="Icons\folder_Closed_16xLG.png" />
+    <Resource Include="Icons\folder_Open_16xMD.png" />
+    <Resource Include="Icons\ViewCode%28Markup%29_6279.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

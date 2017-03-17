@@ -95,10 +95,6 @@ namespace Mjolnir.IDE.Core
 
 
            
-
-
-            
-
             
 
             //Try resolving a workspace
@@ -112,6 +108,7 @@ namespace Mjolnir.IDE.Core
                 _container.RegisterType<AbstractWorkspace, DefaultWorkspace>(new ContainerControlledLifetimeManager());
                 isDefaultWorkspace = true;
             }
+
 
             // Try resolving an output service - if not found, then register the NLog service
             var isDefaultOutputService = false;
@@ -136,16 +133,7 @@ namespace Mjolnir.IDE.Core
             if (isDefaultWorkspace)
                 _outputService.LogOutput("DefaultWorkspace applied", OutputCategory.Info, OutputPriority.None);
 
-
-            ErrorListModule errorModule = _container.Resolve<ErrorListModule>();
-            errorModule.Initialize();
-
-
-
-            ToolboxModule toolboxModule = _container.Resolve<ToolboxModule>();
-            toolboxModule.Initialize();
-
-
+            
 
             var customApplication = _container.Resolve<IApplicationDefinition>();
             if (customApplication != null)
@@ -165,12 +153,13 @@ namespace Mjolnir.IDE.Core
                 _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Application UI..." });
 
                 customApplication.LoadCommands();
+                customApplication.LoadModules();
                 customApplication.LoadTheme();
                 customApplication.LoadMenus();
                 customApplication.LoadToolbar();
                 customApplication.LoadSettings();
 
-                customApplication.LoadModules();
+                
             }
 
             var shell = _container.Resolve<IShellView>();

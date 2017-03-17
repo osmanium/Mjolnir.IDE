@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:controls="clr-namespace:Mjolnir.IDE.Core.Controls">
+					xmlns:controls="clr-namespace:Mjolnir.IDE.Core.Controls"
+					xmlns:Controls="clr-namespace:System.Windows.Controls">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="VS2013/Menu.xaml" />
@@ -140,4 +141,5 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
 </ResourceDictionary>

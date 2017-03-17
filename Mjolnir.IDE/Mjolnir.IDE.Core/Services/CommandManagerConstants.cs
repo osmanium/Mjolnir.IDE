@@ -27,8 +27,10 @@ namespace Mjolnir.IDE.Core.Services
         public const string LogShowCommand = "LOGSHOW";
         public const string ThemeChangeCommand = "THEMECHANGE";
         public const string ToggleToolboxCommand = "TOGGLETOOLBOX";
-
+        public const string ToggleProjectExplorerCommand = "TOGGLEPROJECTEXPLORER";
         
+
+
 
 
     }
