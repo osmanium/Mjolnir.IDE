@@ -120,6 +120,7 @@
     <Compile Include="Attributes\FileContentAttribute.cs" />
     <Compile Include="Attributes\NewContentAttribute.cs" />
     <Compile Include="Attributes\ToolboxItemAttribute.cs" />
+    <Compile Include="BoundPropertyDescriptor.cs" />
     <Compile Include="Converters\ActiveDocumentConverter.cs" />
     <Compile Include="Converters\BoolToInsertModeConverter.cs" />
     <Compile Include="Converters\DocumentContextMenuMixingConverter.cs" />
@@ -142,11 +143,17 @@
     <Compile Include="Events\SplashScreenUpdateEvent.cs" />
     <Compile Include="Events\ThemeChangeEvent.cs" />
     <Compile Include="Events\WindowClosingEvent.cs" />
+    <Compile Include="InspectableObject.cs" />
     <Compile Include="Interfaces\IApplicationDefinition.cs" />
     <Compile Include="Interfaces\ICommandable.cs" />
     <Compile Include="Interfaces\IContentView.cs" />
+    <Compile Include="Interfaces\IEditor.cs" />
+    <Compile Include="Interfaces\IInspectableObject.cs" />
+    <Compile Include="Interfaces\IInspector.cs" />
+    <Compile Include="Interfaces\ILabelledInspector.cs" />
     <Compile Include="Interfaces\IObservableCollection.cs" />
     <Compile Include="Interfaces\IPrioritizedTree.cs" />
+    <Compile Include="Interfaces\IPropertyGrid.cs" />
     <Compile Include="Interfaces\ITheme.cs" />
     <Compile Include="Interfaces\ITool.cs" />
     <Compile Include="Interfaces\IShellToolbar.cs" />
@@ -156,10 +163,12 @@
     <Compile Include="Interfaces\Services\IContentHandler.cs" />
     <Compile Include="Interfaces\Services\IContentHandlerRegistry.cs" />
     <Compile Include="Interfaces\Services\IErrorToolboxToolbarService.cs" />
+    <Compile Include="Interfaces\Services\IPropertiesService.cs" />
     <Compile Include="Interfaces\Services\IOutputService.cs" />
     <Compile Include="Interfaces\Services\IMenuService.cs" />
     <Compile Include="Interfaces\Services\IOpenDocumentService.cs" />
     <Compile Include="Interfaces\Services\IOutputToolboxToolbarService.cs" />
+    <Compile Include="Interfaces\Services\IPropertiesToolboxToolbarService.cs" />
     <Compile Include="Interfaces\Services\IStatusbarService.cs" />
     <Compile Include="Interfaces\Services\IThemeManager.cs" />
     <Compile Include="Interfaces\Services\IShellToolbarService.cs" />
@@ -180,6 +189,7 @@
     <Compile Include="PanesStyleSelector.cs" />
     <Compile Include="PanesTemplateSelector.cs" />
     <Compile Include="ToolboxItem.cs" />
+    <Compile Include="Util\ExpressionUtility.cs" />
     <Compile Include="ViewModels\MenuItemViewModel.cs" />
     <Compile Include="Interfaces\Views\IShellView.cs" />
     <Compile Include="Interfaces\Views\ISplashScreenModule.cs" />

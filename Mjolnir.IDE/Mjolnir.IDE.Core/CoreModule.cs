@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Core.Modules.ErrorList;
 using Mjolnir.IDE.Core.Modules.Output;
+using Mjolnir.IDE.Core.Modules.Properties;
 using Mjolnir.IDE.Core.Modules.Settings;
 using Mjolnir.IDE.Core.Modules.Toolbox;
 using Mjolnir.IDE.Core.Services;
@@ -146,6 +147,9 @@ namespace Mjolnir.IDE.Core
 
             //Below ones can be loaded with solution, does not require immediate load
             //TODO : Console
+
+            PropertiesModule propertiesModule = _container.Resolve<PropertiesModule>();
+            propertiesModule.Initialize();
 
 
             if (customApplication != null)

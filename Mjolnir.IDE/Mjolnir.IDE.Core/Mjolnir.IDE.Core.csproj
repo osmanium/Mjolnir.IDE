@@ -78,6 +78,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -126,6 +127,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Expander\ExpanderEx.cs" />
+    <Compile Include="Controls\Inspector\InspectorGrid.cs" />
+    <Compile Include="Controls\Inspector\InspectorItemTemplateSelector.cs" />
+    <Compile Include="Controls\Inspector\NumericTextBox.cs" />
+    <Compile Include="Controls\Inspector\SimpleGridSplitter.cs" />
     <Compile Include="CoreModule.cs" />
     <Compile Include="MjolnirApp.cs" />
     <Compile Include="MjolnirBootstrapper.cs" />
@@ -141,6 +146,44 @@
     <Compile Include="Modules\Output\ViewModels\OutputViewModel.cs" />
     <Compile Include="Modules\Output\Views\OutputUserControl.xaml.cs">
       <DependentUpon>OutputUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Properties\Conventions\DefaultPropertyInspectors.cs" />
+    <Compile Include="Modules\Properties\Conventions\EnumPropertyEditorBuilder.cs" />
+    <Compile Include="Modules\Properties\Conventions\PropertyEditorBuilder.cs" />
+    <Compile Include="Modules\Properties\Conventions\RangePropertyEditorBuilder.cs" />
+    <Compile Include="Modules\Properties\Conventions\StandardPropertyEditorBuilder.cs" />
+    <Compile Include="Modules\Properties\InspectableObjectBuilder.cs" />
+    <Compile Include="Modules\Properties\InspectorBuilder.cs" />
+    <Compile Include="Modules\Properties\Inspectors\ChangeObjectValueAction.cs" />
+    <Compile Include="Modules\Properties\Inspectors\CheckBoxEditorView.xaml.cs">
+      <DependentUpon>CheckBoxEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Properties\Inspectors\CheckBoxEditorViewModel.cs" />
+    <Compile Include="Modules\Properties\Inspectors\CollapsibleGroupBuilder.cs" />
+    <Compile Include="Modules\Properties\Inspectors\CollapsibleGroupView.xaml.cs">
+      <DependentUpon>CollapsibleGroupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Properties\Inspectors\CollapsibleGroupViewModel.cs" />
+    <Compile Include="Modules\Properties\Inspectors\EditorBase.cs" />
+    <Compile Include="Modules\Properties\Inspectors\EnumEditorView.xaml.cs">
+      <DependentUpon>EnumEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Properties\Inspectors\EnumEditorViewModel.cs" />
+    <Compile Include="Modules\Properties\Inspectors\InspectorBase.cs" />
+    <Compile Include="Modules\Properties\Inspectors\RangeEditorView.xaml.cs">
+      <DependentUpon>RangeEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Properties\Inspectors\RangeEditorViewModel.cs" />
+    <Compile Include="Modules\Properties\Inspectors\ResetObjectValueAction.cs" />
+    <Compile Include="Modules\Properties\Inspectors\SelectiveUndoEditorBase.cs" />
+    <Compile Include="Modules\Properties\Inspectors\TextBoxEditorView.xaml.cs">
+      <DependentUpon>TextBoxEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Properties\Inspectors\TextBoxEditorViewModel.cs" />
+    <Compile Include="Modules\Properties\PropertiesModule.cs" />
+    <Compile Include="Modules\Properties\ViewModels\PropertiesViewModel.cs" />
+    <Compile Include="Modules\Properties\Views\PropertiesView.xaml.cs">
+      <DependentUpon>PropertiesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Settings\RecentViewItem.cs" />
     <Compile Include="Modules\Settings\RecentViewSettings.cs" />
@@ -180,6 +223,7 @@
     <Compile Include="Services\ErrorListToolboxToolbarService.cs" />
     <Compile Include="Services\OpenDocumentService.cs" />
     <Compile Include="Services\OutputToolboxToolbarService.cs" />
+    <Compile Include="Services\PropertiesToolboxToolbarService.cs" />
     <Compile Include="Services\ShellToolbarService.cs" />
     <Compile Include="Services\ThemeManager.cs" />
     <Compile Include="Services\ToolboxToolbarService.cs" />
@@ -202,7 +246,6 @@
     <Folder Include="Modules\CodeEditor\" />
     <Folder Include="Modules\Console\" />
     <Folder Include="Modules\Explorer\" />
-    <Folder Include="Modules\Properties\" />
     <Folder Include="Modules\Settings\ViewModels\" />
     <Folder Include="Modules\Toolbar\" />
   </ItemGroup>
@@ -217,6 +260,30 @@
     <Page Include="Modules\Output\Views\OutputUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Properties\Inspectors\CheckBoxEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Properties\Inspectors\CollapsibleGroupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Properties\Inspectors\EnumEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Properties\Inspectors\RangeEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Properties\Inspectors\TextBoxEditorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Modules\Properties\Views\PropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Modules\Settings\Views\DefaultSettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

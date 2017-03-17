@@ -238,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ProjectExplorer\Styles\" />
+    <Folder Include="PropertiesExplorer\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\CSharpFile_SolutionExplorerNode.png" />
