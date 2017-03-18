@@ -1,5 +1,5 @@
-﻿using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
+﻿using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Interfaces.Settings;
 using Mjolnir.IDE.Core.Modules.Settings.Views;
 using Prism.Commands;
 using System;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Interfaces;
 using Prism.Events;
 using System;
 using System.Collections.Generic;

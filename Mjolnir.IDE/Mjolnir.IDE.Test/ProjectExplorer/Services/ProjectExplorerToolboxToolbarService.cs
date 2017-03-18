@@ -1,5 +1,5 @@
-﻿using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
+﻿using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Interfaces.ViewModels;
 using Mjolnir.IDE.Test.ProjectExplorer.Interfaces;
 using System;
 using System.Collections.Generic;

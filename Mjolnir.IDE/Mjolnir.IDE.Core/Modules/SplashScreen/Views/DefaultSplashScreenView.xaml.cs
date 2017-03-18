@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces.Views;
+﻿using Mjolnir.IDE.Sdk.Interfaces.Views;
 using System.Windows;
 
 namespace Mjolnir.IDE.Core.Modules.SplashScreen.Views

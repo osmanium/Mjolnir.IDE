@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Core", "Mjolnir.IDE.Core\Mjolnir.IDE.Core.csproj", "{FC4902D1-E1CF-4CF7-A465-6E8DB192B9B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Infrastructure", "Mjolnir.IDE.Infrastructure\Mjolnir.IDE.Infrastructure.csproj", "{75853632-A8DA-4426-AEC2-A4F2AB34EE5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Sdk", "Mjolnir.IDE.Sdk\Mjolnir.IDE.Sdk.csproj", "{75853632-A8DA-4426-AEC2-A4F2AB34EE5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Test", "Mjolnir.IDE.Test\Mjolnir.IDE.Test.csproj", "{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4}"
 EndProject

@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
+﻿using Mjolnir.IDE.Sdk.Interfaces.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

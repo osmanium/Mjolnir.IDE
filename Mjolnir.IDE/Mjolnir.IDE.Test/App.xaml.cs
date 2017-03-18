@@ -5,14 +5,14 @@ using Mjolnir.IDE.Core.Modules.ErrorList.Events;
 using Mjolnir.IDE.Core.Modules.Settings;
 using Mjolnir.IDE.Core.Modules.Toolbox;
 using Mjolnir.IDE.Core.Services;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Events;
-using Mjolnir.IDE.Infrastructure.Interfaces;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
-using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
-using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
-using Mjolnir.IDE.Infrastructure.Interfaces.Views;
-using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Events;
+using Mjolnir.IDE.Sdk.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
+using Mjolnir.IDE.Sdk.Interfaces.Settings;
+using Mjolnir.IDE.Sdk.Interfaces.ViewModels;
+using Mjolnir.IDE.Sdk.Interfaces.Views;
+using Mjolnir.IDE.Sdk.ViewModels;
 using Mjolnir.IDE.Test.ProjectExplorer;
 using Mjolnir.IDE.Test.ProjectExplorer.Interfaces;
 using Mjolnir.IDE.Test.TextDocument;
@@ -119,7 +119,7 @@ namespace Mjolnir.IDE.Test
             {
                 Column = 1,
                 Description = "Test description",
-                ItemType = Infrastructure.Enums.ErrorListItemType.Error,
+                ItemType = Sdk.Enums.ErrorListItemType.Error,
                 Line = 1,
                 Path = "Path"
             });
@@ -128,7 +128,7 @@ namespace Mjolnir.IDE.Test
             {
                 Column = 1,
                 Description = "Test description",
-                ItemType = Infrastructure.Enums.ErrorListItemType.Warning,
+                ItemType = Sdk.Enums.ErrorListItemType.Warning,
                 Line = 2,
                 Path = "Path"
             });
@@ -137,7 +137,7 @@ namespace Mjolnir.IDE.Test
             {
                 Column = 1,
                 Description = "Test description",
-                ItemType = Infrastructure.Enums.ErrorListItemType.Message,
+                ItemType = Sdk.Enums.ErrorListItemType.Message,
                 Line = 3,
                 Path = "Path"
             });

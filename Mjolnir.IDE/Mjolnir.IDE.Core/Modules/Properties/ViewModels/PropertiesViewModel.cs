@@ -1,13 +1,13 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces;
-using Mjolnir.IDE.Infrastructure.ViewModels;
+﻿using Mjolnir.IDE.Sdk.Interfaces;
+using Mjolnir.IDE.Sdk.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
-using Mjolnir.IDE.Infrastructure.Enums;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
+using Mjolnir.IDE.Sdk.Enums;
 using Prism.Events;
 using Mjolnir.IDE.Core.Modules.Properties.Views;
 

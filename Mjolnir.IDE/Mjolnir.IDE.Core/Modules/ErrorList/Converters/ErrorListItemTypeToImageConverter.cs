@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.Enums;
+﻿using Mjolnir.IDE.Sdk.Enums;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

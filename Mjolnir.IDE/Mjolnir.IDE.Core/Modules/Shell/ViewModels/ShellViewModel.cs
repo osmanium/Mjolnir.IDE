@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Interfaces;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Mjolnir.UI.Validation;
 using Prism.Events;
 using System;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Sdk;
 using System.Windows.Controls;
 using Microsoft.Practices.Unity;
 using System.Windows.Input;
@@ -13,7 +13,7 @@ using Xceed.Wpf.AvalonDock.Converters;
 using System.Windows.Markup;
 using System.Windows;
 using System.Windows.Data;
-using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
+using Mjolnir.IDE.Sdk.Interfaces.ViewModels;
 
 namespace Mjolnir.IDE.Core.Services
 {

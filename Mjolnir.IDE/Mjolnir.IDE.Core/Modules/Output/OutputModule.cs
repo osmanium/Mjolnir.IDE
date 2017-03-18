@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Events;
-using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Events;
+using Mjolnir.IDE.Sdk.Interfaces;
 using Mjolnir.IDE.Core.Modules.Output.ViewModels;
 using Mjolnir.IDE.Core.Modules.Output.Views;
 using Prism.Events;
@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Prism.Commands;
-using Mjolnir.IDE.Infrastructure.ViewModels;
-using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
+using Mjolnir.IDE.Sdk.ViewModels;
+using Mjolnir.IDE.Sdk.Interfaces.ViewModels;
 using System.Windows.Media.Imaging;
 using Mjolnir.IDE.Core.Services;
 

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Package</id>
+    <version>0.1.0</version>
+    <authors>Osman GUMUS</authors>
+    <owners>Osman GUMUS</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>First release</description>
+    <releaseNotes>First Release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+  </metadata>
+</package>

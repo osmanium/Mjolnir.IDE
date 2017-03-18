@@ -1,5 +1,5 @@
-﻿using Mjolnir.IDE.Infrastructure.Events;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+﻿using Mjolnir.IDE.Sdk.Events;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
 using NLog;
 using Prism.Events;
 using System;

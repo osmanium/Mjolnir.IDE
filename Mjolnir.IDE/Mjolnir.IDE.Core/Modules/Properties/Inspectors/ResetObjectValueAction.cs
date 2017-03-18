@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure;
+﻿using Mjolnir.IDE.Sdk;
 using System.Globalization;
 using System.Windows.Data;
 

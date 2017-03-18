@@ -1,5 +1,5 @@
-﻿using Mjolnir.IDE.Infrastructure.Attributes;
-using Mjolnir.IDE.Infrastructure.Interfaces.Views;
+﻿using Mjolnir.IDE.Sdk.Attributes;
+using Mjolnir.IDE.Sdk.Interfaces.Views;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

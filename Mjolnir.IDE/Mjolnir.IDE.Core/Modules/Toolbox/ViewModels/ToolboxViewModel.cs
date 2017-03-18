@@ -1,20 +1,20 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces.Services;
-using Mjolnir.IDE.Infrastructure.ViewModels;
+﻿using Mjolnir.IDE.Sdk.Interfaces.Services;
+using Mjolnir.IDE.Sdk.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Mjolnir.IDE.Infrastructure.Enums;
+using Mjolnir.IDE.Sdk.Enums;
 using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Sdk;
 using Prism.Events;
-using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces;
 using Mjolnir.IDE.Core.Modules.Toolbox.Views;
 using System.Windows.Data;
-using Mjolnir.IDE.Infrastructure.Attributes;
+using Mjolnir.IDE.Sdk.Attributes;
 using System.Reflection;
-using Mjolnir.IDE.Infrastructure.Events;
+using Mjolnir.IDE.Sdk.Events;
 using System.Collections.ObjectModel;
 
 namespace Mjolnir.IDE.Core.Modules.Toolbox.ViewModels

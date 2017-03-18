@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.Attributes;
+﻿using Mjolnir.IDE.Sdk.Attributes;
 using Mjolnir.IDE.Test.TextDocument.ViewModel;
 using System;
 using System.Collections.Generic;

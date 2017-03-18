@@ -1,8 +1,8 @@
 ﻿using Microsoft.Practices.Unity;
 using Microsoft.Win32;
-using Mjolnir.IDE.Infrastructure.Attributes;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
-using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Sdk.Attributes;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
+using Mjolnir.IDE.Sdk.ViewModels;
 using Mjolnir.IDE.Test.TextDocument.Model;
 using Mjolnir.IDE.Test.TextDocument.View;
 using Mjolnir.IDE.Test.TextDocument.ViewModel;

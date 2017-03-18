@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces;
+﻿using Mjolnir.IDE.Sdk.Interfaces;
 using Mjolnir.IDE.Core.Modules.ErrorList.ViewModels;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces;
+﻿using Mjolnir.IDE.Sdk.Interfaces;
 using System.Collections.Generic;
 
 namespace Mjolnir.IDE.Core.Modules.Properties.Inspectors

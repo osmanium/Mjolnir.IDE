@@ -1,11 +1,11 @@
 ﻿using MahApps.Metro.Controls;
 using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Core.Services.DefaultServiceViews;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Attributes;
-using Mjolnir.IDE.Infrastructure.Interfaces;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
-using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Attributes;
+using Mjolnir.IDE.Sdk.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
+using Mjolnir.IDE.Sdk.ViewModels;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;

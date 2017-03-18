@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:AvalonEdit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
                     xmlns:editing="clr-namespace:ICSharpCode.AvalonEdit.Editing;assembly=ICSharpCode.AvalonEdit"
-                    xmlns:Converters="clr-namespace:Mjolnir.IDE.Infrastructure.Converters;assembly=Mjolnir.IDE.Infrastructure">
+                    xmlns:Converters="clr-namespace:Mjolnir.IDE.Sdk.Converters;assembly=Mjolnir.IDE.Sdk">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Mjolnir.IDE.Shell;component/Styles/VS2010/Brushes.xaml" />

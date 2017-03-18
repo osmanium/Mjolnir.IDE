@@ -1,5 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Sdk.ViewModels;
 using Mjolnir.IDE.Test.ProjectExplorer.Interfaces;
 using Mjolnir.UI.Validation;
 using Prism.Events;
@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
-using Mjolnir.IDE.Infrastructure.Enums;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
+using Mjolnir.IDE.Sdk.Enums;
 using Mjolnir.IDE.Test.ProjectExplorer.Views;
 using Mjolnir.IDE.Test.ProjectExplorer.ProjectItems;
 

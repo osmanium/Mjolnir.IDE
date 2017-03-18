@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces.Views;
+﻿using Mjolnir.IDE.Sdk.Interfaces.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces;
 
 namespace Mjolnir.IDE.Core
 {

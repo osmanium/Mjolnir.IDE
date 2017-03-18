@@ -1,10 +1,10 @@
 ﻿using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Core.Modules.Properties.ViewModels;
 using Mjolnir.IDE.Core.Services;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Events;
-using Mjolnir.IDE.Infrastructure.Interfaces;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Events;
+using Mjolnir.IDE.Sdk.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Prism.Events;
 using Prism.Modularity;
 using System;

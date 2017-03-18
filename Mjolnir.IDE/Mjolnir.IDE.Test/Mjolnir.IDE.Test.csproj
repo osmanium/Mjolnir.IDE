@@ -196,9 +196,9 @@
       <Project>{FC4902D1-E1CF-4CF7-A465-6E8DB192B9B0}</Project>
       <Name>Mjolnir.IDE.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mjolnir.IDE.Infrastructure\Mjolnir.IDE.Infrastructure.csproj">
+    <ProjectReference Include="..\Mjolnir.IDE.Sdk\Mjolnir.IDE.Sdk.csproj">
       <Project>{75853632-A8DA-4426-AEC2-A4F2AB34EE5A}</Project>
-      <Name>Mjolnir.IDE.Infrastructure</Name>
+      <Name>Mjolnir.IDE.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

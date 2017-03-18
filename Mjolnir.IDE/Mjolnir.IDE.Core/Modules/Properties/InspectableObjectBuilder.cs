@@ -1,5 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;

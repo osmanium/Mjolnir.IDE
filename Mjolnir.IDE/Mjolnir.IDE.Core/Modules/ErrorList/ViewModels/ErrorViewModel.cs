@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.ViewModels;
+﻿using Mjolnir.IDE.Sdk.ViewModels;
 using Mjolnir.UI.Validation;
 using System;
 using System.Collections.Generic;
@@ -6,14 +6,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Mjolnir.IDE.Infrastructure.Enums;
+using Mjolnir.IDE.Sdk.Enums;
 using Prism.Events;
 using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Core.Modules.ErrorList.Views;
-using Mjolnir.IDE.Infrastructure;
+using Mjolnir.IDE.Sdk;
 using System.Collections.Specialized;
 using Mjolnir.IDE.Modules.Error.Interfaces;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Mjolnir.IDE.Core.Modules.ErrorList.Events;
 
 namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels

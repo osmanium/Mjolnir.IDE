@@ -8,8 +8,8 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
-        xmlns:Converter="clr-namespace:Mjolnir.IDE.Infrastructure.Converters;assembly=Mjolnir.IDE.Infrastructure"
-        xmlns:Infrastructure="clr-namespace:Mjolnir.IDE.Infrastructure;assembly=Mjolnir.IDE.Infrastructure"
+        xmlns:Converter="clr-namespace:Mjolnir.IDE.Sdk.Converters;assembly=Mjolnir.IDE.Sdk"
+        xmlns:Sdk="clr-namespace:Mjolnir.IDE.Sdk;assembly=Mjolnir.IDE.Sdk"
         xmlns:prism="http://prismlibrary.com/"             
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
@@ -129,23 +129,23 @@
                 </avalonDock:DockingManager.AnchorableContextMenu>-->
 
                 <avalonDock:DockingManager.LayoutItemTemplateSelector>
-                    <Infrastructure:PanesTemplateSelector>
-                        <Infrastructure:PanesTemplateSelector.ContentViewTemplate>
+                    <Sdk:PanesTemplateSelector>
+                        <Sdk:PanesTemplateSelector.ContentViewTemplate>
                             <DataTemplate>
                                 <ContentPresenter Content="{Binding Path=View, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             </DataTemplate>
-                        </Infrastructure:PanesTemplateSelector.ContentViewTemplate>
-                        <Infrastructure:PanesTemplateSelector.ToolViewTemplate>
+                        </Sdk:PanesTemplateSelector.ContentViewTemplate>
+                        <Sdk:PanesTemplateSelector.ToolViewTemplate>
                             <DataTemplate>
                                 <ContentControl Content="{Binding Path=View}" />
                             </DataTemplate>
-                        </Infrastructure:PanesTemplateSelector.ToolViewTemplate>
-                    </Infrastructure:PanesTemplateSelector>
+                        </Sdk:PanesTemplateSelector.ToolViewTemplate>
+                    </Sdk:PanesTemplateSelector>
                 </avalonDock:DockingManager.LayoutItemTemplateSelector>
 
                 <avalonDock:DockingManager.LayoutItemContainerStyleSelector>
-                    <Infrastructure:PanesStyleSelector>
-                        <Infrastructure:PanesStyleSelector.ToolStyle>
+                    <Sdk:PanesStyleSelector>
+                        <Sdk:PanesStyleSelector.ToolStyle>
                             <Style TargetType="{x:Type avalonDock:LayoutAnchorableItem}">
                                 <Setter Property="Title" Value="{Binding Model.Title, Mode=TwoWay}" />
                                 <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
@@ -154,8 +154,8 @@
                                 <Setter Property="IsSelected" Value="{Binding Model.IsSelected, Mode=TwoWay}" />
                                 <Setter Property="IsActive" Value="{Binding Model.IsActive, Mode=TwoWay}" />
                             </Style>
-                        </Infrastructure:PanesStyleSelector.ToolStyle>
-                        <Infrastructure:PanesStyleSelector.ContentStyle>
+                        </Sdk:PanesStyleSelector.ToolStyle>
+                        <Sdk:PanesStyleSelector.ContentStyle>
                             <Style TargetType="{x:Type avalonDock:LayoutItem}">
                                 <Setter Property="Title" Value="{Binding Model.Title, Mode=TwoWay}" />
                                 <Setter Property="ToolTip" Value="{Binding Model.Tooltip}" />
@@ -163,11 +163,11 @@
                                 <Setter Property="IconSource" Value="{Binding Model.IconSource}" />
                                 <Setter Property="ContentId" Value="{Binding Model.ContentId}" />
                             </Style>
-                        </Infrastructure:PanesStyleSelector.ContentStyle>
-                    </Infrastructure:PanesStyleSelector>
+                        </Sdk:PanesStyleSelector.ContentStyle>
+                    </Sdk:PanesStyleSelector>
                 </avalonDock:DockingManager.LayoutItemContainerStyleSelector>
                 <avalonDock:DockingManager.LayoutUpdateStrategy>
-                    <Infrastructure:LayoutInitializer />
+                    <Sdk:LayoutInitializer />
                 </avalonDock:DockingManager.LayoutUpdateStrategy>
 
                 <avalonDock:LayoutRoot>

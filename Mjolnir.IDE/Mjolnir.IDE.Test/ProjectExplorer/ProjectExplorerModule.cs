@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Events;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Events;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Mjolnir.IDE.Test.ProjectExplorer.Interfaces;
 using Mjolnir.IDE.Test.ProjectExplorer.Services;
 using Mjolnir.IDE.Test.ProjectExplorer.ViewModels;

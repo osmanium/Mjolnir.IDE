@@ -1,5 +1,5 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces.Services;
-using Mjolnir.IDE.Infrastructure.ViewModels;
+﻿using Mjolnir.IDE.Sdk.Interfaces.Services;
+using Mjolnir.IDE.Sdk.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"             
         prism:ViewModelLocator.AutoWireViewModel="True"
-        xmlns:Converters="clr-namespace:Mjolnir.IDE.Infrastructure.Converters;assembly=Mjolnir.IDE.Infrastructure"
+        xmlns:Converters="clr-namespace:Mjolnir.IDE.Sdk.Converters;assembly=Mjolnir.IDE.Sdk"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
         Title="New Object" Height="400" Width="700"
         WindowStartupLocation="CenterScreen" 

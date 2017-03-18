@@ -1,8 +1,8 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure.Events;
-using Mjolnir.IDE.Infrastructure.Interfaces;
-using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
-using Mjolnir.IDE.Infrastructure.Interfaces.Views;
+using Mjolnir.IDE.Sdk.Events;
+using Mjolnir.IDE.Sdk.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces.ViewModels;
+using Mjolnir.IDE.Sdk.Interfaces.Views;
 using Prism.Events;
 using Prism.Modularity;
 using System;

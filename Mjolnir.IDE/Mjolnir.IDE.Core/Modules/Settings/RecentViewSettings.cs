@@ -1,8 +1,8 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
-using Mjolnir.IDE.Infrastructure.Interfaces.ViewModels;
-using Mjolnir.IDE.Infrastructure.ViewModels;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Interfaces.Settings;
+using Mjolnir.IDE.Sdk.Interfaces.ViewModels;
+using Mjolnir.IDE.Sdk.ViewModels;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;

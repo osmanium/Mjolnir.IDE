@@ -1,4 +1,4 @@
-﻿using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+﻿using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;

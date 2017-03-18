@@ -1,5 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
-using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces;
 
 namespace Mjolnir.IDE.Core.Modules.Properties.Inspectors
 {

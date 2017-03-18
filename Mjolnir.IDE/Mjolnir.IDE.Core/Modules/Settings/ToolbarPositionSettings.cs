@@ -1,7 +1,7 @@
-﻿using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Events;
-using Mjolnir.IDE.Infrastructure.Interfaces.Services;
-using Mjolnir.IDE.Infrastructure.Interfaces.Settings;
+﻿using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Events;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
+using Mjolnir.IDE.Sdk.Interfaces.Settings;
 using Prism.Events;
 using System;
 using System.Collections.Generic;

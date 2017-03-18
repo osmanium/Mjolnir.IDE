@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Core.Modules.Properties.Inspectors;
-using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Globalization;

@@ -1,5 +1,5 @@
 ﻿using Mjolnir.IDE.Core.Modules.Toolbox.ViewModels;
-using Mjolnir.IDE.Infrastructure.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
