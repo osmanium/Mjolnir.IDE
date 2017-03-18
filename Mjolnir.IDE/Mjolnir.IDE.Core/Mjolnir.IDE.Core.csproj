@@ -136,7 +136,6 @@
     <Compile Include="MjolnirBootstrapper.cs" />
     <Compile Include="Modules\ErrorList\Converters\ErrorListItemTypeToImageConverter.cs" />
     <Compile Include="Modules\ErrorList\ErrorListModule.cs" />
-    <Compile Include="Modules\ErrorList\Events\ErrorDetected.cs" />
     <Compile Include="Modules\ErrorList\Events\ErrorListUpdated.cs" />
     <Compile Include="Modules\ErrorList\ViewModels\ErrorViewModel.cs" />
     <Compile Include="Modules\ErrorList\Views\ErrorUserControl.xaml.cs">

@@ -162,6 +162,7 @@
     <Compile Include="Interfaces\Services\ICommandManager.cs" />
     <Compile Include="Interfaces\Services\IContentHandler.cs" />
     <Compile Include="Interfaces\Services\IContentHandlerRegistry.cs" />
+    <Compile Include="Interfaces\Services\IErrorService.cs" />
     <Compile Include="Interfaces\Services\IErrorToolboxToolbarService.cs" />
     <Compile Include="Interfaces\Services\IPropertiesService.cs" />
     <Compile Include="Interfaces\Services\IOutputService.cs" />

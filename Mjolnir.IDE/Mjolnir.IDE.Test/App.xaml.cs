@@ -113,37 +113,37 @@ namespace Mjolnir.IDE.Test
 
         public void OnIDELoaded()
         {
-            _eventAggregator.GetEvent<ErrorDetected>().Publish(new ErrorDetected()
+            //Log error
+            var errorService = _container.Resolve<IErrorService>();
+            errorService.LogError(new ErrorListItem()
             {
                 Column = 1,
                 Description = "Test description",
                 ItemType = Infrastructure.Enums.ErrorListItemType.Error,
                 Line = 1,
-                OnClick = null,
                 Path = "Path"
             });
 
-            _eventAggregator.GetEvent<ErrorDetected>().Publish(new ErrorDetected()
+            errorService.LogError(new ErrorListItem()
             {
                 Column = 1,
                 Description = "Test description",
                 ItemType = Infrastructure.Enums.ErrorListItemType.Warning,
                 Line = 2,
-                OnClick = null,
                 Path = "Path"
             });
 
-            _eventAggregator.GetEvent<ErrorDetected>().Publish(new ErrorDetected()
+            errorService.LogError(new ErrorListItem()
             {
                 Column = 1,
                 Description = "Test description",
                 ItemType = Infrastructure.Enums.ErrorListItemType.Message,
                 Line = 3,
-                OnClick = null,
                 Path = "Path"
             });
 
 
+            //Update statusbar values
             var _statusBar = _container.Resolve<IStatusbarService>();
             _statusBar.CharPosition = 3;
             _statusBar.ColPosition = 4;
@@ -154,18 +154,19 @@ namespace Mjolnir.IDE.Test
 
 
             //Dynamically toolbar item can be added
-            //var _outputToolboxService = _container.Resolve<IOutputToolboxToolbarService>();
-            //var manager = _container.Resolve<ICommandManager>();
-            //_outputToolboxService.Get("Standard").Add(new MenuItemViewModel("_Clear All 2", "Clear All 2", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")), manager.GetCommand("CLEAROUTPUT"), null, false, false, null, false));
+            var _outputToolboxService = _container.Resolve<IOutputToolboxToolbarService>();
+            var manager = _container.Resolve<ICommandManager>();
+            _outputToolboxService.Get("Standard").Add(new MenuItemViewModel("_Clear All 2", "Clear All 2", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")), manager.GetCommand("CLEAROUTPUT"), null, false, false, null, false));
 
 
+            //Create new output service and new log in it
             var _outputService = _container.Resolve<IOutputService>();
             _outputService.AddOutputSource("TestOutputSource");
             _outputService.LogOutput("TestOutputSource message", OutputCategory.Info, OutputPriority.High, "TestOutputSource");
 
 
+            //Add toolbox items
             var _toolboxService = _container.Resolve<IToolboxService>();
-
             _toolboxService.AddToolboxItems(typeof(TextViewModel).Name, new List<ToolboxItem>()
             {
                 new ToolboxItem()
@@ -191,7 +192,7 @@ namespace Mjolnir.IDE.Test
                 }
             });
 
-
+            //Remove toolbox item
             _toolboxService.RemoveToolboxItems(typeof(TextViewModel).Name, new List<ToolboxItem>()
             {
                 new ToolboxItem()
@@ -204,8 +205,12 @@ namespace Mjolnir.IDE.Test
             });
 
 
+            //Update property grid selected object
             var _propertyGrid = _container.Resolve<IPropertyGrid>();
             _propertyGrid.SelectedObject = _statusBar;
+
+
+
 
         }
 
@@ -335,7 +340,7 @@ namespace Mjolnir.IDE.Test
                            .Add(new MenuItemViewModel("_Properties", "_Properties", 1,
                                     new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/toolbox_16xLG.png")),
                                     new DelegateCommand(ToggleProperties) { IsActive = false }));
-            
+
 
 
             menuService.Get("_View").Add(new MenuItemViewModel("Themes", "Themes", 1));
@@ -419,7 +424,7 @@ namespace Mjolnir.IDE.Test
             projectExplorerToolbarService.Add(new ToolbarViewModel("Standard", "Standard", 1) { Band = 1, BandIndex = 1 });
             projectExplorerToolbarService.Get("Standard").Add(menuService.Get("_File").Get("_New"));
             projectExplorerToolbarService.Get("Standard").Add(menuService.Get("_File").Get("_Open"));
-            
+
 
         }
 
@@ -427,7 +432,7 @@ namespace Mjolnir.IDE.Test
         {
             ErrorListModule errorModule = _container.Resolve<ErrorListModule>();
             errorModule.Initialize();
-            
+
 
             ToolboxModule toolboxModule = _container.Resolve<ToolboxModule>();
             toolboxModule.Initialize();
@@ -442,7 +447,8 @@ namespace Mjolnir.IDE.Test
 
         public bool onIDEClosing()
         {
-            return true;
+            //Returns true if it is prevented, false to allow continue closing
+            return false;
         }
 
         public void onIDEClosed()
@@ -610,7 +616,7 @@ namespace Mjolnir.IDE.Test
             }
         }
 
-        
+
         #endregion
     }
 }

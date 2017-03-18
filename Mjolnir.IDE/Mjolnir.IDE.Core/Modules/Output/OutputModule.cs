@@ -56,9 +56,10 @@ namespace Mjolnir.IDE.Core.Modules.Output
 
             LoadCommands();
             LoadToolbar();
-
+            
             workspace.Tools.Add(_outputViewModel);
         }
+
 
         private void LoadCommands()
         {
@@ -85,7 +86,9 @@ namespace Mjolnir.IDE.Core.Modules.Output
             _outputToolbarService.Get("Standard").Add(new MenuItemViewModel("_Clear All", "Clear All", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")), _commandManager.GetCommand("CLEAROUTPUT"), null, false, false, null, false));
 
 
+            _outputViewModel.OutputSourceRefresh();
         }
+        
 
         private void ClearOutput()
         {

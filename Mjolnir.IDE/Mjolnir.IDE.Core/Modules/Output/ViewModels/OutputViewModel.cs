@@ -113,6 +113,12 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             OnPropertyChanged(() => Text);
         }
 
+
+        public void OutputSourceRefresh()
+        {
+            OnPropertyChanged(() => CurrentOutputContext);
+        }
+
         public void OutputSourceAddedEvent(OutputSourceAddedEvent e)
         {
             _outputSource[e.OutputSourceName] = string.Empty;

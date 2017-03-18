@@ -10,6 +10,8 @@ namespace Mjolnir.IDE.Infrastructure
 {
     public class ErrorListItem : ValidatableBindableBase
     {
+        public Guid Id { get; }
+
         private ErrorListItemType _itemType;
         public ErrorListItemType ItemType
         {
@@ -76,7 +78,7 @@ namespace Mjolnir.IDE.Infrastructure
             }
         }
 
-        public System.Action OnClick { get; set; }
+        //public System.Action OnClick { get; set; }
 
         public ErrorListItem(ErrorListItemType itemType, int number, string description,
             string path = null, int? line = null, int? column = null)
@@ -91,7 +93,7 @@ namespace Mjolnir.IDE.Infrastructure
 
         public ErrorListItem()
         {
-
+            Id = Guid.NewGuid();
         }
     }
 }

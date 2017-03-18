@@ -11,13 +11,14 @@ using Prism.Events;
 using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Core.Modules.ErrorList.Views;
 using Mjolnir.IDE.Infrastructure;
-using Mjolnir.IDE.Core.Modules.ErrorList.Events;
 using System.Collections.Specialized;
 using Mjolnir.IDE.Modules.Error.Interfaces;
+using Mjolnir.IDE.Infrastructure.Interfaces.Services;
+using Mjolnir.IDE.Core.Modules.ErrorList.Events;
 
 namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels
 {
-    public class ErrorViewModel : ToolViewModel
+    public class ErrorViewModel : ToolViewModel, IErrorService
     {
         private readonly IUnityContainer _container;
         private readonly ErrorUserControl _view;
@@ -126,7 +127,7 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels
                 OnPropertyChanged(() => ErrorItemCount);
                 OnPropertyChanged(() => WarningItemCount);
                 OnPropertyChanged(() => MessageItemCount);
-
+                
                 _eventAggregator.GetEvent<ErrorListUpdated>().Publish(new ErrorListUpdated());
             };
 
@@ -139,17 +140,19 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels
 
             _view = new ErrorUserControl(this);
             View = _view;
-
-            _eventAggregator.GetEvent<ErrorDetected>().Subscribe(AddItem);
-
         }
 
-        public void AddItem(ErrorDetected error)
+        public void LogError(ErrorListItem error)
         {
-            Items.Add(new ErrorListItem(error.ItemType, Items.Count + 1, error.Description, error.Path, error.Line, error.Column)
-            {
-                OnClick = error.OnClick
-            });
+            Items.Add(new ErrorListItem(error.ItemType, Items.Count + 1, error.Description, error.Path, error.Line, error.Column));
+        }
+
+        public void RemoveError(Guid errorId)
+        {
+            var itemToBeRemoved = Items.Where(w => w.Id == errorId).FirstOrDefault();
+
+            if (itemToBeRemoved != null)
+                Items.Remove(itemToBeRemoved);
         }
     }
 }
