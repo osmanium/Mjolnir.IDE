@@ -94,9 +94,25 @@ namespace Mjolnir.IDE.Core
             AppCommands();
             LoadSettings();
 
-
-           
             
+            // Try resolving an output service - if not found, then register the NLog service
+            var isDefaultOutputService = false;
+            try
+            {
+                this._outputService = _container.Resolve<IOutputService>();
+            }
+            catch
+            {
+                _container.RegisterType<IOutputService, DefaultLogService>(new ContainerControlledLifetimeManager());
+                this._outputService = _container.Resolve<IOutputService>();
+                isDefaultOutputService = true;
+            }
+
+
+            var customApplication = _container.Resolve<IApplicationDefinition>();
+
+            if (customApplication != null)
+                customApplication.RegisterTypes();
 
             //Try resolving a workspace
             var isDefaultWorkspace = false;
@@ -111,19 +127,6 @@ namespace Mjolnir.IDE.Core
             }
 
 
-            // Try resolving an output service - if not found, then register the NLog service
-            var isDefaultOutputService = false;
-            try
-            {
-                this._outputService = _container.Resolve<IOutputService>();
-            }
-            catch
-            {
-                _container.RegisterType<IOutputService, DefaultLogService>(new ContainerControlledLifetimeManager());
-                this._outputService = _container.Resolve<IOutputService>();
-                isDefaultOutputService = true;
-            }
-
             //Output
             OutputModule outputModule = _container.Resolve<OutputModule>();
             outputModule.Initialize();
@@ -136,14 +139,11 @@ namespace Mjolnir.IDE.Core
 
             
 
-            var customApplication = _container.Resolve<IApplicationDefinition>();
-            if (customApplication != null)
-            {
-                customApplication.InitalizeIDE();
-                customApplication.RegisterTypes();
-            }
-
             
+
+
+            if (customApplication != null)
+                customApplication.InitalizeIDE();
 
             //Below ones can be loaded with solution, does not require immediate load
             //TODO : Console

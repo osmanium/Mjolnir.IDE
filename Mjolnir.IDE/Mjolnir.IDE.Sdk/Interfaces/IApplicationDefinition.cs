@@ -13,6 +13,7 @@ namespace Mjolnir.IDE.Sdk.Interfaces
         string ApplicationName { get; set; }
         ImageSource ApplicationIconSource { get; set; }
 
+
         void InitalizeIDE();
 
         void RegisterTypes();

@@ -57,7 +57,6 @@ namespace Mjolnir.IDE.Test
 
         public void InitalizeIDE()
         {
-            _container = Bootstrapper.Container;
             _eventAggregator = _container.Resolve<IEventAggregator>();
         }
 
@@ -92,6 +91,8 @@ namespace Mjolnir.IDE.Test
 
         public void RegisterTypes()
         {
+            _container = Bootstrapper.Container;
+
             //Register own splash screen view here
             //container.RegisterType<ISplashScreenView, CustomSplashScreenView>(new ContainerControlledLifetimeManager());
 
@@ -99,7 +100,7 @@ namespace Mjolnir.IDE.Test
             //container.RegisterType<ISplashScreenViewModel, CustomSplashScreenViewModel>(new ContainerControlledLifetimeManager());
 
             //Register Workspace
-            //_container.RegisterType<AbstractWorkspace, Workspace>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<AbstractWorkspace, Workspace>(new ContainerControlledLifetimeManager());
 
             _container.RegisterType<TextViewModel>();
             _container.RegisterType<TextModel>();
