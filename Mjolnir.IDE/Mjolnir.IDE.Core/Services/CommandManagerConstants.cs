@@ -9,7 +9,7 @@ namespace Mjolnir.IDE.Core.Services
     public static class CommandManagerConstants
     {
         public const string CloseCommand = "CLOSE";
-        public const string New = "NEW";
+        public const string NewItem = "NEWITEM";
 
         public const string ToggleErrorListCommand = "TOGGLEERRORLIST";
         public const string ToggleWarningListCommand = "TOGGLEEWARNINGLIST";

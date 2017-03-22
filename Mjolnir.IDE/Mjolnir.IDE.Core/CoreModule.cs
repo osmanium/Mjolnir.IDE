@@ -182,7 +182,7 @@ namespace Mjolnir.IDE.Core
             //TODO: Check if you can hook up to the Workspace.ActiveDocument.CloseCommand
             var closeCommand = new DelegateCommand<object>(CloseDocument, CanExecuteCloseDocument);
             manager.RegisterCommand(CommandManagerConstants.CloseCommand, closeCommand);
-            manager.RegisterCommand(CommandManagerConstants.New, registry.NewCommand);
+            manager.RegisterCommand(CommandManagerConstants.NewItem, registry.NewCommand);
         }
 
         private void LoadSettings()
