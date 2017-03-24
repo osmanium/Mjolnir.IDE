@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Sdk", "Mjolnir.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Test", "Mjolnir.IDE.Test\Mjolnir.IDE.Test.csproj", "{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.UnitTests", "Mjolnir.IDE.UnitTests\Mjolnir.IDE.UnitTests.csproj", "{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

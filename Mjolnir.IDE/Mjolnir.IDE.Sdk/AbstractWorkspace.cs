@@ -5,6 +5,7 @@ using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Mjolnir.IDE.Sdk.Interfaces.ViewModels;
 using Mjolnir.IDE.Sdk.ViewModels;
 using Mjolnir.UI.Validation;
+using Newtonsoft.Json;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,7 @@ namespace Mjolnir.IDE.Sdk
 
         private IApplicationDefinition _applicationDefinition;
 
+        [JsonIgnore]
         public ImageSource Icon
         {
             get
@@ -81,6 +83,7 @@ namespace Mjolnir.IDE.Sdk
             }
         }
 
+        [JsonIgnore]
         public string Title
         {
             get
@@ -123,6 +126,7 @@ namespace Mjolnir.IDE.Sdk
         /// Gets the menu.
         /// </summary>
         /// <value>The menu.</value>
+        [JsonIgnore]
         public IList<AbstractCommandable> Menus
         {
             get { return _menus.Children; }
@@ -132,11 +136,13 @@ namespace Mjolnir.IDE.Sdk
         /// Gets the tool bar tray.
         /// </summary>
         /// <value>The tool bar tray.</value>
+        [JsonIgnore]
         public ToolBarTray ToolBarTray
         {
             get { return (_toolbarService as IShellToolbarService).ToolBarTray; }
         }
 
+        [JsonIgnore]
         public IStatusbarService StatusBar
         {
             get { return _statusbarService; }
@@ -150,6 +156,7 @@ namespace Mjolnir.IDE.Sdk
         /// The list of documents which are open in the workspace
         /// </summary>
         /// <value>The documents.</value>
+        [JsonIgnore]
         public virtual ObservableCollection<ContentViewModel> Documents
         {
             get { return _docs; }
@@ -160,6 +167,7 @@ namespace Mjolnir.IDE.Sdk
         /// The list of tools that are available in the workspace
         /// </summary>
         /// <value>The tools.</value>
+        [JsonIgnore]
         public virtual ObservableCollection<ToolViewModel> Tools
         {
             get { return _tools; }
@@ -170,6 +178,7 @@ namespace Mjolnir.IDE.Sdk
         /// The current document which is active in the workspace
         /// </summary>
         /// <value>The active document.</value>
+        [JsonIgnore]
         public virtual ContentViewModel ActiveDocument
         {
             get { return _activeDocument; }

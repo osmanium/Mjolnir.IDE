@@ -12,6 +12,7 @@ using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Mjolnir.IDE.Sdk.Interfaces.Settings;
 using Mjolnir.IDE.Sdk.Interfaces.ViewModels;
 using Mjolnir.IDE.Sdk.Interfaces.Views;
+using Mjolnir.IDE.Sdk.Util;
 using Mjolnir.IDE.Sdk.ViewModels;
 using Mjolnir.IDE.Test.ProjectExplorer;
 using Mjolnir.IDE.Test.ProjectExplorer.Interfaces;
@@ -58,6 +59,7 @@ namespace Mjolnir.IDE.Test
         public void InitalizeIDE()
         {
             _eventAggregator = _container.Resolve<IEventAggregator>();
+            
         }
 
         public void LoadCommands()
