@@ -40,6 +40,7 @@ namespace Mjolnir.IDE.Core.Modules.SplashScreen
                 (Action)(() =>
                 {
                     shell.Show();
+                    shell.WindowState = System.Windows.WindowState.Maximized;
                     eventAggregator.GetEvent<SplashScreenCloseEvent>().Publish(new SplashScreenCloseEvent());
                 })
             );
