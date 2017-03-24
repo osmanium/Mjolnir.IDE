@@ -10,14 +10,17 @@ namespace Mjolnir.IDE.Sdk.Util
 {
     public static class SerializationHelper
     {
-        public static string SerializeResponse<TObject>(TObject input)
+        public static string SerializeObject<TObject>(TObject input, JsonSerializerSettings settings = null)
         {
             StringBuilder sb = new StringBuilder();
             using (StringWriter sw = new StringWriter(sb))
             {
                 using (JsonTextWriter jsonWriter = new JsonTextWriter(sw))
                 {
-                    var serializer = JsonSerializer.Create();
+                    var serializer = JsonSerializer.Create(settings);
+
+
+                    serializer.Formatting = Formatting.Indented;
 
                     //Read the request
                     serializer.Serialize(jsonWriter, input);
@@ -27,14 +30,14 @@ namespace Mjolnir.IDE.Sdk.Util
             return sb.ToString();
         }
 
-        public static TObject DeserizalizeRequest<TObject>(string input)
+        public static TObject DeserizalizeObject<TObject>(string input, JsonSerializerSettings settings = null)
         {
             TObject request;
             using (StringReader sr = new StringReader(input))
             {
                 using (JsonTextReader jsonReader = new JsonTextReader(sr))
                 {
-                    var serializer = JsonSerializer.Create();
+                    var serializer = JsonSerializer.Create(settings);
 
                     //Read the request
                     request = serializer.Deserialize<TObject>(jsonReader);
@@ -43,6 +46,5 @@ namespace Mjolnir.IDE.Sdk.Util
 
             return request;
         }
-
     }
 }
