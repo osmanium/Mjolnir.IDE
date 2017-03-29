@@ -92,7 +92,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\DefaultSplashScreenViewModelTests.cs" />
     <Compile Include="ViewModels\ErrorListViewModelTests.cs" />
+    <Compile Include="ViewModels\OutputViewModelTests.cs" />
+    <Compile Include="ViewModels\ShellViewModelTests.cs" />
+    <Compile Include="ViewModelTestBase.cs" />
     <Compile Include="WorkSpaceUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -15,36 +15,24 @@ using Xunit;
 
 namespace Mjolnir.IDE.Core.UnitTests.ViewModels
 {
-    public class ErrorListViewModelTests
+    public class ErrorListViewModelTests : ViewModelTestBase
     {
         private ErrorViewModel _viewModel;
-        private Mock<IApplicationDefinition> _applicationDefinition;
-        private Mock<IMenuService> _menuService;
-        private Mock<IShellToolbarService> _shellToolbarService;
-        private Mock<IStatusbarService> _statusbarService;
-        private Mock<ICommandManager> _commandManager;
-        private Mock<DefaultWorkspace> _workspace;
         private Mock<IErrorToolboxToolbarService> _errorToolboxToolbarService;
+
 
         public ErrorListViewModelTests()
         {
+            _errorToolboxToolbarService = new Mock<IErrorToolboxToolbarService>();
+
             var errorListUpdatedEvent = new Mock<ErrorListUpdated>();
 
-            var _eventAggregator = new Mock<IEventAggregator>();
             _eventAggregator.Setup(ea => ea.GetEvent<ErrorListUpdated>())
                 .Returns(errorListUpdatedEvent.Object);
 
-            _applicationDefinition = new Mock<IApplicationDefinition>();
-            _menuService = new Mock<IMenuService>();
-            _shellToolbarService = new Mock<IShellToolbarService>();
-            _statusbarService = new Mock<IStatusbarService>();
-            _commandManager = new Mock<ICommandManager>();
-            _errorToolboxToolbarService = new Mock<IErrorToolboxToolbarService>();
-
-
-            _workspace = new Mock<DefaultWorkspace>(MockBehavior.Loose, _eventAggregator.Object, _applicationDefinition.Object, _menuService.Object, _shellToolbarService.Object, _statusbarService.Object, _commandManager.Object);
-
-            _viewModel = new ErrorViewModel(_workspace.Object, _errorToolboxToolbarService.Object, _eventAggregator.Object);
+            _viewModel = new ErrorViewModel(_workspace.Object, 
+                                            _errorToolboxToolbarService.Object, 
+                                            _eventAggregator.Object);
         }
 
         [WpfFact]
@@ -118,7 +106,7 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         public void Should_remove_message()
         {
             var logid = LogMessage();
-            
+
             Assert.Equal(1, _viewModel.MessageItemCount);
             Assert.NotEqual(Guid.Empty, logid);
 
@@ -133,7 +121,7 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         //TODO : Log multiple errors
 
         //TODO : Remove single from multiple errors
-        
+
         //TODO : Show only errors
 
         //TODO : Show only warnings
@@ -145,7 +133,7 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         //TODO : Show error - warnings
 
         //TODO : Show error - messages
-        
+
         //TODO : Show warning - messages
 
 
@@ -159,7 +147,7 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
                 path: "Error Path",
                 line: 1,
                 column: 1);
-            
+
             _viewModel.LogError(log);
 
             return log.Id;

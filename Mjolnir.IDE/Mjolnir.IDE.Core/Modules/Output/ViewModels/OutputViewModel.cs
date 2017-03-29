@@ -18,16 +18,18 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
 {
     public class OutputViewModel : ToolViewModel
     {
+        #region Fields
         private readonly IEventAggregator _aggregator;
-        private readonly IUnityContainer _container;
         private readonly OutputUserControl _view;
         private readonly IOutputToolboxToolbarService _outputToolbox;
         private readonly ICommandManager _commandManager;
+        #endregion
 
-
-
+        #region Constants
         public const string DefaultOutputSource = "General";
+        #endregion
 
+        #region Properties
         public override PaneLocation PreferredLocation
         {
             get { return PaneLocation.Bottom; }
@@ -63,7 +65,9 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             get { return _text; }
         }
 
+        #endregion
 
+        #region Constructors
         public OutputViewModel(DefaultWorkspace workspace,
                                IOutputToolboxToolbarService outputToolbox,
                                ICommandManager commandManager,
@@ -95,47 +99,13 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             _aggregator.GetEvent<OutputSourceChangedEvent>().Subscribe(OutputSourceChangedEvent);
         }
 
-
-        public void OutputSourceChangedEvent(OutputSourceChangedEvent e)
-        {
-
-            if (!string.IsNullOrWhiteSpace(e.EventSourceName))
-            {
-                _text = _outputSource[e.EventSourceName];
-            }
-            else
-            {
-                _text = _outputSource[DefaultOutputSource];
-            }
-
-            OnPropertyChanged(() => Text);
-        }
-
-
+        #endregion
+        
+        #region Public Methods
         public void OutputSourceRefresh()
         {
             OnPropertyChanged(() => CurrentOutputContext);
         }
-
-        public void OutputSourceAddedEvent(OutputSourceAddedEvent e)
-        {
-            _outputSource[e.OutputSourceName] = string.Empty;
-
-            _outputToolbox.Get("OutputSource").Get("_Output_Source")
-                .Add(new MenuItemViewModel(e.OutputSourceName, e.OutputSourceName, 1,
-                null, _commandManager.GetCommand("DONOTHING"), null, false, false, null, false, false));
-
-
-            OnPropertyChanged(() => OutputSource);
-        }
-
-        public void OutputSourceRemovedEvent(OutputSourceRemovedEvent e)
-        {
-            _outputSource[e.OutputSourceName] = string.Empty;
-            OnPropertyChanged(() => OutputSource);
-        }
-
-
 
         public void AddLog(IOutputService output)
         {
@@ -167,5 +137,51 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             _text = string.Empty;
             OnPropertyChanged(() => Text);
         }
+
+        public void AddOutputSource()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveOutputSource()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Private Methods
+        private void OutputSourceChangedEvent(OutputSourceChangedEvent e)
+        {
+
+            if (!string.IsNullOrWhiteSpace(e.EventSourceName))
+            {
+                _text = _outputSource[e.EventSourceName];
+            }
+            else
+            {
+                _text = _outputSource[DefaultOutputSource];
+            }
+
+            OnPropertyChanged(() => Text);
+        }
+
+        private void OutputSourceAddedEvent(OutputSourceAddedEvent e)
+        {
+            _outputSource[e.OutputSourceName] = string.Empty;
+
+            _outputToolbox.Get("OutputSource").Get("_Output_Source")
+                .Add(new MenuItemViewModel(e.OutputSourceName, e.OutputSourceName, 1,
+                null, _commandManager.GetCommand("DONOTHING"), null, false, false, null, false, false));
+
+
+            OnPropertyChanged(() => OutputSource);
+        }
+
+        private void OutputSourceRemovedEvent(OutputSourceRemovedEvent e)
+        {
+            _outputSource[e.OutputSourceName] = string.Empty;
+            OnPropertyChanged(() => OutputSource);
+        }
+        #endregion
     }
 }

@@ -56,6 +56,7 @@ namespace Mjolnir.IDE.Core.Services
 
             Logger.Log(LogLevel.Info, method.DeclaringType + ": " + message);
 
+            //TODOD : DefaultLogService
             _aggregator.GetEvent<LogEvent>().Publish(new DefaultLogService
             { Message = Message, Category = Category, Priority = Priority, OutputSource = outputSource });
         }

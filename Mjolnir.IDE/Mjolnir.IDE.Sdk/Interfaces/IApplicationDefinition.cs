@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace Mjolnir.IDE.Sdk.Interfaces
 {
+    //TODO : Remove this interface and throw Event, developers will attach event handlers +=
     public interface IApplicationDefinition
     {
         string ApplicationName { get; set; }

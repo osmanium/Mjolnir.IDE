@@ -18,7 +18,7 @@ namespace Mjolnir.IDE.Core.Modules.SplashScreen.ViewModels
     public class DefaultSplashScreenViewModel : ValidatableBindableBase, ISplashScreenViewModel
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IUnityContainer _container;
+        //private readonly IUnityContainer _container;
         private readonly IApplicationDefinition _applicationDefinition;
 
         private string _status;
@@ -42,10 +42,9 @@ namespace Mjolnir.IDE.Core.Modules.SplashScreen.ViewModels
             set { _applicationIconSource = value; _applicationIconSource.Freeze(); }
         }
 
-        public DefaultSplashScreenViewModel(IUnityContainer container, IEventAggregator eventAggregator,
-            IApplicationDefinition applicationDefinition)
+        public DefaultSplashScreenViewModel(IEventAggregator eventAggregator,
+                                            IApplicationDefinition applicationDefinition)
         {
-            _container = container;
             _applicationDefinition = applicationDefinition;
             _eventAggregator = eventAggregator;
 

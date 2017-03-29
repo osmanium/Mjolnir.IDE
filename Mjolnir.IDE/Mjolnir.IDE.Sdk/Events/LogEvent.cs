@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mjolnir.IDE.Sdk.Events
 {
-    /// <summary>
-    /// Class LogEvent - This event is used when a logging operation happens.
-    /// </summary>
+    //TODO : It should send log object not the service
     public class LogEvent : PubSubEvent<IOutputService>
     {
     }
