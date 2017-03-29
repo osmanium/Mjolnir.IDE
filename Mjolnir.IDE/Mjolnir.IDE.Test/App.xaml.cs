@@ -241,7 +241,7 @@ namespace Mjolnir.IDE.Test
                                        new BitmapImage(
                                            new Uri(
                                                @"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/NewRequest_8796.png")),
-                                       manager.GetCommand("NEW"),
+                                       manager.GetCommand(CommandManagerConstants.NewItem),
                                        new KeyGesture(Key.N, ModifierKeys.Control, "Ctrl + N"))));
 
             menuService.Get("_File").Add(

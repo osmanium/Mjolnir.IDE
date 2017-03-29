@@ -141,10 +141,10 @@ namespace Mjolnir.IDE.Sdk
         /// <exception cref="System.ArgumentException">Expected a AbstractMenuItem as the argument. Only Menu's can be added within a Menu.</exception>
         public override string Add(Commandable item)
         {
-            if (item.GetType().IsAssignableFrom(typeof(DefaultMenuItem)))
+            if (item != null && item.GetType().IsAssignableFrom(typeof(DefaultMenuItem)))
             {
                 throw new ArgumentException(
-                    "Expected a AbstractMenuItem as the argument. Only Menu's can be added within a Menu.");
+                    "Expected a DefaultMenuItem as the argument. Only Menu's can be added within a Menu.");
             }
             return base.Add(item);
         }
