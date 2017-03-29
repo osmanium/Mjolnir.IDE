@@ -12,7 +12,7 @@ namespace Mjolnir.IDE.Sdk.ViewModels
     /// <summary>
     /// Class ToolbarViewModel
     /// </summary>
-    public sealed class ToolbarViewModel : AbstractToolbar
+    public sealed class ToolbarViewModel : DefaultToolbar
     {
         #region CTOR
 

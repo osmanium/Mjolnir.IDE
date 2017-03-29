@@ -17,21 +17,18 @@ namespace Mjolnir.IDE.Test.ProjectExplorer.ViewModels
 {
     public class ProjectExplorerViewModel : ToolViewModel
     {
-        private readonly IUnityContainer _container;
         private readonly IProjectExplorerToolboxToolbarService _projectExplorerToolboxToolbarService;
         private readonly IEventAggregator _eventAggregator;
         private readonly ProjectExplorerView _view;
 
         public ProjectTreeViewItem Root { get; set; }
 
-        public ProjectExplorerViewModel(IUnityContainer container, 
-                                        IProjectExplorerToolboxToolbarService toolbarService,
-                                        IEventAggregator eventAggregator) 
-            : base(container, toolbarService)
+        public ProjectExplorerViewModel(IProjectExplorerToolboxToolbarService toolbarService,
+                                        IEventAggregator eventAggregator)
+            : base(toolbarService)
         {
             _eventAggregator = eventAggregator;
-            _container = container;
-            
+
             Name = "Project Explorer";
             Title = "Project Explorer";
             ContentId = "Project Explorer";//TODO : Move to constants

@@ -20,7 +20,7 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Settings
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns>The GUID for the item added which needs to be used to remove the item</returns>
-        string Add(AbstractSettingsItem item);
+        string Add(DefaultSettingsItem item);
 
         /// <summary>
         /// Removes the specified key.
@@ -34,6 +34,6 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Settings
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>`0.</returns>
-        AbstractSettingsItem Get(string key);
+        DefaultSettingsItem Get(string key);
     }
 }

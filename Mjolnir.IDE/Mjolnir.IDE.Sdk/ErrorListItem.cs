@@ -89,11 +89,12 @@ namespace Mjolnir.IDE.Sdk
             _path = path;
             _line = line;
             _column = column;
+
+            Id = Guid.NewGuid();
         }
 
-        public ErrorListItem()
+        private ErrorListItem()
         {
-            Id = Guid.NewGuid();
         }
     }
 }

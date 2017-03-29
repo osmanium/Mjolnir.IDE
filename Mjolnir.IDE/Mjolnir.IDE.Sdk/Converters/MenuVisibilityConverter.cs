@@ -14,7 +14,7 @@ namespace Mjolnir.IDE.Sdk.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            AbstractMenuItem menu = value as AbstractMenuItem;
+            DefaultMenuItem menu = value as DefaultMenuItem;
 
             if (menu == null)
                 return Visibility.Hidden;

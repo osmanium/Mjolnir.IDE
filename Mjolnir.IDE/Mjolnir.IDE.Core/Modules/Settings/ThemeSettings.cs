@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Mjolnir.IDE.Core.Modules.Settings
 {
-    public class ThemeSettings : AbstractSettings, IThemeSettings
+    public class ThemeSettings : DefaultSettings, IThemeSettings
     {
         public ThemeSettings(IEventAggregator eventAggregator)
         {

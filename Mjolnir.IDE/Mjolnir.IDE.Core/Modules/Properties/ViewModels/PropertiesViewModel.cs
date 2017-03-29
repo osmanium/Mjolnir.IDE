@@ -25,25 +25,23 @@ namespace Mjolnir.IDE.Core.Modules.Properties.ViewModels
         private object _selectedObject;
         public object SelectedObject
         {
-            get{ return _selectedObject; }
+            get { return _selectedObject; }
             set { SetProperty(ref _selectedObject, value); }
         }
 
         public override PaneLocation PreferredLocation => PaneLocation.Right;
 
-        public PropertiesViewModel(IUnityContainer container, 
-                                   IPropertiesToolboxToolbarService toolbarService,
+        public PropertiesViewModel(IPropertiesToolboxToolbarService toolbarService,
                                    IEventAggregator aggregator,
-                                   ICommandManager commandManager) 
-            : base(container, toolbarService)
+                                   ICommandManager commandManager)
+            : base(toolbarService)
         {
             IsValidationEnabled = false;
 
-            _container = container;
             _propertiesToolboxToolbar = toolbarService;
             _aggregator = aggregator;
             _commandManager = commandManager;
-            
+
 
             Name = "Properties";
             Title = "Properties";
@@ -53,9 +51,9 @@ namespace Mjolnir.IDE.Core.Modules.Properties.ViewModels
 
             _view = new PropertiesView(this);
             View = _view;
-            
+
         }
 
-        
+
     }
 }

@@ -193,7 +193,7 @@ namespace Mjolnir.IDE.Core.Services
         private void NewDocument()
         {
             if (_workspace == null)
-                _workspace = _container.Resolve<AbstractWorkspace>();
+                _workspace = _container.Resolve<DefaultWorkspace>();
 
             if (_availableNewContent.Count == 1)
             {

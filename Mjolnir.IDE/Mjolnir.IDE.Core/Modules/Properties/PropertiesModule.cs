@@ -30,7 +30,7 @@ namespace Mjolnir.IDE.Core.Modules.Properties
         {
             _container = container;
             _eventAggregator = _container.Resolve<IEventAggregator>();
-            _workspace = _container.Resolve<AbstractWorkspace>();
+            _workspace = _container.Resolve<DefaultWorkspace>();
             _commandManager = _container.Resolve<ICommandManager>();
         }
 
@@ -42,7 +42,7 @@ namespace Mjolnir.IDE.Core.Modules.Properties
             _container.RegisterType<IPropertiesToolboxToolbarService, PropertiesToolboxToolbarService>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IPropertyGrid, PropertiesViewModel>(new ContainerControlledLifetimeManager());
 
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
 
             _propertiesViewModel = _container.Resolve<PropertiesViewModel>();
             _propertiesToolbarService = _container.Resolve<IPropertiesToolboxToolbarService>();

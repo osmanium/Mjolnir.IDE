@@ -49,7 +49,7 @@ namespace Mjolnir.IDE.Core
 
             
             var shellViewModel = Container.Resolve<IShellView>();
-            (shellViewModel.DataContext as ShellViewModel).Workspace = Container.Resolve<AbstractWorkspace>();
+            (shellViewModel.DataContext as ShellViewModel).Workspace = Container.Resolve<DefaultWorkspace>();
 
             
         

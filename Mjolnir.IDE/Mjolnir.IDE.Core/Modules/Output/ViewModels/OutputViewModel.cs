@@ -64,16 +64,14 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
         }
 
 
-        public OutputViewModel(IUnityContainer container,
-                               AbstractWorkspace workspace,
+        public OutputViewModel(DefaultWorkspace workspace,
                                IOutputToolboxToolbarService outputToolbox,
                                ICommandManager commandManager,
                                IEventAggregator aggregator)
-            : base(container, outputToolbox)
+            : base(outputToolbox)
         {
             IsValidationEnabled = false;
 
-            _container = container;
             _outputToolbox = outputToolbox;
             _aggregator = aggregator;
             _commandManager = commandManager;
@@ -156,7 +154,7 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             {
                 //Append to default
                 _outputSource[DefaultOutputSource] += output.Message + "\n" + _text;
-                
+
 
                 if (CurrentOutputContext == DefaultOutputSource)
                     OnPropertyChanged(() => Text);

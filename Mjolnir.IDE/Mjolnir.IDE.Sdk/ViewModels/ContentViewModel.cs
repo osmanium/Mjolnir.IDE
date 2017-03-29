@@ -86,7 +86,7 @@ namespace Mjolnir.IDE.Sdk.ViewModels
         /// <param name="workspace">The injected workspace.</param>
         /// <param name="commandManager">The injected command manager.</param>
         /// <param name="logger">The injected logger.</param>
-        protected ContentViewModel(AbstractWorkspace workspace, ICommandManager commandManager, IOutputService logger,
+        protected ContentViewModel(DefaultWorkspace workspace, ICommandManager commandManager, IOutputService logger,
                                    IMenuService menuService)
         {
             _workspace = workspace;
@@ -139,12 +139,12 @@ namespace Mjolnir.IDE.Sdk.ViewModels
         /// The content menu that should be available for the document pane
         /// </summary>
         /// <value>The view.</value>
-        public IReadOnlyCollection<AbstractMenuItem> Menus
+        public IReadOnlyCollection<DefaultMenuItem> Menus
         {
             get
             {
-                AbstractMenuItem item = _menuService.Get("_File").Get("_Save") as AbstractMenuItem;
-                List<AbstractMenuItem> items = new List<AbstractMenuItem>();
+                DefaultMenuItem item = _menuService.Get("_File").Get("_Save") as DefaultMenuItem;
+                List<DefaultMenuItem> items = new List<DefaultMenuItem>();
                 items.Add(item);
                 return items.AsReadOnly();
             }

@@ -12,7 +12,7 @@ namespace Mjolnir.IDE.Sdk.Interfaces.ViewModels
     /// <summary>
     /// Class MenuItemViewModel - simple menu implementation which can be reused by apps
     /// </summary>
-    public sealed class MenuItemViewModel : AbstractMenuItem
+    public sealed class MenuItemViewModel : DefaultMenuItem
     {
         #region CTOR
 
@@ -43,7 +43,7 @@ namespace Mjolnir.IDE.Sdk.Interfaces.ViewModels
         /// </summary>
         /// <param name="priority">The priority.</param>
         /// <returns>AbstractMenuItem.</returns>
-        public static AbstractMenuItem Separator(int priority)
+        public static DefaultMenuItem Separator(int priority)
         {
             return new MenuItemViewModel("SEP", string.Empty, priority);
         }

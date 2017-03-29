@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Mjolnir.IDE.Sdk
 {
-    public abstract class AbstractSettings : ApplicationSettingsBase, IDataErrorInfo
+    public class DefaultSettings : ApplicationSettingsBase, IDataErrorInfo
     {
         #region Member
 
@@ -20,7 +20,7 @@ namespace Mjolnir.IDE.Sdk
 
         #region CTOR
 
-        protected AbstractSettings()
+        protected DefaultSettings()
         {
             Backup = new Dictionary<string, object>();
         }

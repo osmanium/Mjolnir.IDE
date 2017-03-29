@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Mjolnir.IDE.Test
 {
-    public class MjolnirTestSettings : AbstractSettings
+    public class MjolnirTestSettings : DefaultSettings
     {
         private static MjolnirTestSettings settings = new MjolnirTestSettings();
 

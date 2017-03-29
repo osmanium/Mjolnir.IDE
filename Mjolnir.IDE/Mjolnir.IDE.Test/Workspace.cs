@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Sdk;
 using Mjolnir.IDE.Sdk.Interfaces;
+using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,20 @@ using System.Windows.Media;
 
 namespace Mjolnir.IDE.Test
 {
-    public class Workspace : AbstractWorkspace
+    public class Workspace : DefaultWorkspace
     {
         /// <summary>
         /// The generic workspace that will be used if the application does not have its workspace
         /// </summary>
         /// <param name="container">The injected container - can be used by custom flavors of workspace</param>
         /// <param name="eventAggregator">The event aggregator.</param>
-        public Workspace(IUnityContainer container, IEventAggregator eventAggregator, IApplicationDefinition applicationDefinition)
-            : base(container, eventAggregator, applicationDefinition)
+        public Workspace(IEventAggregator eventAggregator,
+                         IApplicationDefinition applicationDefinition,
+                         IMenuService menuService,
+                         IShellToolbarService shellToolbarService,
+                         IStatusbarService statusbarService,
+                         ICommandManager commandManager)
+            : base(eventAggregator, applicationDefinition, menuService, shellToolbarService, statusbarService, commandManager)
         {
         }
     }

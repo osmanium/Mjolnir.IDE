@@ -20,14 +20,14 @@ namespace Mjolnir.IDE.Test.ProjectExplorer
 
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
-        private readonly AbstractWorkspace _workspace;
+        private readonly DefaultWorkspace _workspace;
         private readonly ICommandManager _commandManager;
 
         private ProjectExplorerViewModel _viewModel;
 
         public ProjectExplorerModule(IUnityContainer container,
                              IEventAggregator eventAggregaor,
-                             AbstractWorkspace abstractWorkspace,
+                             DefaultWorkspace abstractWorkspace,
                              ICommandManager commandManager)
         {
             _container = container;

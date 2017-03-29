@@ -112,13 +112,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractCommandable.cs" />
-    <Compile Include="AbstractMenuItem.cs" />
-    <Compile Include="AbstractPrioritizedTree.cs" />
-    <Compile Include="AbstractSettings.cs" />
-    <Compile Include="AbstractSettingsItem.cs" />
-    <Compile Include="AbstractToolbar.cs" />
-    <Compile Include="AbstractWorkspace.cs" />
+    <Compile Include="Commandable.cs" />
+    <Compile Include="PrioritizedTree.cs" />
+    <Compile Include="DefaultMenuItem.cs" />
+    <Compile Include="DefaultSettings.cs" />
+    <Compile Include="DefaultSettingsItem.cs" />
+    <Compile Include="DefaultToolbar.cs" />
+    <Compile Include="DefaultWorkspace.cs" />
     <Compile Include="Attributes\FileContentAttribute.cs" />
     <Compile Include="Attributes\NewContentAttribute.cs" />
     <Compile Include="Attributes\ToolboxItemAttribute.cs" />
@@ -130,7 +130,6 @@
     <Compile Include="Converters\NullObjectToVisibiltyConverter.cs" />
     <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\PercentToFontSizeConverter.cs" />
-    <Compile Include="DefaultWorkspace.cs" />
     <Compile Include="Enums\ErrorListItemType.cs" />
     <Compile Include="Enums\PaneLocation.cs" />
     <Compile Include="ErrorListItem.cs" />

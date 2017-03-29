@@ -14,9 +14,9 @@ using System.Xml.Serialization;
 
 namespace Mjolnir.IDE.Core.Modules.Settings
 {
-    public class RecentViewSettings : AbstractSettings, IRecentViewSettings
+    public class RecentViewSettings : DefaultSettings, IRecentViewSettings
     {
-        private AbstractMenuItem recentMenu;
+        private DefaultMenuItem recentMenu;
         private List<string> menuGuids;
         private DelegateCommand<string> recentOpen;
         //private IOpenDocumentService fileService;
@@ -80,7 +80,7 @@ namespace Mjolnir.IDE.Core.Modules.Settings
         }
 
         [XmlIgnore]
-        public AbstractMenuItem RecentMenu
+        public DefaultMenuItem RecentMenu
         {
             get
             {

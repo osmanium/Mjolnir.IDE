@@ -10,7 +10,7 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Settings
     public interface IRecentViewSettings
     {
         [XmlIgnore]
-        AbstractMenuItem RecentMenu { get; }
+        DefaultMenuItem RecentMenu { get; }
 
         [XmlIgnore]
         IReadOnlyList<IRecentViewItem> RecentItems { get; }

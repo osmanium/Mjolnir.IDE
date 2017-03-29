@@ -12,14 +12,14 @@ namespace Mjolnir.IDE.Sdk
     /// <summary>
     /// Class AbstractSettings
     /// </summary>
-    public abstract class AbstractSettingsItem : AbstractPrioritizedTree<AbstractSettingsItem>
+    public class DefaultSettingsItem : AbstractPrioritizedTree<DefaultSettingsItem>
     {
         #region CTOR
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AbstractSettings"/> class.
+        /// Initializes a new instance of the <see cref="DefaultSettings"/> class.
         /// </summary>
-        protected AbstractSettingsItem(string title, AbstractSettings settings) : base()
+        protected DefaultSettingsItem(string title, DefaultSettings settings) : base()
         {
             this.Title = title;
             this.Key = title;
@@ -71,7 +71,7 @@ namespace Mjolnir.IDE.Sdk
         /// </summary>
         public virtual void Reset()
         {
-            foreach (AbstractSettingsItem settings in Children)
+            foreach (DefaultSettingsItem settings in Children)
             {
                 settings.Reset();
             }
@@ -87,7 +87,7 @@ namespace Mjolnir.IDE.Sdk
         /// </summary>
         public virtual void Save()
         {
-            foreach (AbstractSettingsItem settings in Children)
+            foreach (DefaultSettingsItem settings in Children)
             {
                 settings.Save();
             }
@@ -113,7 +113,7 @@ namespace Mjolnir.IDE.Sdk
 
         #region Members
 
-        protected AbstractSettings _appSettings;
+        protected DefaultSettings _appSettings;
 
         #endregion
     }

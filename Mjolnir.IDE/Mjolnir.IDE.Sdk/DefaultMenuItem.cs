@@ -14,7 +14,7 @@ namespace Mjolnir.IDE.Sdk
     /// <summary>
     /// Class AbstractMenuItem - representation of a Menu
     /// </summary>
-    public abstract class AbstractMenuItem : AbstractCommandable, IMenuService
+    public class DefaultMenuItem : Commandable, IMenuService
     {
         #region Static
 
@@ -139,9 +139,9 @@ namespace Mjolnir.IDE.Sdk
         /// <param name="item">The item.</param>
         /// <returns><c>true</c> if successfully added, <c>false</c> otherwise</returns>
         /// <exception cref="System.ArgumentException">Expected a AbstractMenuItem as the argument. Only Menu's can be added within a Menu.</exception>
-        public override string Add(AbstractCommandable item)
+        public override string Add(Commandable item)
         {
-            if (item.GetType().IsAssignableFrom(typeof(AbstractMenuItem)))
+            if (item.GetType().IsAssignableFrom(typeof(DefaultMenuItem)))
             {
                 throw new ArgumentException(
                     "Expected a AbstractMenuItem as the argument. Only Menu's can be added within a Menu.");
@@ -164,7 +164,7 @@ namespace Mjolnir.IDE.Sdk
         #region CTOR
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AbstractMenuItem"/> class.
+        /// Initializes a new instance of the <see cref="DefaultMenuItem"/> class.
         /// </summary>
         /// <param name="header">The header.</param>
         /// <param name="priority">The priority.</param>
@@ -172,7 +172,7 @@ namespace Mjolnir.IDE.Sdk
         /// <param name="command">The command.</param>
         /// <param name="gesture">The gesture.</param>
         /// <param name="isCheckable">if set to <c>true</c> acts as a checkable menu.</param>
-        protected AbstractMenuItem(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
+        protected DefaultMenuItem(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
                                    KeyGesture gesture = null, bool isCheckable = false, bool hideDisabled = false,
                                    bool isToggleButton = false, bool isSplitButton = true)
         {

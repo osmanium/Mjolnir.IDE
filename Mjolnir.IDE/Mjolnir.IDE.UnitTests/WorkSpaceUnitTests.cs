@@ -1,16 +1,15 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Mjolnir.IDE.Test;
 using Mjolnir.IDE.Core;
 using Microsoft.Practices.Unity;
+using Xunit;
 
-namespace Mjolnir.IDE.UnitTests
+namespace Mjolnir.IDE.Core.UnitTests
 {
-    [TestClass]
     public class WorkSpaceUnitTests
     {
-        [TestMethod]
-        public void TestMethod1()
+        [Fact]
+        public void Should_load_workspace()
         {
             Test.App app = new Test.App();
 

@@ -114,30 +114,13 @@ namespace Mjolnir.IDE.Core
             if (customApplication != null)
                 customApplication.RegisterTypes();
 
-            //Try resolving a workspace
-            var isDefaultWorkspace = false;
-            try
-            {
-                _container.Resolve<AbstractWorkspace>();
-            }
-            catch
-            {
-                _container.RegisterType<AbstractWorkspace, DefaultWorkspace>(new ContainerControlledLifetimeManager());
-                isDefaultWorkspace = true;
-            }
-
-
+            
             //Output
             OutputModule outputModule = _container.Resolve<OutputModule>();
             outputModule.Initialize();
             
             if (isDefaultOutputService)
                 _outputService.LogOutput("DefaultLogService applied", OutputCategory.Info, OutputPriority.None);
-
-            if (isDefaultWorkspace)
-                _outputService.LogOutput("DefaultWorkspace applied", OutputCategory.Info, OutputPriority.None);
-
-            
 
             
 
@@ -205,7 +188,7 @@ namespace Mjolnir.IDE.Core
             if (vm != null)
                 return true;
 
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             return workspace.ActiveDocument != null;
         }
 
@@ -214,7 +197,7 @@ namespace Mjolnir.IDE.Core
         /// </summary>
         private void CloseDocument(object obj)
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             IOutputService output = _container.Resolve<IOutputService>();
             IMenuService menuService = _container.Resolve<IMenuService>();
 

@@ -11,14 +11,14 @@ namespace Mjolnir.IDE.Sdk
     /// <summary>
     /// Class AbstractCommandable
     /// </summary>
-    public class AbstractCommandable : AbstractPrioritizedTree<AbstractCommandable>, ICommandable
+    public class Commandable : AbstractPrioritizedTree<Commandable>, ICommandable<Commandable>
     {
         #region CTOR
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AbstractCommandable"/> class.
+        /// Initializes a new instance of the <see cref="Commandable"/> class.
         /// </summary>
-        protected AbstractCommandable() : base()
+        protected Commandable() : base()
         {
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Mjolnir.IDE.Sdk.Interfaces
     /// <summary>
     /// Interface ICommandable
     /// </summary>
-    internal interface ICommandable
+    internal interface ICommandable<T> : IPrioritizedTree<T>
     {
         /// <summary>
         /// Gets the command.
@@ -29,5 +30,6 @@ namespace Mjolnir.IDE.Sdk.Interfaces
         /// </summary>
         /// <value>The input gesture text.</value>
         string InputGestureText { get; }
+        
     }
 }

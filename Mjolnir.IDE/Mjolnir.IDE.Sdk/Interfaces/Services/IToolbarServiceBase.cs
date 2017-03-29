@@ -23,7 +23,7 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Services
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns><c>true</c> if successfully added, <c>false</c> otherwise</returns>
-        string Add(AbstractCommandable item);
+        string Add(Commandable item);
 
         /// <summary>
         /// Removes the specified key.
@@ -37,13 +37,13 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Services
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>AbstractCommandable.</returns>
-        AbstractCommandable Get(string key);
+        Commandable Get(string key);
 
         /// <summary>
         /// Gets the right click menu.
         /// </summary>
         /// <value>The right click menu.</value>
-        AbstractMenuItem RightClickMenu { get; }
+        DefaultMenuItem RightClickMenu { get; }
 
         void RefreshToolBar();
     }

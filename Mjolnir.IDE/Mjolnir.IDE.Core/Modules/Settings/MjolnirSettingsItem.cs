@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Mjolnir.IDE.Core.Modules.Settings
 {
-    public class MjolnirSettingsItem : AbstractSettingsItem
+    public class MjolnirSettingsItem : DefaultSettingsItem
     {
-        public MjolnirSettingsItem(string title, int priority, AbstractSettings settings) 
+        public MjolnirSettingsItem(string title, int priority, DefaultSettings settings) 
             : base(title, settings)
         {
             this.Priority = priority;

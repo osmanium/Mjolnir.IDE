@@ -59,7 +59,7 @@ namespace Mjolnir.IDE.Test
         public void InitalizeIDE()
         {
             _eventAggregator = _container.Resolve<IEventAggregator>();
-            
+
         }
 
         public void LoadCommands()
@@ -102,7 +102,7 @@ namespace Mjolnir.IDE.Test
             //container.RegisterType<ISplashScreenViewModel, CustomSplashScreenViewModel>(new ContainerControlledLifetimeManager());
 
             //Register Workspace
-            _container.RegisterType<AbstractWorkspace, Workspace>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<DefaultWorkspace, Workspace>(new ContainerControlledLifetimeManager());
 
             _container.RegisterType<TextViewModel>();
             _container.RegisterType<TextModel>();
@@ -118,32 +118,30 @@ namespace Mjolnir.IDE.Test
         {
             //Log error
             var errorService = _container.Resolve<IErrorService>();
-            errorService.LogError(new ErrorListItem()
-            {
-                Column = 1,
-                Description = "Test description",
-                ItemType = Sdk.Enums.ErrorListItemType.Error,
-                Line = 1,
-                Path = "Path"
-            });
+            errorService.LogError(new ErrorListItem(
+                itemType: Sdk.Enums.ErrorListItemType.Error,
+                number: 1, 
+                description: "Test description", 
+                path:"Path", 
+                line: 1, 
+                column: 1));
 
-            errorService.LogError(new ErrorListItem()
-            {
-                Column = 1,
-                Description = "Test description",
-                ItemType = Sdk.Enums.ErrorListItemType.Warning,
-                Line = 2,
-                Path = "Path"
-            });
 
-            errorService.LogError(new ErrorListItem()
-            {
-                Column = 1,
-                Description = "Test description",
-                ItemType = Sdk.Enums.ErrorListItemType.Message,
-                Line = 3,
-                Path = "Path"
-            });
+            errorService.LogError(new ErrorListItem(
+                itemType: Sdk.Enums.ErrorListItemType.Warning,
+                number: 1,
+                description: "Test description",
+                path: "Path",
+                line: 2,
+                column: 1));
+
+            errorService.LogError(new ErrorListItem(
+                itemType: Sdk.Enums.ErrorListItemType.Message,
+                number: 1,
+                description: "Test description",
+                path: "Path",
+                line: 3,
+                column: 1));
 
 
             //Update statusbar values
@@ -223,7 +221,7 @@ namespace Mjolnir.IDE.Test
             var manager = _container.Resolve<ICommandManager>();
             var settingsManager = _container.Resolve<ISettingsManager>();
             var themeSettings = _container.Resolve<IThemeSettings>();
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
 
             ToolViewModel output = workspace.Tools.First(f => f.ContentId == "Output");
             ToolViewModel error = workspace.Tools.First(f => f.ContentId == "Error");
@@ -489,7 +487,7 @@ namespace Mjolnir.IDE.Test
 
         private void ToggleOutput()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             var menuService = _container.Resolve<IMenuService>();
             ToolViewModel output = workspace.Tools.First(f => f.ContentId == "Output");
             if (output != null)
@@ -501,7 +499,7 @@ namespace Mjolnir.IDE.Test
         }
         private void ErrorOutput()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             var menuService = _container.Resolve<IMenuService>();
             ToolViewModel output = workspace.Tools.First(f => f.ContentId == "Error");
             if (output != null)
@@ -520,7 +518,7 @@ namespace Mjolnir.IDE.Test
 
         private bool CanExecuteSaveDocument()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             if (workspace.ActiveDocument != null)
             {
                 return workspace.ActiveDocument.Model.IsDirty;
@@ -530,7 +528,7 @@ namespace Mjolnir.IDE.Test
 
         private bool CanExecuteSaveAllDocument()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             if (workspace.Documents != null && workspace.Documents.Any())
             {
                 return true;
@@ -540,13 +538,13 @@ namespace Mjolnir.IDE.Test
 
         private bool CanExecuteSaveAsDocument()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             return (workspace.ActiveDocument != null);
         }
 
         private void SaveDocument()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             ICommandManager manager = _container.Resolve<ICommandManager>();
             workspace.ActiveDocument.Handler.SaveContent(workspace.ActiveDocument);
             manager.Refresh();
@@ -554,7 +552,7 @@ namespace Mjolnir.IDE.Test
 
         private void SaveAllDocuments()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             ICommandManager manager = _container.Resolve<ICommandManager>();
             workspace.Documents.ToList().ForEach(f =>
             {
@@ -565,7 +563,7 @@ namespace Mjolnir.IDE.Test
 
         private void SaveAsDocument()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             ICommandManager manager = _container.Resolve<ICommandManager>();
             if (workspace.ActiveDocument != null)
             {
@@ -582,7 +580,7 @@ namespace Mjolnir.IDE.Test
 
         private void ToggleToolbox()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             var menuService = _container.Resolve<IMenuService>();
             ToolViewModel toolbox = workspace.Tools.First(f => f.ContentId == "Toolbox");
             if (toolbox != null)
@@ -595,7 +593,7 @@ namespace Mjolnir.IDE.Test
 
         private void ToggleProjectExplorer()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             var menuService = _container.Resolve<IMenuService>();
             ToolViewModel toolbox = workspace.Tools.First(f => f.ContentId == "Project Explorer");
             if (toolbox != null)
@@ -608,7 +606,7 @@ namespace Mjolnir.IDE.Test
 
         private void ToggleProperties()
         {
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
             var menuService = _container.Resolve<IMenuService>();
             ToolViewModel toolbox = workspace.Tools.First(f => f.ContentId == "Properties");
             if (toolbox != null)

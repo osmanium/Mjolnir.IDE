@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace Mjolnir.IDE.Sdk
 {
-    public abstract class AbstractToolbar : AbstractMenuItem, IToolbar, IShellToolbar, IToolboxToolbar
+    public class DefaultToolbar : DefaultMenuItem, IToolbar, IShellToolbar, IToolboxToolbar
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ToolbarViewModel"/> class.
@@ -22,7 +22,7 @@ namespace Mjolnir.IDE.Sdk
         /// <param name="isCheckable">if set to <c>true</c> does nothing in the case of toolbar - default value is false.</param>
         /// <param name="container">The container.</param>
         /// <exception cref="System.ArgumentException">Header cannot be SEP for a Toolbar</exception>
-        protected AbstractToolbar(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
+        protected DefaultToolbar(string key, string text, int priority, ImageSource icon = null, ICommand command = null,
                                   bool isCheckable = false, IUnityContainer container = null, bool isToggleButton = false, bool isSplitButton = true)
             : base(key, text, priority, icon, command, null, isCheckable, false, isToggleButton, isSplitButton)
         {

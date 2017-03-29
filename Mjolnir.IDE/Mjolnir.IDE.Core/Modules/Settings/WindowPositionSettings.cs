@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace Mjolnir.IDE.Core.Modules.Settings
 {
-    public class WindowPositionSettings : AbstractSettings, IWindowPositionSettings
+    public class WindowPositionSettings : DefaultSettings, IWindowPositionSettings
     {
         public WindowPositionSettings(IEventAggregator eventAggregator)
         {

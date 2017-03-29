@@ -20,13 +20,14 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels
 {
     public class ErrorViewModel : ToolViewModel, IErrorService
     {
-        private readonly IUnityContainer _container;
+        #region Fields
         private readonly ErrorUserControl _view;
         private readonly ObservableCollection<ErrorListItem> _items;
         private readonly IErrorToolboxToolbarService _errorToolbox;
         private readonly IEventAggregator _eventAggregator;
+        #endregion
 
-
+        #region Properties
         public override PaneLocation PreferredLocation
         {
             get { return PaneLocation.Bottom; }
@@ -101,23 +102,15 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels
             get { return _items.Count(x => x.ItemType == ErrorListItemType.Message); }
         }
 
-        private static string Pluralize(string singular, string plural, int number)
-        {
-            if (number == 1)
-                return string.Format(singular, number);
+        #endregion
 
-            return string.Format(plural, number);
-        }
-
-
-        public ErrorViewModel(IUnityContainer container,
-                              AbstractWorkspace workspace,
+        #region Constructors
+        public ErrorViewModel(DefaultWorkspace workspace,
                               IErrorToolboxToolbarService errorToolbox,
                               IEventAggregator eventAggregator)
-            : base(container, errorToolbox)
+            : base(errorToolbox)
         {
             _eventAggregator = eventAggregator;
-            _container = container;
             _errorToolbox = errorToolbox;
 
             _items = new ObservableCollection<ErrorListItem>();
@@ -127,7 +120,7 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels
                 OnPropertyChanged(() => ErrorItemCount);
                 OnPropertyChanged(() => WarningItemCount);
                 OnPropertyChanged(() => MessageItemCount);
-                
+
                 _eventAggregator.GetEvent<ErrorListUpdated>().Publish(new ErrorListUpdated());
             };
 
@@ -142,9 +135,12 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels
             View = _view;
         }
 
+        #endregion
+
+        #region Public Methods
         public void LogError(ErrorListItem error)
         {
-            Items.Add(new ErrorListItem(error.ItemType, Items.Count + 1, error.Description, error.Path, error.Line, error.Column));
+            Items.Add(error);
         }
 
         public void RemoveError(Guid errorId)
@@ -154,5 +150,16 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList.ViewModels
             if (itemToBeRemoved != null)
                 Items.Remove(itemToBeRemoved);
         }
+        #endregion
+
+        #region Private Methods
+        private static string Pluralize(string singular, string plural, int number)
+        {
+            if (number == 1)
+                return string.Format(singular, number);
+
+            return string.Format(plural, number);
+        }
+        #endregion
     }
 }

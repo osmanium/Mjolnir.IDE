@@ -36,7 +36,7 @@ namespace Mjolnir.IDE.Core.Modules.Output
         {
             _container = container;
             _eventAggregator = _container.Resolve<IEventAggregator>();
-            _workspace = _container.Resolve<AbstractWorkspace>();
+            _workspace = _container.Resolve<DefaultWorkspace>();
             _commandManager = _container.Resolve<ICommandManager>();
         }
 
@@ -48,7 +48,7 @@ namespace Mjolnir.IDE.Core.Modules.Output
             _container.RegisterType<IOutputToolboxToolbarService, OutputToolboxToolbarService>(new ContainerControlledLifetimeManager());
 
 
-            IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+            IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
 
 
             _outputViewModel = _container.Resolve<OutputViewModel>();

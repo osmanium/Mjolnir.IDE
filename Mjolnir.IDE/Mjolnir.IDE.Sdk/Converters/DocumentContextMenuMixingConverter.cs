@@ -17,10 +17,10 @@ namespace Mjolnir.IDE.Sdk.Converters
         public object Convert(object[] values, Type targetType, object parameter,
                               System.Globalization.CultureInfo culture)
         {
-            AbstractMenuItem root = new MenuItemViewModel("$CROOT$", "$CROOT$", 1);
+            DefaultMenuItem root = new MenuItemViewModel("$CROOT$", "$CROOT$", 1);
             LayoutDocumentItem doc = values[0] as LayoutDocumentItem;
             int i = 1;
-            IReadOnlyCollection<AbstractMenuItem> menus = values[1] as IReadOnlyCollection<AbstractMenuItem>;
+            IReadOnlyCollection<DefaultMenuItem> menus = values[1] as IReadOnlyCollection<DefaultMenuItem>;
             ContextMenu cm;
             if (doc != null)
             {
@@ -42,7 +42,7 @@ namespace Mjolnir.IDE.Sdk.Converters
 
                 if (menus != null)
                 {
-                    foreach (AbstractMenuItem abstractMenuItem in menus)
+                    foreach (DefaultMenuItem abstractMenuItem in menus)
                     {
                         root.Add(abstractMenuItem);
                     }
@@ -57,7 +57,7 @@ namespace Mjolnir.IDE.Sdk.Converters
             throw new NotImplementedException();
         }
 
-        private AbstractMenuItem FromMenuItem(MenuItem item, LayoutDocumentItem doc, int priority)
+        private DefaultMenuItem FromMenuItem(MenuItem item, LayoutDocumentItem doc, int priority)
         {
             bool hideDisabled = false;
             if (item != null)

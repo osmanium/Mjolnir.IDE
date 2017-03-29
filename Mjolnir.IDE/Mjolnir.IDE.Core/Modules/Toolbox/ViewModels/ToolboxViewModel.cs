@@ -39,14 +39,12 @@ namespace Mjolnir.IDE.Core.Modules.Toolbox.ViewModels
         }
 
 
-        public ToolboxViewModel(IUnityContainer container,
-                              AbstractWorkspace workspace,
+        public ToolboxViewModel(DefaultWorkspace workspace,
                               IEventAggregator eventAggregator,
                               IToolboxToolbarService toolboxToolbarService
                               )
-            : base(container, toolboxToolbarService)
+            : base(toolboxToolbarService)
         {
-            _container = container;
             _eventAggregator = eventAggregator;
             _workspace = workspace;
 

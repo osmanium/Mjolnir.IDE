@@ -34,7 +34,7 @@
     </DataTemplate>
 
 
-    <DataTemplate x:Key="comboboxTemplate" DataType="{x:Type Sdk:AbstractMenuItem}">
+    <DataTemplate x:Key="comboboxTemplate" DataType="{x:Type Sdk:DefaultMenuItem}">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Output Source" VerticalAlignment="Center" TextAlignment="Center"/>
             <ComboBox Background="{DynamicResource WindowTitleColorBrush}" 
@@ -53,7 +53,7 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="splitButtonTemplate" DataType="{x:Type Sdk:AbstractMenuItem}">
+    <DataTemplate x:Key="splitButtonTemplate" DataType="{x:Type Sdk:DefaultMenuItem}">
         <xctk:SplitButton Background="{DynamicResource WindowTitleColorBrush}" IsEnabled="True" Command="{Binding Command}" ToolTip="{Binding ToolTip}" Visibility="{Binding ., Converter={StaticResource ResourceKey=cvc}}">
             <xctk:SplitButton.Content>
                 <StackPanel Orientation="Horizontal" IsEnabled="False">

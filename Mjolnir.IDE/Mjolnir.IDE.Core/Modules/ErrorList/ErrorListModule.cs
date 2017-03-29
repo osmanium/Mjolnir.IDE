@@ -35,7 +35,7 @@ namespace Mjolnir.IDE.Core.Modules.ErrorList
 
         public ErrorListModule(IUnityContainer container,
                              IEventAggregator eventAggregaor,
-                             AbstractWorkspace abstractWorkspace,
+                             DefaultWorkspace abstractWorkspace,
                              ICommandManager commandManager)
         {
             _container = container;

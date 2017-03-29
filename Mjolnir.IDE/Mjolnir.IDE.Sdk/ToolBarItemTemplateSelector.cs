@@ -44,7 +44,7 @@ namespace Mjolnir.IDE.Sdk
         /// <returns>Returns a <see cref="T:System.Windows.DataTemplate" /> or null. The default value is null.</returns>
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            var toolBarItem = item as AbstractMenuItem;
+            var toolBarItem = item as DefaultMenuItem;
             if (toolBarItem != null && !toolBarItem.IsSeparator)
             {
                 if (toolBarItem.Children.Count > 0)

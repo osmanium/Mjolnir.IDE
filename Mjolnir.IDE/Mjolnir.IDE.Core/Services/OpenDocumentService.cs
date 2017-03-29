@@ -44,7 +44,7 @@ namespace Mjolnir.IDE.Core.Services
         /// <summary>
         /// The workspace
         /// </summary>
-        private AbstractWorkspace _workspace;
+        private DefaultWorkspace _workspace;
 
         /// <summary>
         /// The content handler registry
@@ -63,7 +63,7 @@ namespace Mjolnir.IDE.Core.Services
         /// <param name="eventAggregator">The injected event aggregator</param>
         /// <param name="output">The injected logger</param>
         public OpenDocumentService(IUnityContainer container, IEventAggregator eventAggregator, IOutputService output,
-                                   AbstractWorkspace workspace, IContentHandlerRegistry handler,
+                                   DefaultWorkspace workspace, IContentHandlerRegistry handler,
                                    IRecentViewSettings recentSettings)
         {
             _container = container;

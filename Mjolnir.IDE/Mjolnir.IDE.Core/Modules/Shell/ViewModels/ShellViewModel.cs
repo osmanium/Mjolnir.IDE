@@ -16,8 +16,8 @@ namespace Mjolnir.IDE.Core.Modules.Shell.ViewModels
 {
     public class ShellViewModel : ValidatableBindableBase
     {
-        private AbstractWorkspace _abstractWorkspace;
-        public AbstractWorkspace Workspace
+        private DefaultWorkspace _abstractWorkspace;
+        public DefaultWorkspace Workspace
         {
             get { return _abstractWorkspace; }
             set { SetProperty(ref _abstractWorkspace, value); }

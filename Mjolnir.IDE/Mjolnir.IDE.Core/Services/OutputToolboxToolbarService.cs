@@ -14,10 +14,10 @@ using Xceed.Wpf.AvalonDock.Converters;
 
 namespace Mjolnir.IDE.Core.Services
 {
-    public class OutputToolboxToolbarService : AbstractToolbar, IOutputToolboxToolbarService
+    public class OutputToolboxToolbarService : DefaultToolbar, IOutputToolboxToolbarService
     {
         private static BoolToVisibilityConverter btv = new BoolToVisibilityConverter();
-        private AbstractMenuItem menuItem;
+        private DefaultMenuItem menuItem;
         private ToolBarTray tray;
 
         public OutputToolboxToolbarService() : base("$OUTPUT$", "$OUTPUT$", 0)
@@ -29,9 +29,9 @@ namespace Mjolnir.IDE.Core.Services
         /// </summary>
         /// <param name="item">The item.</param>
         /// <returns><c>true</c> if successfully added, <c>false</c> otherwise</returns>
-        public override string Add(AbstractCommandable item)
+        public override string Add(Commandable item)
         {
-            AbstractToolbar tb = item as AbstractToolbar;
+            DefaultToolbar tb = item as DefaultToolbar;
             if (tb != null)
             {
                 tb.IsCheckable = true;
@@ -55,7 +55,7 @@ namespace Mjolnir.IDE.Core.Services
                     IAddChild child = tray;
                     foreach (var node in this.Children)
                     {
-                        var value = node as AbstractToolbar;
+                        var value = node as DefaultToolbar;
                         if (value != null)
                         {
                             var tb = new ToolBar();
@@ -94,7 +94,7 @@ namespace Mjolnir.IDE.Core.Services
             }
         }
 
-        public AbstractMenuItem RightClickMenu
+        public DefaultMenuItem RightClickMenu
         {
             get
             {
@@ -107,7 +107,7 @@ namespace Mjolnir.IDE.Core.Services
                     menuItem = new MenuItemViewModel("_Output", "Output", 100);
                     foreach (var value in tray.ContextMenu.ItemsSource)
                     {
-                        var menu = value as AbstractMenuItem;
+                        var menu = value as DefaultMenuItem;
                         menuItem.Add(menu);
                     }
                 }

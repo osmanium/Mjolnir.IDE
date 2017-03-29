@@ -26,7 +26,6 @@ namespace Mjolnir.IDE.Sdk.ViewModels
         private bool _isVisible = false;
         protected string _title = null;
 
-        private readonly IUnityContainer _container;
 
         #endregion
 
@@ -172,10 +171,9 @@ namespace Mjolnir.IDE.Sdk.ViewModels
         private IToolboxToolbar _toolbarService;
         #endregion
 
-        public ToolViewModel(IUnityContainer container, IToolbarServiceBase toolbarService)
+        public ToolViewModel(IToolbarServiceBase toolbarService)
         {
-            _container = container;
-            _toolbarService = toolbarService as AbstractToolbar;
+            _toolbarService = toolbarService as DefaultToolbar;
             IsValidationEnabled = false;
         }
     }

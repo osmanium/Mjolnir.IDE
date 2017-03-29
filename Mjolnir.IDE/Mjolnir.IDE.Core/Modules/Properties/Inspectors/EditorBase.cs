@@ -12,7 +12,7 @@ namespace Mjolnir.IDE.Core.Modules.Properties.Inspectors
 {
     public abstract class EditorBase<TValue> : InspectorBase, IEditor, IDisposable
     {
-        private readonly AbstractWorkspace _workspace;
+        private readonly DefaultWorkspace _workspace;
         private readonly IUnityContainer _container;
 
         private BoundPropertyDescriptor _boundPropertyDescriptor;
@@ -20,7 +20,7 @@ namespace Mjolnir.IDE.Core.Modules.Properties.Inspectors
         public EditorBase(IUnityContainer container)
         {
             _container = container;
-            _workspace = container.Resolve<AbstractWorkspace>();
+            _workspace = container.Resolve<DefaultWorkspace>();
         }
 
         public bool IsUndoEnabled

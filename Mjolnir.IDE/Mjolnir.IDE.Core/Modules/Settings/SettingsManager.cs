@@ -14,7 +14,7 @@ namespace Mjolnir.IDE.Core.Modules.Settings
     /// <summary>
     /// Class WideSettingsManager
     /// </summary>
-    public class SettingsManager : AbstractSettingsItem, ISettingsManager
+    public class SettingsManager : DefaultSettingsItem, ISettingsManager
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WideSettingsManager"/> class.

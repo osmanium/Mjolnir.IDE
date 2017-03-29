@@ -48,7 +48,7 @@ namespace Mjolnir.IDE.Core.Modules.Shell.Views
             {
                 var anchorable = e.Model as LayoutAnchorable;
                 var document = e.Model as LayoutDocument;
-                IWorkspace workspace = _container.Resolve<AbstractWorkspace>();
+                IWorkspace workspace = _container.Resolve<DefaultWorkspace>();
 
                 if (anchorable != null)
                 {

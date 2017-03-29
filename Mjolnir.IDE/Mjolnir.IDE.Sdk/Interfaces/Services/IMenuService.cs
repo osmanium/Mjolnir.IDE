@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,7 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Services
         /// <param name="item">The item.</param>
         /// <returns><c>true</c> if successfully added, <c>false</c> otherwise</returns>
         /// <exception cref="System.ArgumentException">Expected a AbstractMenuItem as the argument. Only Menu's can be added within a Menu.</exception>
-        string Add(AbstractCommandable item);
+        string Add(Commandable item);
 
         /// <summary>
         /// Removes the specified key.
@@ -28,11 +30,15 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Services
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>`0.</returns>
-        AbstractCommandable Get(string key);
+        Commandable Get(string key);
 
         /// <summary>
         /// Refreshes this instance.
         /// </summary>
         void Refresh();
+
+        event PropertyChangedEventHandler PropertyChanged;
+
+        ReadOnlyObservableCollection<Commandable> Children { get; }
     }
 }
