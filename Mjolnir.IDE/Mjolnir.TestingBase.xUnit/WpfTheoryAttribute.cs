@@ -3,5 +3,5 @@ using Xunit;
 using Xunit.Sdk;
 
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-[XunitTestCaseDiscoverer("STAExamples.WpfTheoryDiscoverer", "STAExamples")]
+[XunitTestCaseDiscoverer("Mjolnir.TestingBase.xUnit.WpfTheoryDiscoverer", "Mjolnir.TestingBase.xUnit")]
 public class WpfTheoryAttribute : TheoryAttribute { }
