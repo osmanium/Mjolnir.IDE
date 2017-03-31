@@ -23,6 +23,7 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
         private readonly OutputUserControl _view;
         private readonly IOutputToolboxToolbarService _outputToolbox;
         private readonly ICommandManager _commandManager;
+        private readonly IOutputService _outputService;
         #endregion
 
         #region Constants
@@ -71,7 +72,8 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
         public OutputViewModel(DefaultWorkspace workspace,
                                IOutputToolboxToolbarService outputToolbox,
                                ICommandManager commandManager,
-                               IEventAggregator aggregator)
+                               IEventAggregator aggregator,
+                               IOutputService outputService)
             : base(outputToolbox)
         {
             IsValidationEnabled = false;
@@ -79,6 +81,7 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             _outputToolbox = outputToolbox;
             _aggregator = aggregator;
             _commandManager = commandManager;
+            _outputService = outputService;
 
             _outputSource = new Dictionary<string, string>();
             _outputSource[DefaultOutputSource] = string.Empty;
@@ -93,7 +96,7 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             _view = new OutputUserControl(this);
             View = _view;
 
-            _aggregator.GetEvent<LogEvent>().Subscribe(AddLog);
+            _aggregator.GetEvent<LogOutputEvent>().Subscribe(AddLog);
             _aggregator.GetEvent<OutputSourceAddedEvent>().Subscribe(OutputSourceAddedEvent);
             _aggregator.GetEvent<OutputSourceRemovedEvent>().Subscribe(OutputSourceRemovedEvent);
             _aggregator.GetEvent<OutputSourceChangedEvent>().Subscribe(OutputSourceChangedEvent);
@@ -107,23 +110,23 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             OnPropertyChanged(() => CurrentOutputContext);
         }
 
-        public void AddLog(IOutputService output)
+        public void AddLog(LogOutputItem log)
         {
-            if (output.OutputSource != null && CurrentOutputContext == output.OutputSource)
+            if (log.OutputSource != null && CurrentOutputContext == log.OutputSource)
             {
-                _text = output.Message + "\n" + _text;
-                _outputSource[output.OutputSource] = _text;
+                _text = log.Message + "\n" + _text;
+                _outputSource[log.OutputSource] = _text;
                 OnPropertyChanged(() => Text);
             }
-            else if (output.OutputSource != null && CurrentOutputContext != output.OutputSource)
+            else if (log.OutputSource != null && CurrentOutputContext != log.OutputSource)
             {
                 //Apply to non selected output source
-                _outputSource[output.OutputSource] += output.Message + "\n" + _text;
+                _outputSource[log.OutputSource] += log.Message + "\n" + _text;
             }
-            else if (output.OutputSource == null)
+            else if (log.OutputSource == null)
             {
                 //Append to default
-                _outputSource[DefaultOutputSource] += output.Message + "\n" + _text;
+                _outputSource[DefaultOutputSource] += log.Message + "\n" + _text;
 
 
                 if (CurrentOutputContext == DefaultOutputSource)

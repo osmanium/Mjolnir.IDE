@@ -6,6 +6,7 @@ using Mjolnir.IDE.Core.Modules.Settings;
 using Mjolnir.IDE.Core.Modules.Toolbox;
 using Mjolnir.IDE.Core.Services;
 using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Enums;
 using Mjolnir.IDE.Sdk.Events;
 using Mjolnir.IDE.Sdk.Interfaces;
 using Mjolnir.IDE.Sdk.Interfaces.Services;
@@ -36,33 +37,36 @@ using System.Windows.Media.Imaging;
 
 namespace Mjolnir.IDE.Test
 {
-    public partial class App : MjolnirApp, IApplicationDefinition
+    public partial class App : MjolnirApp
     {
         private IUnityContainer _container;
         private IEventAggregator _eventAggregator;
 
         private string _applicationName;
-        public string ApplicationName { get { return _applicationName; } set { _applicationName = value; } }
+        public override string ApplicationName { get { return _applicationName; } set { _applicationName = value; } }
 
         private ImageSource _applicationIconSource;
-        public ImageSource ApplicationIconSource { get { return _applicationIconSource; } set { _applicationIconSource = value; } }
+        public override ImageSource ApplicationIconSource { get { return _applicationIconSource; } set { _applicationIconSource = value; } }
 
+        
         public App()
         {
             //Set application specific information
             //_applicationName = "Test Application";
             //_applicationIconSource = new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/mjolnir_override.png"));
-
-            base.ApplicationDefinition = this;
         }
+        
 
-        public void InitalizeIDE()
+        public override void InitalizeIDE()
         {
             _eventAggregator = _container.Resolve<IEventAggregator>();
-
+            
+            _eventAggregator.GetEvent<IDELoadedEvent>().Subscribe(App_OnIDELoaded);
+            _eventAggregator.GetEvent<IDEClosingEvent>().Subscribe(App_OnIDEClosing);
+            _eventAggregator.GetEvent<IDEClosedEvent>().Subscribe(App_OnIDEClosed);
         }
 
-        public void LoadCommands()
+        public override void LoadCommands()
         {
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Commands..." });
             var manager = _container.Resolve<ICommandManager>();
@@ -88,10 +92,8 @@ namespace Mjolnir.IDE.Test
             manager.RegisterCommand(CommandManagerConstants.ToggleToolboxCommand, toolboxCommand);
             manager.RegisterCommand(CommandManagerConstants.ToggleProjectExplorerCommand, solutionExplorerCommand);
         }
-
-
-
-        public void RegisterTypes()
+        
+        public override void RegisterTypes()
         {
             _container = Bootstrapper.Container;
 
@@ -114,108 +116,9 @@ namespace Mjolnir.IDE.Test
             registry.Register(_container.Resolve<AllFileHandler>());
         }
 
-        public void OnIDELoaded()
-        {
-            //Log error
-            var errorService = _container.Resolve<IErrorService>();
-            errorService.LogError(new ErrorListItem(
-                itemType: Sdk.Enums.ErrorListItemType.Error,
-                number: 1, 
-                description: "Test description", 
-                path:"Path", 
-                line: 1, 
-                column: 1));
+        
 
-
-            errorService.LogError(new ErrorListItem(
-                itemType: Sdk.Enums.ErrorListItemType.Warning,
-                number: 1,
-                description: "Test description",
-                path: "Path",
-                line: 2,
-                column: 1));
-
-            errorService.LogError(new ErrorListItem(
-                itemType: Sdk.Enums.ErrorListItemType.Message,
-                number: 1,
-                description: "Test description",
-                path: "Path",
-                line: 3,
-                column: 1));
-
-
-            //Update statusbar values
-            var _statusBar = _container.Resolve<IStatusbarService>();
-            _statusBar.CharPosition = 3;
-            _statusBar.ColPosition = 4;
-            _statusBar.LineNumber = 5;
-            _statusBar.Progress(true, 50, 100);
-            _statusBar.Text = "Building...";
-            _statusBar.InsertMode = true;
-
-
-            //Dynamically toolbar item can be added
-            var _outputToolboxService = _container.Resolve<IOutputToolboxToolbarService>();
-            var manager = _container.Resolve<ICommandManager>();
-            _outputToolboxService.Get("Standard").Add(new MenuItemViewModel("_Clear All 2", "Clear All 2", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")), manager.GetCommand("CLEAROUTPUT"), null, false, false, null, false));
-
-
-            //Create new output service and new log in it
-            var _outputService = _container.Resolve<IOutputService>();
-            _outputService.AddOutputSource("TestOutputSource");
-            _outputService.LogOutput("TestOutputSource message", OutputCategory.Info, OutputPriority.High, "TestOutputSource");
-
-
-            //Add toolbox items
-            var _toolboxService = _container.Resolve<IToolboxService>();
-            _toolboxService.AddToolboxItems(typeof(TextViewModel).Name, new List<ToolboxItem>()
-            {
-                new ToolboxItem()
-                {
-                    Category = "Manually Added Items",
-                    DocumentType = typeof(TextViewModel),
-                    ItemType = typeof(TestToolboxItem),
-                    Name = "Manual Item 1"
-                },
-                new ToolboxItem()
-                {
-                    Category = "Manually Added Items",
-                    DocumentType = typeof(TextViewModel),
-                    ItemType = typeof(TestToolboxItem),
-                    Name = "Manual Item 2"
-                },
-                new ToolboxItem()
-                {
-                    Category = "Manually Added Items",
-                    DocumentType = typeof(TextViewModel),
-                    ItemType = typeof(TestToolboxItem),
-                    Name = "Manual Item 3"
-                }
-            });
-
-            //Remove toolbox item
-            _toolboxService.RemoveToolboxItems(typeof(TextViewModel).Name, new List<ToolboxItem>()
-            {
-                new ToolboxItem()
-                {
-                    Category = "Manually Added Items",
-                    DocumentType = typeof(TextViewModel),
-                    ItemType = typeof(TestToolboxItem),
-                    Name = "Manual Item 3"
-                }
-            });
-
-
-            //Update property grid selected object
-            var _propertyGrid = _container.Resolve<IPropertyGrid>();
-            _propertyGrid.SelectedObject = _statusBar;
-
-
-
-
-        }
-
-        public void LoadMenus()
+        public override void LoadMenus()
         {
             var menuService = _container.Resolve<IMenuService>();
             var manager = _container.Resolve<ICommandManager>();
@@ -371,14 +274,14 @@ namespace Mjolnir.IDE.Test
 
         }
 
-        public void LoadSettings()
+        public override void LoadSettings()
         {
             ISettingsManager manager = _container.Resolve<ISettingsManager>();
             manager.Add(new MjolnirSettingsItem("Mjolnir Settings", 1, null));
             manager.Get("Mjolnir Settings").Add(new MjolnirSettingsItem("General", 1, MjolnirTestSettings.Default));
         }
 
-        public void LoadTheme()
+        public override void LoadTheme()
         {
             //TODO : Load settings before theme
             //new SplashMessageUpdateEvent().Publish(new SplashMessageUpdateEvent() { Message = "Themes.." });
@@ -390,7 +293,7 @@ namespace Mjolnir.IDE.Test
             //win.Dispatcher.InvokeAsync(() => manager.SetCurrent(themeSettings.SelectedTheme));
         }
 
-        public void LoadToolbar()
+        public override void LoadToolbar()
         {
             var toolbarService = _container.Resolve<IShellToolbarService>();
             var menuService = _container.Resolve<IMenuService>();
@@ -429,7 +332,7 @@ namespace Mjolnir.IDE.Test
 
         }
 
-        public void LoadModules()
+        public override void LoadModules()
         {
             ErrorListModule errorModule = _container.Resolve<ErrorListModule>();
             errorModule.Initialize();
@@ -445,20 +348,117 @@ namespace Mjolnir.IDE.Test
             ProjectExplorerModule projectExplorerModule = _container.Resolve<ProjectExplorerModule>();
             projectExplorerModule.Initialize();
         }
-
-        public bool onIDEClosing()
-        {
-            //Returns true if it is prevented, false to allow continue closing
-            return false;
-        }
-
-        public void onIDEClosed()
+        
+        
+        private void App_OnIDEClosed()
         {
 
         }
 
+        private void App_OnIDEClosing(IDEClosingEvent e)
+        {
+            var shell = _container.Resolve<IShellView>();
+            shell.SaveLayout();
+        }
+
+        private void App_OnIDELoaded()
+        {
+            //Log error
+            var errorService = _container.Resolve<IErrorService>();
+            errorService.LogError(new ErrorListItem(
+                itemType: Sdk.Enums.ErrorListItemType.Error,
+                number: 1,
+                description: "Test description",
+                path: "Path",
+                line: 1,
+                column: 1));
 
 
+            errorService.LogError(new ErrorListItem(
+                itemType: Sdk.Enums.ErrorListItemType.Warning,
+                number: 1,
+                description: "Test description",
+                path: "Path",
+                line: 2,
+                column: 1));
+
+            errorService.LogError(new ErrorListItem(
+                itemType: Sdk.Enums.ErrorListItemType.Message,
+                number: 1,
+                description: "Test description",
+                path: "Path",
+                line: 3,
+                column: 1));
+
+
+            //Update statusbar values
+            var _statusBar = _container.Resolve<IStatusbarService>();
+            _statusBar.CharPosition = 3;
+            _statusBar.ColPosition = 4;
+            _statusBar.LineNumber = 5;
+            _statusBar.Progress(true, 50, 100);
+            _statusBar.Text = "Building...";
+            _statusBar.InsertMode = true;
+
+
+            //Dynamically toolbar item can be added
+            var _outputToolboxService = _container.Resolve<IOutputToolboxToolbarService>();
+            var manager = _container.Resolve<ICommandManager>();
+            _outputToolboxService.Get("Standard").Add(new MenuItemViewModel("_Clear All 2", "Clear All 2", 3, new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Clearwindowcontent_6304.png")), manager.GetCommand("CLEAROUTPUT"), null, false, false, null, false));
+
+
+            //Create new output service and new log in it
+            var _outputService = _container.Resolve<IOutputService>();
+            _outputService.AddOutputSource("TestOutputSource");
+            _outputService.LogOutput(new LogOutputItem("TestOutputSource message", OutputCategory.Info, OutputPriority.High, "TestOutputSource"));
+
+
+            //Add toolbox items
+            var _toolboxService = _container.Resolve<IToolboxService>();
+            _toolboxService.AddToolboxItems(typeof(TextViewModel).Name, new List<ToolboxItem>()
+            {
+                new ToolboxItem()
+                {
+                    Category = "Manually Added Items",
+                    DocumentType = typeof(TextViewModel),
+                    ItemType = typeof(TestToolboxItem),
+                    Name = "Manual Item 1"
+                },
+                new ToolboxItem()
+                {
+                    Category = "Manually Added Items",
+                    DocumentType = typeof(TextViewModel),
+                    ItemType = typeof(TestToolboxItem),
+                    Name = "Manual Item 2"
+                },
+                new ToolboxItem()
+                {
+                    Category = "Manually Added Items",
+                    DocumentType = typeof(TextViewModel),
+                    ItemType = typeof(TestToolboxItem),
+                    Name = "Manual Item 3"
+                }
+            });
+
+            //Remove toolbox item
+            _toolboxService.RemoveToolboxItems(typeof(TextViewModel).Name, new List<ToolboxItem>()
+            {
+                new ToolboxItem()
+                {
+                    Category = "Manually Added Items",
+                    DocumentType = typeof(TextViewModel),
+                    ItemType = typeof(TestToolboxItem),
+                    Name = "Manual Item 3"
+                }
+            });
+
+
+            //Update property grid selected object
+            var _propertyGrid = _container.Resolve<IPropertyGrid>();
+            _propertyGrid.SelectedObject = _statusBar;
+
+        }
+        
 
         #region Commands Methods
 
@@ -618,6 +618,8 @@ namespace Mjolnir.IDE.Test
         }
 
 
+
         #endregion
+        
     }
 }

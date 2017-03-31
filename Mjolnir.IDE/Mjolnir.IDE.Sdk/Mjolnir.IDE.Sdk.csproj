@@ -113,6 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commandable.cs" />
+    <Compile Include="Enums\OutputCategory.cs" />
+    <Compile Include="Enums\OutputPriority.cs" />
+    <Compile Include="Events\IDEClosedEvent.cs" />
+    <Compile Include="Events\IDEClosingEvent.cs" />
+    <Compile Include="Events\IDELoadedEvent.cs" />
+    <Compile Include="LogOutputItem.cs" />
     <Compile Include="PrioritizedTree.cs" />
     <Compile Include="DefaultMenuItem.cs" />
     <Compile Include="DefaultSettings.cs" />
@@ -135,7 +141,7 @@
     <Compile Include="ErrorListItem.cs" />
     <Compile Include="Events\ActiveContentChangedEvent.cs" />
     <Compile Include="Events\ClosedContentEvent.cs" />
-    <Compile Include="Events\LogEvent.cs" />
+    <Compile Include="Events\LogOutputEvent.cs" />
     <Compile Include="Events\OpenContentEvent.cs" />
     <Compile Include="Events\OutputSourceAddedEvent.cs" />
     <Compile Include="Events\OutputSourceChangedEvent.cs" />
@@ -145,7 +151,6 @@
     <Compile Include="Events\ThemeChangeEvent.cs" />
     <Compile Include="Events\WindowClosingEvent.cs" />
     <Compile Include="InspectableObject.cs" />
-    <Compile Include="Interfaces\IApplicationDefinition.cs" />
     <Compile Include="Interfaces\ICommandable.cs" />
     <Compile Include="Interfaces\IContentView.cs" />
     <Compile Include="Interfaces\IEditor.cs" />

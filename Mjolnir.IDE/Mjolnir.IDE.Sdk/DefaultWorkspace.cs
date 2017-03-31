@@ -69,25 +69,25 @@ namespace Mjolnir.IDE.Sdk
         /// </summary>
         protected ObservableCollection<ToolViewModel> _tools = new ObservableCollection<ToolViewModel>();
 
-        private IApplicationDefinition _applicationDefinition;
+        //private MjolnirApp _applicationDefinition;
 
-        [JsonIgnore]
-        public ImageSource Icon
-        {
-            get
-            {
-                return _applicationDefinition.ApplicationIconSource;
-            }
-        }
+        //[JsonIgnore]
+        //public ImageSource Icon
+        //{
+        //    get
+        //    {
+        //        return _applicationDefinition.ApplicationIconSource;
+        //    }
+        //}
 
-        [JsonIgnore]
-        public string Title
-        {
-            get
-            {
-                return _applicationDefinition.ApplicationName;
-            }
-        }
+        //[JsonIgnore]
+        //public string Title
+        //{
+        //    get
+        //    {
+        //        return _applicationDefinition.ApplicationName;
+        //    }
+        //}
 
         #endregion
 
@@ -99,7 +99,6 @@ namespace Mjolnir.IDE.Sdk
         /// <param name="container">The injected container.</param>
         /// <param name="eventAggregator">The event aggregator.</param>
         protected DefaultWorkspace(IEventAggregator eventAggregator, 
-                                    IApplicationDefinition applicationDefinition,
                                     IMenuService menuService,
                                     IShellToolbarService shellToolbarService,
                                     IStatusbarService statusbarService,
@@ -107,7 +106,6 @@ namespace Mjolnir.IDE.Sdk
         {
             
             _eventAggregator = eventAggregator;
-            _applicationDefinition = applicationDefinition;
             _toolbarService = shellToolbarService as DefaultToolbar;
             _statusbarService = statusbarService;
             _commandManager = commandManager;

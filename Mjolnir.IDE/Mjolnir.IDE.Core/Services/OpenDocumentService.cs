@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using Mjolnir.IDE.Core.Modules.Settings;
 using Mjolnir.IDE.Sdk;
 using Mjolnir.IDE.Sdk.Attributes;
+using Mjolnir.IDE.Sdk.Enums;
 using Mjolnir.IDE.Sdk.Events;
 using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Mjolnir.IDE.Sdk.Interfaces.Settings;
@@ -128,17 +129,17 @@ namespace Mjolnir.IDE.Core.Services
                             {
                                 if (contentViewModel.Model.Location.Equals(openValue.Model.Location))
                                 {
-                                    _output.LogOutput(
+                                    _output.LogOutput(new LogOutputItem(
                                         "Document " + contentViewModel.Model.Location +
                                         "already open - making it active",
-                                        OutputCategory.Info, OutputPriority.Low);
+                                        OutputCategory.Info, OutputPriority.Low));
                                     _workspace.ActiveDocument = contentViewModel;
                                     return contentViewModel;
                                 }
                             }
                         }
 
-                        _output.LogOutput("Opening file" + location + " !!", OutputCategory.Info, OutputPriority.Low);
+                        _output.LogOutput(new LogOutputItem("Opening file" + location + " !!", OutputCategory.Info, OutputPriority.Low));
 
                         // Publish the event to the Application - subscribers can use this object
                         _eventAggregator.GetEvent<OpenContentEvent>().Publish(openValue);
@@ -156,14 +157,14 @@ namespace Mjolnir.IDE.Core.Services
                     }
                     else
                     {
-                        _output.LogOutput("Unable to find a IContentHandler to open " + location, OutputCategory.Error,
-                                    OutputPriority.High);
+                        _output.LogOutput(new LogOutputItem("Unable to find a IContentHandler to open " + location, OutputCategory.Error,
+                                    OutputPriority.High));
                     }
                 }
             }
             else
             {
-                _output.LogOutput("Canceled out of open file dialog", OutputCategory.Info, OutputPriority.Low);
+                _output.LogOutput(new LogOutputItem("Canceled out of open file dialog", OutputCategory.Info, OutputPriority.Low));
             }
             return returnValue;
         }
@@ -188,9 +189,9 @@ namespace Mjolnir.IDE.Core.Services
                     {
                         if (contentViewModel.Model.Location.Equals(openValue.Model.Location))
                         {
-                            _output.LogOutput("Document " + contentViewModel.Model.Location + "already open.",
+                            _output.LogOutput(new LogOutputItem("Document " + contentViewModel.Model.Location + "already open.",
                                         OutputCategory.Info,
-                                        OutputPriority.Low);
+                                        OutputPriority.Low));
 
                             if (makeActive)
                                 _workspace.ActiveDocument = contentViewModel;
@@ -200,7 +201,7 @@ namespace Mjolnir.IDE.Core.Services
                     }
                 }
 
-                _output.LogOutput("Opening content with " + contentID + " !!", OutputCategory.Info, OutputPriority.Low);
+                _output.LogOutput(new LogOutputItem("Opening content with " + contentID + " !!", OutputCategory.Info, OutputPriority.Low));
 
                 // Publish the event to the Application - subscribers can use this object
                 _eventAggregator.GetEvent<OpenContentEvent>().Publish(openValue);
@@ -216,8 +217,8 @@ namespace Mjolnir.IDE.Core.Services
                 return openValue;
             }
 
-            _output.LogOutput("Unable to find a IContentHandler to open content with ID = " + contentID, OutputCategory.Error,
-                        OutputPriority.High);
+            _output.LogOutput(new LogOutputItem("Unable to find a IContentHandler to open content with ID = " + contentID, OutputCategory.Error,
+                        OutputPriority.High));
             return null;
         }
 

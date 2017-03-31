@@ -1,4 +1,6 @@
-﻿using Mjolnir.IDE.Sdk.Events;
+﻿using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Enums;
+using Mjolnir.IDE.Sdk.Events;
 using Mjolnir.IDE.Sdk.Interfaces.Services;
 using NLog;
 using Prism.Events;
@@ -17,7 +19,7 @@ namespace Mjolnir.IDE.Core.Services
     /// </summary>
     public class DefaultLogService : IOutputService
     {
-        private static readonly Logger Logger = LogManager.GetLogger("Mjolnir.IDE");
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IEventAggregator _aggregator;
 
         /// <summary>
@@ -44,21 +46,15 @@ namespace Mjolnir.IDE.Core.Services
         /// <param name="message">A message to log</param>
         /// <param name="category">The category of logging</param>
         /// <param name="priority">The priority of logging</param>
-        public void LogOutput(string message, OutputCategory category, OutputPriority priority, string outputSource = null)
+        public void LogOutput(LogOutputItem log)
         {
-            Message = string.Format("{0} - {1}", DateTime.Now.ToLongTimeString(), message);
-            Category = category;
-            Priority = priority;
-
             var trace = new StackTrace();
             StackFrame frame = trace.GetFrame(1); // 0 will be the inner-most method
             MethodBase method = frame.GetMethod();
-
-            Logger.Log(LogLevel.Info, method.DeclaringType + ": " + message);
-
-            //TODOD : DefaultLogService
-            _aggregator.GetEvent<LogEvent>().Publish(new DefaultLogService
-            { Message = Message, Category = Category, Priority = Priority, OutputSource = outputSource });
+            
+            Logger.Log(LogLevel.Info, method.DeclaringType + ": " + log.Message);
+            
+            _aggregator.GetEvent<LogOutputEvent>().Publish(log);
         }
 
         public void AddOutputSource(string outputSource)
@@ -70,25 +66,6 @@ namespace Mjolnir.IDE.Core.Services
         {
             _aggregator.GetEvent<OutputSourceAddedEvent>().Publish(new OutputSourceAddedEvent() { OutputSourceName = outputSource });
         }
-
-
-        /// <summary>
-        /// The message which was last logged using the service
-        /// </summary>
-        public string Message { get; internal set; }
-
-        /// <summary>
-        /// The log message's category
-        /// </summary>
-        public OutputCategory Category { get; internal set; }
-
-        /// <summary>
-        /// The log message's priority
-        /// </summary>
-        public OutputPriority Priority { get; internal set; }
-
-        public string OutputSource { get; set; }
-
         #endregion
     }
 }

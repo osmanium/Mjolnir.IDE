@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Sdk.Interfaces;
+using System.Windows.Media;
 
 namespace Mjolnir.IDE.Core
 {
@@ -14,11 +15,22 @@ namespace Mjolnir.IDE.Core
     {
         public MjolnirBootstrapper Bootstrapper { get; set; }
 
-        public IApplicationDefinition ApplicationDefinition { get; set; }
+        public abstract string ApplicationName { get; set; }
+        public abstract ImageSource ApplicationIconSource { get; set; }
         
+        
+        public abstract void InitalizeIDE();
+        public abstract void RegisterTypes();
+        public abstract void LoadTheme();
+        public abstract void LoadMenus();
+        public abstract void LoadToolbar();
+        public abstract void LoadSettings();
+        public abstract void LoadCommands();
+        public abstract void LoadModules();
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            Bootstrapper = new MjolnirBootstrapper(ApplicationDefinition);
+            Bootstrapper = new MjolnirBootstrapper(this);
             base.OnStartup(e);
             Bootstrapper.Run();
         }

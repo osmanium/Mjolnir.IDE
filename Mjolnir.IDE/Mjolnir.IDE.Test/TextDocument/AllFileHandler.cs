@@ -1,6 +1,8 @@
 ﻿using Microsoft.Practices.Unity;
 using Microsoft.Win32;
+using Mjolnir.IDE.Sdk;
 using Mjolnir.IDE.Sdk.Attributes;
+using Mjolnir.IDE.Sdk.Enums;
 using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Mjolnir.IDE.Sdk.ViewModels;
 using Mjolnir.IDE.Test.TextDocument.Model;
@@ -58,7 +60,7 @@ namespace Mjolnir.IDE.Test.TextDocument
             var model = _container.Resolve<TextModel>();
             var view = _container.Resolve<TextView>();
 
-            _outputService.LogOutput("Creating a new simple file using AllFileHandler", OutputCategory.Info, OutputPriority.Low);
+            _outputService.LogOutput(new LogOutputItem("Creating a new simple file using AllFileHandler", OutputCategory.Info, OutputPriority.Low));
 
             //Clear the undo stack
             model.Document.UndoStack.ClearAll();
@@ -132,8 +134,8 @@ namespace Mjolnir.IDE.Test.TextDocument
                 }
                 catch (Exception exception)
                 {
-                    _outputService.LogOutput(exception.Message, OutputCategory.Exception, OutputPriority.High);
-                    _outputService.LogOutput(exception.StackTrace, OutputCategory.Exception, OutputPriority.High);
+                    _outputService.LogOutput(new LogOutputItem(exception.Message, OutputCategory.Exception, OutputPriority.High));
+                    _outputService.LogOutput(new LogOutputItem(exception.StackTrace, OutputCategory.Exception, OutputPriority.High));
                     return null;
                 }
 
@@ -183,8 +185,8 @@ namespace Mjolnir.IDE.Test.TextDocument
 
             if (textViewModel == null)
             {
-                _outputService.LogOutput("ContentViewModel needs to be a TextViewModel to save details", OutputCategory.Exception,
-                                   OutputPriority.High);
+                _outputService.LogOutput(new LogOutputItem("ContentViewModel needs to be a TextViewModel to save details", OutputCategory.Exception,
+                                   OutputPriority.High));
                 throw new ArgumentException("ContentViewModel needs to be a TextViewModel to save details");
             }
 
@@ -192,8 +194,8 @@ namespace Mjolnir.IDE.Test.TextDocument
 
             if (textModel == null)
             {
-                _outputService.LogOutput("TextViewModel does not have a TextModel which should have the text",
-                                   OutputCategory.Exception, OutputPriority.High);
+                _outputService.LogOutput(new LogOutputItem("TextViewModel does not have a TextModel which should have the text",
+                                   OutputCategory.Exception, OutputPriority.High));
                 throw new ArgumentException("TextViewModel does not have a TextModel which should have the text");
             }
 
@@ -227,8 +229,8 @@ namespace Mjolnir.IDE.Test.TextDocument
                     }
                     catch (Exception exception)
                     {
-                        _outputService.LogOutput(exception.Message, OutputCategory.Exception, OutputPriority.High);
-                        _outputService.LogOutput(exception.StackTrace, OutputCategory.Exception, OutputPriority.High);
+                        _outputService.LogOutput(new LogOutputItem(exception.Message, OutputCategory.Exception, OutputPriority.High));
+                        _outputService.LogOutput(new LogOutputItem(exception.StackTrace, OutputCategory.Exception, OutputPriority.High));
                         return false;
                     }
                 }
@@ -243,8 +245,8 @@ namespace Mjolnir.IDE.Test.TextDocument
                 }
                 catch (Exception exception)
                 {
-                    _outputService.LogOutput(exception.Message, OutputCategory.Exception, OutputPriority.High);
-                    _outputService.LogOutput(exception.StackTrace, OutputCategory.Exception, OutputPriority.High);
+                    _outputService.LogOutput(new LogOutputItem(exception.Message, OutputCategory.Exception, OutputPriority.High));
+                    _outputService.LogOutput(new LogOutputItem(exception.StackTrace, OutputCategory.Exception, OutputPriority.High));
                     return false;
                 }
             }

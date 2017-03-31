@@ -1,4 +1,6 @@
 ﻿using Mjolnir.IDE.Core.Modules.SplashScreen.ViewModels;
+using Mjolnir.IDE.Sdk.Events;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +14,20 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         private DefaultSplashScreenViewModel _viewModel;
         public DefaultSplashScreenViewModelTests()
         {
-            _viewModel = new DefaultSplashScreenViewModel(_eventAggregator.Object, _applicationDefinition.Object);
+            var splashScreenUpdateEvent = new Mock<SplashScreenUpdateEvent>();
+
+            _eventAggregator.Setup(ea => ea.GetEvent<SplashScreenUpdateEvent>())
+                .Returns(splashScreenUpdateEvent.Object);
+
+            _viewModel = new DefaultSplashScreenViewModel(_eventAggregator.Object, _mjolnirApp.Object);
         }
 
-        [WpfFact]
+        [WpfFact(Skip ="Check the message")]
         public void Should_update_message()
         {
+            
+
+
 
         }
 

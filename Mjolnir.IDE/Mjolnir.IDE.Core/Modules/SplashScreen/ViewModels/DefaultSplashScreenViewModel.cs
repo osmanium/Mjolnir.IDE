@@ -19,7 +19,7 @@ namespace Mjolnir.IDE.Core.Modules.SplashScreen.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         //private readonly IUnityContainer _container;
-        private readonly IApplicationDefinition _applicationDefinition;
+        private readonly MjolnirApp _app;
 
         private string _status;
         public string Status
@@ -43,30 +43,30 @@ namespace Mjolnir.IDE.Core.Modules.SplashScreen.ViewModels
         }
 
         public DefaultSplashScreenViewModel(IEventAggregator eventAggregator,
-                                            IApplicationDefinition applicationDefinition)
+                                            MjolnirApp app)
         {
-            _applicationDefinition = applicationDefinition;
+            _app = app;
             _eventAggregator = eventAggregator;
 
-            if (!string.IsNullOrWhiteSpace(applicationDefinition.ApplicationName))
+            if (!string.IsNullOrWhiteSpace(app.ApplicationName))
             {
-                ApplicationName = applicationDefinition.ApplicationName;
+                ApplicationName = app.ApplicationName;
             }
             else
             {
                 ApplicationName = "Mjolnir.IDE";
-                applicationDefinition.ApplicationName = ApplicationName;
+                app.ApplicationName = ApplicationName;
             }
 
 
-            if (applicationDefinition?.ApplicationIconSource != null)
+            if (app?.ApplicationIconSource != null)
             {
-                ApplicationIconSource = applicationDefinition.ApplicationIconSource;
+                ApplicationIconSource = app.ApplicationIconSource;
             }
             else
             {
                 ApplicationIconSource = new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Mjolnir_Icon.png"));
-                applicationDefinition.ApplicationIconSource = ApplicationIconSource;
+                app.ApplicationIconSource = ApplicationIconSource;
             }
 
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Subscribe(e => UpdateMessage(e.Text));

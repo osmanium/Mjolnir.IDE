@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 using Mjolnir.IDE.Sdk;
 using Mjolnir.IDE.Sdk.Converters;
+using Mjolnir.IDE.Sdk.Enums;
 using Mjolnir.IDE.Sdk.Events;
 using Mjolnir.IDE.Sdk.Interfaces;
 using Mjolnir.IDE.Sdk.Interfaces.Services;
@@ -33,12 +34,14 @@ namespace Mjolnir.IDE.Core.Modules.Shell.Views
     /// </summary>
     public partial class ShellView : MetroWindow, IShellView
     {
-        private IUnityContainer _container;
+        private readonly IUnityContainer _container;
+        private readonly IEventAggregator _eventAggregator;
 
-        public ShellView(IUnityContainer container)
+        public ShellView(IUnityContainer container, IEventAggregator eventAggregator)
         {
             InitializeComponent();
             _container = container;
+            _eventAggregator = eventAggregator;
         }
 
         public void LoadLayout()
@@ -90,7 +93,7 @@ namespace Mjolnir.IDE.Core.Modules.Shell.Views
             catch (Exception ex)
             {
                 var outputService = _container.Resolve<IOutputService>();
-                outputService.LogOutput(ex.Message, OutputCategory.Exception, OutputPriority.High);
+                outputService.LogOutput(new LogOutputItem(ex.Message, OutputCategory.Exception, OutputPriority.High));
             }
         }
 
@@ -102,30 +105,11 @@ namespace Mjolnir.IDE.Core.Modules.Shell.Views
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            var applicationDefinition = _container.Resolve<IApplicationDefinition>();
-            if (applicationDefinition != null)
-            {
-                if (!applicationDefinition.onIDEClosing())
-                {
-                    var shell = _container.Resolve<IShellView>();
-                    shell.SaveLayout();
-
-                    applicationDefinition.onIDEClosing();
-                }
-                else
-                {
-                    e.Cancel = true;
-                    base.OnClosing(e);
-                }
-            }
+            _eventAggregator.GetEvent<IDEClosedEvent>().Publish();
         }
         protected override void OnClosed(EventArgs e)
         {
-            var applicationDefinition = _container.Resolve<IApplicationDefinition>();
-            if (applicationDefinition != null)
-            {
-                applicationDefinition.onIDEClosed();
-            }
+            _eventAggregator.GetEvent<IDEClosedEvent>().Publish();
 
             base.OnClosed(e);
         }

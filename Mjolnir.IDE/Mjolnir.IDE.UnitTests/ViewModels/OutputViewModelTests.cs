@@ -19,14 +19,14 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         public OutputViewModelTests()
         {
 
-            var logEvent = new Mock<LogEvent>();
+            var logEvent = new Mock<LogOutputEvent>();
             var outputSourceChangedEvent = new Mock<OutputSourceChangedEvent>();
             var outputSourceAddedEvent = new Mock<OutputSourceAddedEvent>();
             var outputSourceRemovedEvent = new Mock<OutputSourceRemovedEvent>();
 
 
 
-            _eventAggregator.Setup(ea => ea.GetEvent<LogEvent>())
+            _eventAggregator.Setup(ea => ea.GetEvent<LogOutputEvent>())
                 .Returns(logEvent.Object);
             _eventAggregator.Setup(ea => ea.GetEvent<OutputSourceChangedEvent>())
                 .Returns(outputSourceChangedEvent.Object);
@@ -41,7 +41,8 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
             _viewModel = new OutputViewModel(_workspace.Object,
                                              _outputToolboxToolbarService.Object,
                                              _commandManager.Object,
-                                             _eventAggregator.Object);
+                                             _eventAggregator.Object,
+                                             _outputService.Object);
         }
 
         [WpfFact]

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Mjolnir.IDE.Sdk.Events
 {
-    //TODO : It should send log object not the service
-    public class LogEvent : PubSubEvent<IOutputService>
+    public class LogOutputEvent : PubSubEvent<LogOutputItem>
     {
+        public LogOutputItem Log { get; set; }
     }
 }

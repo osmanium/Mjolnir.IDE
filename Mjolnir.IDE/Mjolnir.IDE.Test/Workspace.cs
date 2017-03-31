@@ -20,12 +20,11 @@ namespace Mjolnir.IDE.Test
         /// <param name="container">The injected container - can be used by custom flavors of workspace</param>
         /// <param name="eventAggregator">The event aggregator.</param>
         public Workspace(IEventAggregator eventAggregator,
-                         IApplicationDefinition applicationDefinition,
                          IMenuService menuService,
                          IShellToolbarService shellToolbarService,
                          IStatusbarService statusbarService,
                          ICommandManager commandManager)
-            : base(eventAggregator, applicationDefinition, menuService, shellToolbarService, statusbarService, commandManager)
+            : base(eventAggregator, menuService, shellToolbarService, statusbarService, commandManager)
         {
         }
     }

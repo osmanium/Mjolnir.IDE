@@ -16,25 +16,28 @@ namespace Mjolnir.IDE.Core.UnitTests
 {
     public class ViewModelTestBase
     {
-        protected Mock<IApplicationDefinition> _applicationDefinition;
         protected Mock<IMenuService> _menuService;
         protected Mock<IShellToolbarService> _shellToolbarService;
         protected Mock<IStatusbarService> _statusbarService;
         protected Mock<ICommandManager> _commandManager;
         protected Mock<DefaultWorkspace> _workspace;
         protected Mock<IEventAggregator> _eventAggregator;
+        protected Mock<IOutputService> _outputService;
+        protected Mock<MjolnirApp> _mjolnirApp;
 
 
         public ViewModelTestBase()
         {
             _eventAggregator = new Mock<IEventAggregator>();
-            _applicationDefinition = new Mock<IApplicationDefinition>();
             _menuService = new Mock<IMenuService>();
             _shellToolbarService = new Mock<IShellToolbarService>();
             _statusbarService = new Mock<IStatusbarService>();
             _commandManager = new Mock<ICommandManager>();
-            
-            _workspace = new Mock<DefaultWorkspace>(MockBehavior.Loose, _eventAggregator.Object, _applicationDefinition.Object, _menuService.Object, _shellToolbarService.Object, _statusbarService.Object, _commandManager.Object);
+            _outputService = new Mock<IOutputService>();
+
+            _mjolnirApp = new Mock<MjolnirApp>();
+
+            _workspace = new Mock<DefaultWorkspace>(MockBehavior.Loose, _eventAggregator.Object, _menuService.Object, _shellToolbarService.Object, _statusbarService.Object, _commandManager.Object);
         }
 
 

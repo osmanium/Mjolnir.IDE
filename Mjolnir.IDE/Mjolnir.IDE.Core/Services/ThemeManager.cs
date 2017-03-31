@@ -1,4 +1,6 @@
-﻿using Mjolnir.IDE.Sdk.Events;
+﻿using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Enums;
+using Mjolnir.IDE.Sdk.Events;
 using Mjolnir.IDE.Sdk.Interfaces;
 using Mjolnir.IDE.Sdk.Interfaces.Services;
 using Prism.Events;
@@ -114,7 +116,7 @@ namespace Mjolnir.IDE.Core.Services
                 }
                 appTheme.EndInit();
                 theme.EndInit();
-                _logger.LogOutput("Theme set to " + name, OutputCategory.Info, OutputPriority.None);
+                _logger.LogOutput(new LogOutputItem("Theme set to " + name, OutputCategory.Info, OutputPriority.None));
                 _eventAggregator.GetEvent<ThemeChangeEvent>().Publish(newTheme);
             }
             return false;

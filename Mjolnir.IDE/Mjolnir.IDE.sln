@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.TestingBase.xUnit",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Test.UITest", "Mjolnir.IDE.Test.UITest\Mjolnir.IDE.Test.UITest.csproj", "{064D3314-FAA9-4C90-AB63-8397F48FF7AA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{96422E8B-0880-4D72-A759-008A83EB7BF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4} = {96422E8B-0880-4D72-A759-008A83EB7BF3}
+		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1} = {96422E8B-0880-4D72-A759-008A83EB7BF3}
+		{9179695A-0B3D-42D9-A903-1D508A2B6636} = {96422E8B-0880-4D72-A759-008A83EB7BF3}
+		{064D3314-FAA9-4C90-AB63-8397F48FF7AA} = {96422E8B-0880-4D72-A759-008A83EB7BF3}
 	EndGlobalSection
 EndGlobal

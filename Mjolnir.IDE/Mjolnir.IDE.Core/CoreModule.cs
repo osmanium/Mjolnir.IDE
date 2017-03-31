@@ -6,6 +6,7 @@ using Mjolnir.IDE.Core.Modules.Settings;
 using Mjolnir.IDE.Core.Modules.Toolbox;
 using Mjolnir.IDE.Core.Services;
 using Mjolnir.IDE.Sdk;
+using Mjolnir.IDE.Sdk.Enums;
 using Mjolnir.IDE.Sdk.Events;
 using Mjolnir.IDE.Sdk.Interfaces;
 using Mjolnir.IDE.Sdk.Interfaces.Services;
@@ -34,12 +35,15 @@ namespace Mjolnir.IDE.Core
         private readonly IUnityContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private IOutputService _outputService;
+        private readonly MjolnirApp _app;
 
         public CoreModule(IUnityContainer container,
-                          IEventAggregator eventAggregator)
+                          IEventAggregator eventAggregator,
+                          MjolnirApp app)
         {
             this._container = container;
             this._eventAggregator = eventAggregator;
+            this._app = app;
         }
 
 
@@ -109,10 +113,10 @@ namespace Mjolnir.IDE.Core
             }
 
 
-            var customApplication = _container.Resolve<IApplicationDefinition>();
+            var app = _container.Resolve<MjolnirApp>();
 
-            if (customApplication != null)
-                customApplication.RegisterTypes();
+            if (app != null)
+                app.RegisterTypes();
 
             
             //Output
@@ -120,13 +124,13 @@ namespace Mjolnir.IDE.Core
             outputModule.Initialize();
             
             if (isDefaultOutputService)
-                _outputService.LogOutput("DefaultLogService applied", OutputCategory.Info, OutputPriority.None);
-
-            
+                _outputService.LogOutput(new LogOutputItem("DefaultLogService applied", OutputCategory.Info, OutputPriority.None));
 
 
-            if (customApplication != null)
-                customApplication.InitalizeIDE();
+
+
+            if (app != null)
+                app.InitalizeIDE();
 
             //Below ones can be loaded with solution, does not require immediate load
             //TODO : Console
@@ -135,16 +139,16 @@ namespace Mjolnir.IDE.Core
             propertiesModule.Initialize();
 
 
-            if (customApplication != null)
+            if (app != null)
             {
                 _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Publish(new SplashScreenUpdateEvent { Text = "Loading Application UI..." });
 
-                customApplication.LoadCommands();
-                customApplication.LoadModules();
-                customApplication.LoadTheme();
-                customApplication.LoadMenus();
-                customApplication.LoadToolbar();
-                customApplication.LoadSettings();
+                app.LoadCommands();
+                app.LoadModules();
+                app.LoadTheme();
+                app.LoadMenus();
+                app.LoadToolbar();
+                app.LoadSettings();
 
                 
             }
@@ -152,9 +156,7 @@ namespace Mjolnir.IDE.Core
             var shell = _container.Resolve<IShellView>();
             shell.LoadLayout();
 
-            var applicationDefinition = _container.Resolve<IApplicationDefinition>();
-            if (applicationDefinition != null)
-                applicationDefinition.OnIDELoaded();
+            _eventAggregator.GetEvent<IDELoadedEvent>().Publish();
         }
 
         private void AppCommands()
@@ -244,7 +246,7 @@ namespace Mjolnir.IDE.Core
 
             if (e == null)
             {
-                output.LogOutput("Closing document " + activeDocument.Model.Location, OutputCategory.Info, OutputPriority.None);
+                output.LogOutput(new LogOutputItem("Closing document " + activeDocument.Model.Location, OutputCategory.Info, OutputPriority.None));
                 workspace.Documents.Remove(activeDocument);
                 _eventAggregator.GetEvent<ClosedContentEvent>().Publish(activeDocument);
                 menuService.Refresh();

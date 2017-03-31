@@ -28,17 +28,17 @@ namespace Mjolnir.IDE.Sdk.Interfaces
         /// </summary>
         ContentViewModel ActiveDocument { get; set; }
 
-        /// <summary>
-        /// Gets the title of the application.
-        /// </summary>
-        /// <value>The title.</value>
-        string Title { get; }
+        ///// <summary>
+        ///// Gets the title of the application.
+        ///// </summary>
+        ///// <value>The title.</value>
+        //string Title { get; }
 
-        /// <summary>
-        /// Gets the icon of the application.
-        /// </summary>
-        /// <value>The icon.</value>
-        ImageSource Icon { get; }
+        ///// <summary>
+        ///// Gets the icon of the application.
+        ///// </summary>
+        ///// <value>The icon.</value>
+        //ImageSource Icon { get; }
 
         /// <summary>
         /// Closing this instance.

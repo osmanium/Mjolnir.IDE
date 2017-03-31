@@ -28,11 +28,11 @@ namespace Mjolnir.IDE.Core
     {
         public bool HideSplashWindow { get; set; }
 
-        private readonly IApplicationDefinition _applicationDefinition;
+        private readonly MjolnirApp _app;
 
-        public MjolnirBootstrapper(IApplicationDefinition ApplicationDefinition)
+        public MjolnirBootstrapper(MjolnirApp app)
         {
-            _applicationDefinition = ApplicationDefinition;
+            _app = app;
         }
 
         protected override void InitializeModules()
@@ -86,7 +86,7 @@ namespace Mjolnir.IDE.Core
                 Container.RegisterType<ISplashScreenView, DefaultSplashScreenView>(new ContainerControlledLifetimeManager());
             }
 
-            Container.RegisterInstance<IApplicationDefinition>(_applicationDefinition, new ContainerControlledLifetimeManager());
+            Container.RegisterInstance<MjolnirApp>(_app, new ContainerControlledLifetimeManager());
 
             base.ConfigureContainer();
         }
