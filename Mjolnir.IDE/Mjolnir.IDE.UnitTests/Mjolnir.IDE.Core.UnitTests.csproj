@@ -95,7 +95,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestDataProviders\ErrorListTestDataProvider.cs" />
     <Compile Include="TestDataProviders\OutputTestDataProvider.cs" />
     <Compile Include="ViewModels\DefaultSplashScreenViewModelTests.cs" />
     <Compile Include="ViewModels\ErrorListViewModelTests.cs" />
