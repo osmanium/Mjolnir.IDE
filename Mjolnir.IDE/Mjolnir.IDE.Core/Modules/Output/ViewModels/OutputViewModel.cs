@@ -86,6 +86,7 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             _outputSource = new Dictionary<string, string>();
             _outputSource[DefaultOutputSource] = string.Empty;
             CurrentOutputContext = DefaultOutputSource;
+            OutputSourceRefresh();
 
             Name = "Output";
             Title = "Output";
@@ -114,15 +115,16 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(log.Message))
             {
+                var message = $"{DateTime.Now.ToShortTimeString()} - {log.Message}\n";
 
                 if (log.OutputSource != null)
                 {
-                    _outputSource[log.OutputSource] += log.Message + "\n";
+                    _outputSource[log.OutputSource] += message;
                 }
                 else
                 {
                     //Append to default
-                    _outputSource[DefaultOutputSource] += log.Message + "\n";
+                    _outputSource[DefaultOutputSource] += message;
                 }
 
                 if (CurrentOutputContext == DefaultOutputSource)

@@ -54,6 +54,9 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Mjolnir.TestingBase.xUnit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mjolnir.TestingBase.xUnit.1.0.0\lib\net452\Mjolnir.TestingBase.xUnit.dll</HintPath>
+    </Reference>
     <Reference Include="Mjolnir.UI.Validation, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mjolnir.UI.Validation.1.1.0\lib\net452\Mjolnir.UI.Validation.dll</HintPath>
     </Reference>
@@ -123,10 +126,6 @@
     <ProjectReference Include="..\Mjolnir.IDE.Test\Mjolnir.IDE.Test.csproj">
       <Project>{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4}</Project>
       <Name>Mjolnir.IDE.Test</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mjolnir.TestingBase.xUnit\Mjolnir.TestingBase.xUnit.csproj">
-      <Project>{9179695a-0b3d-42d9-a903-1d508a2b6636}</Project>
-      <Name>Mjolnir.TestingBase.xUnit</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Core", "Mjolnir.IDE.Core\Mjolnir.IDE.Core.csproj", "{FC4902D1-E1CF-4CF7-A465-6E8DB192B9B0}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Test", "Mjolnir.IDE.Test\Mjolnir.IDE.Test.csproj", "{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Core.UnitTests", "Mjolnir.IDE.UnitTests\Mjolnir.IDE.Core.UnitTests.csproj", "{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.TestingBase.xUnit", "Mjolnir.TestingBase.xUnit\Mjolnir.TestingBase.xUnit.csproj", "{9179695A-0B3D-42D9-A903-1D508A2B6636}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mjolnir.IDE.Test.UITest", "Mjolnir.IDE.Test.UITest\Mjolnir.IDE.Test.UITest.csproj", "{064D3314-FAA9-4C90-AB63-8397F48FF7AA}"
 EndProject
@@ -39,10 +37,6 @@ Global
 		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9179695A-0B3D-42D9-A903-1D508A2B6636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9179695A-0B3D-42D9-A903-1D508A2B6636}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9179695A-0B3D-42D9-A903-1D508A2B6636}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9179695A-0B3D-42D9-A903-1D508A2B6636}.Release|Any CPU.Build.0 = Release|Any CPU
 		{064D3314-FAA9-4C90-AB63-8397F48FF7AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{064D3314-FAA9-4C90-AB63-8397F48FF7AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{064D3314-FAA9-4C90-AB63-8397F48FF7AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,7 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CF2E249B-9DDD-4ACA-90EF-E76B03EB6BC4} = {96422E8B-0880-4D72-A759-008A83EB7BF3}
 		{E1ED77B6-08B5-4B34-8B03-705C789C9EA1} = {96422E8B-0880-4D72-A759-008A83EB7BF3}
-		{9179695A-0B3D-42D9-A903-1D508A2B6636} = {96422E8B-0880-4D72-A759-008A83EB7BF3}
 		{064D3314-FAA9-4C90-AB63-8397F48FF7AA} = {96422E8B-0880-4D72-A759-008A83EB7BF3}
 	EndGlobalSection
 EndGlobal
