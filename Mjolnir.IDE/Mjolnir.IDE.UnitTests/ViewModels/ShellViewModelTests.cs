@@ -15,7 +15,7 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
 
         public ShellViewModelTests()
         {
-            _shellViewModel = new ShellViewModel();
+            //_shellViewModel = new ShellViewModel();
         }
 
         [WpfFact]

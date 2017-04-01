@@ -325,6 +325,26 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
             viewModel.Text.ShouldNotBeNullOrWhiteSpace();
         }
 
+        [WpfFact]
+        public void Should_Text_Property_Changed()
+        {
+            var isFired = false;
+            var viewModel = ViewModelFactory();
+
+            viewModel.PropertyChanged += (o, e) => 
+            {
+                if (e.PropertyName == nameof(viewModel.Text))
+                {
+                    isFired = true;
+                }
+            };
+
+            var log = new LogOutputItem("Test message", OutputCategory.Warn, OutputPriority.None);
+            viewModel.AddLog(log);
+
+            isFired.ShouldBe(true);
+        }
+
 
         private OutputViewModel ViewModelFactory()
         {

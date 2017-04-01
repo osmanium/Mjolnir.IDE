@@ -15,8 +15,8 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
-        Title="{Binding Workspace.Title}"
-        Icon="{Binding Workspace.Icon}"
+        Title="{Binding App.ApplicationName}"
+        Icon="{Binding App.ApplicationIconSource}"
         ResizeMode="CanResizeWithGrip"
         TitleForeground="#FF717171" 
         TitleCaps="False" >

@@ -52,21 +52,11 @@ namespace Mjolnir.IDE.Core.Modules.SplashScreen.ViewModels
             {
                 ApplicationName = app.ApplicationName;
             }
-            else
-            {
-                ApplicationName = "Mjolnir.IDE";
-                app.ApplicationName = ApplicationName;
-            }
 
 
             if (app?.ApplicationIconSource != null)
             {
                 ApplicationIconSource = app.ApplicationIconSource;
-            }
-            else
-            {
-                ApplicationIconSource = new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Core;component/Assets/Mjolnir_Icon.png"));
-                app.ApplicationIconSource = ApplicationIconSource;
             }
 
             _eventAggregator.GetEvent<SplashScreenUpdateEvent>().Subscribe(e => UpdateMessage(e.Text));

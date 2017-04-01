@@ -107,6 +107,7 @@ namespace Mjolnir.IDE.Core.Modules.Shell.Views
         {
             _eventAggregator.GetEvent<IDEClosedEvent>().Publish();
         }
+
         protected override void OnClosed(EventArgs e)
         {
             _eventAggregator.GetEvent<IDEClosedEvent>().Publish();

@@ -42,25 +42,18 @@ namespace Mjolnir.IDE.Test
         private IUnityContainer _container;
         private IEventAggregator _eventAggregator;
 
-        private string _applicationName;
-        public override string ApplicationName { get { return _applicationName; } set { _applicationName = value; } }
-
-        private ImageSource _applicationIconSource;
-        public override ImageSource ApplicationIconSource { get { return _applicationIconSource; } set { _applicationIconSource = value; } }
-
-        
         public App()
         {
             //Set application specific information
             //_applicationName = "Test Application";
             //_applicationIconSource = new BitmapImage(new Uri(@"pack://application:,,,/Mjolnir.IDE.Test;component/Icons/mjolnir_override.png"));
         }
-        
+
 
         public override void InitalizeIDE()
         {
             _eventAggregator = _container.Resolve<IEventAggregator>();
-            
+
             _eventAggregator.GetEvent<IDELoadedEvent>().Subscribe(App_OnIDELoaded);
             _eventAggregator.GetEvent<IDEClosingEvent>().Subscribe(App_OnIDEClosing);
             _eventAggregator.GetEvent<IDEClosedEvent>().Subscribe(App_OnIDEClosed);
@@ -92,7 +85,7 @@ namespace Mjolnir.IDE.Test
             manager.RegisterCommand(CommandManagerConstants.ToggleToolboxCommand, toolboxCommand);
             manager.RegisterCommand(CommandManagerConstants.ToggleProjectExplorerCommand, solutionExplorerCommand);
         }
-        
+
         public override void RegisterTypes()
         {
             _container = Bootstrapper.Container;
@@ -116,7 +109,7 @@ namespace Mjolnir.IDE.Test
             registry.Register(_container.Resolve<AllFileHandler>());
         }
 
-        
+
 
         public override void LoadMenus()
         {
@@ -348,8 +341,8 @@ namespace Mjolnir.IDE.Test
             ProjectExplorerModule projectExplorerModule = _container.Resolve<ProjectExplorerModule>();
             projectExplorerModule.Initialize();
         }
-        
-        
+
+
         private void App_OnIDEClosed()
         {
 
@@ -458,7 +451,7 @@ namespace Mjolnir.IDE.Test
             _propertyGrid.SelectedObject = _statusBar;
 
         }
-        
+
 
         #region Commands Methods
 
@@ -620,6 +613,6 @@ namespace Mjolnir.IDE.Test
 
 
         #endregion
-        
+
     }
 }

@@ -16,6 +16,12 @@ namespace Mjolnir.IDE.Core.Modules.Shell.ViewModels
 {
     public class ShellViewModel : ValidatableBindableBase
     {
+        private MjolnirApp _app;
+        public MjolnirApp App
+        {
+            get { return _app; }
+        }
+
         private DefaultWorkspace _abstractWorkspace;
         public DefaultWorkspace Workspace
         {
@@ -23,9 +29,10 @@ namespace Mjolnir.IDE.Core.Modules.Shell.ViewModels
             set { SetProperty(ref _abstractWorkspace, value); }
         }
 
-        public ShellViewModel()
+        public ShellViewModel(MjolnirApp app)
         {
             IsValidationEnabled = false;
+            _app = app;
         }
     }
 }
