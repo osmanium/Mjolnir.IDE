@@ -92,7 +92,7 @@ namespace Mjolnir.IDE.Core.Modules.Output
 
         private void ClearOutput()
         {
-            _outputViewModel.ClearLog();
+            _outputViewModel.ClearCurrentContextLog();
         }
 
         private void DoNothing()

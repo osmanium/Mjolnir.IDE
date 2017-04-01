@@ -10,5 +10,13 @@ namespace Mjolnir.IDE.Sdk.Events
     public class OutputSourceRemovedEvent : PubSubEvent<OutputSourceRemovedEvent>
     {
         public string OutputSourceName { get; set; }
+
+        public OutputSourceRemovedEvent()
+        { }
+
+        public OutputSourceRemovedEvent(string outputSourceName)
+        {
+            this.OutputSourceName = outputSourceName;
+        }
     }
 }

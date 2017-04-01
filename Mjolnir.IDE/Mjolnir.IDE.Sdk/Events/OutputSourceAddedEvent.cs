@@ -10,5 +10,13 @@ namespace Mjolnir.IDE.Sdk.Events
     public class OutputSourceAddedEvent : PubSubEvent<OutputSourceAddedEvent>
     {
         public string OutputSourceName { get; set; }
+
+        public OutputSourceAddedEvent()
+        { }
+
+        public OutputSourceAddedEvent(string outputSourceName)
+        {
+            this.OutputSourceName = outputSourceName;
+        }
     }
 }

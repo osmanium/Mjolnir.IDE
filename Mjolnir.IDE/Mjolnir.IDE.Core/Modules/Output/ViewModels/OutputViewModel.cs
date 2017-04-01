@@ -19,7 +19,7 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
     public class OutputViewModel : ToolViewModel
     {
         #region Fields
-        private readonly IEventAggregator _aggregator;
+        private readonly IEventAggregator _eventAggregator;
         private readonly OutputUserControl _view;
         private readonly IOutputToolboxToolbarService _outputToolbox;
         private readonly ICommandManager _commandManager;
@@ -55,7 +55,7 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             {
                 SetProperty(ref _currentOutputContext, value);
 
-                _aggregator.GetEvent<OutputSourceChangedEvent>().Publish(new OutputSourceChangedEvent() { EventSourceName = value });
+                _eventAggregator.GetEvent<OutputSourceChangedEvent>().Publish(new OutputSourceChangedEvent() { EventSourceName = value });
             }
         }
 
@@ -63,7 +63,7 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
         private string _text;
         public string Text
         {
-            get { return _text; }
+            get { return _outputSource[CurrentOutputContext]; }
         }
 
         #endregion
@@ -72,14 +72,14 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
         public OutputViewModel(DefaultWorkspace workspace,
                                IOutputToolboxToolbarService outputToolbox,
                                ICommandManager commandManager,
-                               IEventAggregator aggregator,
+                               IEventAggregator eventAggregator,
                                IOutputService outputService)
             : base(outputToolbox)
         {
             IsValidationEnabled = false;
 
             _outputToolbox = outputToolbox;
-            _aggregator = aggregator;
+            _eventAggregator = eventAggregator;
             _commandManager = commandManager;
             _outputService = outputService;
 
@@ -96,14 +96,14 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
             _view = new OutputUserControl(this);
             View = _view;
 
-            _aggregator.GetEvent<LogOutputEvent>().Subscribe(AddLog);
-            _aggregator.GetEvent<OutputSourceAddedEvent>().Subscribe(OutputSourceAddedEvent);
-            _aggregator.GetEvent<OutputSourceRemovedEvent>().Subscribe(OutputSourceRemovedEvent);
-            _aggregator.GetEvent<OutputSourceChangedEvent>().Subscribe(OutputSourceChangedEvent);
+            _eventAggregator.GetEvent<LogOutputEvent>().Subscribe(AddLog);
+            _eventAggregator.GetEvent<OutputSourceAddedEvent>().Subscribe(OutputSourceAddedEvent);
+            _eventAggregator.GetEvent<OutputSourceRemovedEvent>().Subscribe(OutputSourceRemovedEvent);
+            _eventAggregator.GetEvent<OutputSourceChangedEvent>().Subscribe(OutputSourceChangedEvent);
         }
 
         #endregion
-        
+
         #region Public Methods
         public void OutputSourceRefresh()
         {
@@ -112,43 +112,55 @@ namespace Mjolnir.IDE.Core.Modules.Output.ViewModels
 
         public void AddLog(LogOutputItem log)
         {
-            if (log.OutputSource != null && CurrentOutputContext == log.OutputSource)
+            if (!string.IsNullOrWhiteSpace(log.Message))
             {
-                _text = log.Message + "\n" + _text;
-                _outputSource[log.OutputSource] = _text;
-                OnPropertyChanged(() => Text);
-            }
-            else if (log.OutputSource != null && CurrentOutputContext != log.OutputSource)
-            {
-                //Apply to non selected output source
-                _outputSource[log.OutputSource] += log.Message + "\n" + _text;
-            }
-            else if (log.OutputSource == null)
-            {
-                //Append to default
-                _outputSource[DefaultOutputSource] += log.Message + "\n" + _text;
 
+                if (log.OutputSource != null)
+                {
+                    _outputSource[log.OutputSource] += log.Message + "\n";
+                }
+                else
+                {
+                    //Append to default
+                    _outputSource[DefaultOutputSource] += log.Message + "\n";
+                }
 
                 if (CurrentOutputContext == DefaultOutputSource)
                     OnPropertyChanged(() => Text);
             }
         }
 
-        public void ClearLog()
+        public void ClearCurrentContextLog()
         {
             _outputSource[CurrentOutputContext] = string.Empty;
             _text = string.Empty;
             OnPropertyChanged(() => Text);
         }
 
-        public void AddOutputSource()
+        public void AddOutputSource(string outputSourceKey)
         {
-            throw new NotImplementedException();
+            if (OutputSource.ContainsKey(outputSourceKey))
+                throw new ArgumentException($"{outputSourceKey} alread exist.");
+
+            _outputSource[outputSourceKey] = string.Empty;
+
+            _eventAggregator.GetEvent<OutputSourceAddedEvent>().Publish(new OutputSourceAddedEvent()
+            {
+                OutputSourceName = outputSourceKey
+            });
         }
 
-        public void RemoveOutputSource()
+        public void RemoveOutputSource(string outputSourceKey)
         {
-            throw new NotImplementedException();
+            if (!OutputSource.ContainsKey(outputSourceKey))
+                throw new ArgumentException($"{outputSourceKey} does not exist.");
+
+            _outputSource.Remove(outputSourceKey);
+
+            _eventAggregator.GetEvent<OutputSourceRemovedEvent>().Publish(new OutputSourceRemovedEvent()
+            {
+                OutputSourceName = outputSourceKey
+            });
         }
         #endregion
 

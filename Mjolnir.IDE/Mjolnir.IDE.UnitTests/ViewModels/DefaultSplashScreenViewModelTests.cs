@@ -3,12 +3,14 @@ using Mjolnir.IDE.Sdk.Events;
 using Moq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Mjolnir.IDE.Core.UnitTests.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     public class DefaultSplashScreenViewModelTests : ViewModelTestBase
     {
         private DefaultSplashScreenViewModel _viewModel;
