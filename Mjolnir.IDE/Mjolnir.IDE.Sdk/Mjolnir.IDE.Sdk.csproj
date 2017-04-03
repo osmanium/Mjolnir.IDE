@@ -110,11 +110,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commandable.cs" />
+    <Compile Include="Enums\MessageResult.cs" />
     <Compile Include="Enums\OutputCategory.cs" />
     <Compile Include="Enums\OutputPriority.cs" />
     <Compile Include="Events\IDEClosedEvent.cs" />
     <Compile Include="Events\IDEClosingEvent.cs" />
     <Compile Include="Events\IDELoadedEvent.cs" />
+    <Compile Include="Interfaces\Services\IFileDialogService.cs" />
+    <Compile Include="Interfaces\Services\IMessagingService.cs" />
     <Compile Include="LogOutputItem.cs" />
     <Compile Include="PrioritizedTree.cs" />
     <Compile Include="DefaultMenuItem.cs" />

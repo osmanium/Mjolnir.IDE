@@ -218,6 +218,8 @@
       <DependentUpon>DefaultNewFileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\ErrorListToolboxToolbarService.cs" />
+    <Compile Include="Services\FileDialogService.cs" />
+    <Compile Include="Services\MessageDialogService.cs" />
     <Compile Include="Services\OpenDocumentService.cs" />
     <Compile Include="Services\OutputToolboxToolbarService.cs" />
     <Compile Include="Services\PropertiesToolboxToolbarService.cs" />

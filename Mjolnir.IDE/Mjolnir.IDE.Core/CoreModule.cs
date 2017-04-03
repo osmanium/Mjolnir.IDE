@@ -90,11 +90,12 @@ namespace Mjolnir.IDE.Core
 
             _container.RegisterType<ISettingsManager, SettingsManager>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IOpenDocumentService, OpenDocumentService>(new ContainerControlledLifetimeManager());
-
-
+            _container.RegisterType<IMessageDialogService, DefaultMessageDialogService>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IFileDialogService, DefaultFileDialogService>(new ContainerControlledLifetimeManager());
             
 
-            
+
+
             AppCommands();
             LoadSettings();
 

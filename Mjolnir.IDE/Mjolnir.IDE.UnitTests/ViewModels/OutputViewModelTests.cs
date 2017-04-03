@@ -346,6 +346,7 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         }
 
 
+        //TODO : Move here to constructor like error list
         private OutputViewModel ViewModelFactory()
         {
             return new OutputViewModel(_workspace.Object,

@@ -21,19 +21,33 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
     [ExcludeFromCodeCoverage]
     public class ErrorListViewModelTests : ViewModelTestBase
     {
+        Mock<IErrorToolboxToolbarService> _errorToolboxToolbarService;
+        Mock<ErrorListUpdated> _errorListUpdatedEvent;
+        ErrorViewModel _errorViewModel;
+
+        public ErrorListViewModelTests()
+        {
+            _errorToolboxToolbarService = new Mock<IErrorToolboxToolbarService>();
+            _errorListUpdatedEvent = new Mock<ErrorListUpdated>();
+
+            _eventAggregator.Setup(ea => ea.GetEvent<ErrorListUpdated>())
+                .Returns(_errorListUpdatedEvent.Object);
+            _errorViewModel = new ErrorViewModel(_workspace.Object,
+                                            _errorToolboxToolbarService.Object,
+                                            _eventAggregator.Object);
+        }
 
         [WpfFact]
         public void Should_Log_New_Error()
         {
-            var viewModel = CreateErrorViewModelFactory ();
-            var logid = LogError(viewModel);
+            var logid = LogError(_errorViewModel);
 
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(1),
-                () => viewModel.FilteredItems.Count().ShouldBe(0),
-                () => viewModel.ErrorItemCount.ShouldBe(1),
-                () => viewModel.WarningItemCount.ShouldBe(0),
-                () => viewModel.MessageItemCount.ShouldBe(0)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(1),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(0),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(1),
+                () => _errorViewModel.WarningItemCount.ShouldBe(0),
+                () => _errorViewModel.MessageItemCount.ShouldBe(0)
             );
 
 
@@ -43,15 +57,14 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         [WpfFact]
         public void Should_Log_New_Warning()
         {
-            var viewModel = CreateErrorViewModelFactory();
-            var logid = LogWarning(viewModel);
+            var logid = LogWarning(_errorViewModel);
 
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(1),
-                () => viewModel.FilteredItems.Count().ShouldBe(0),
-                () => viewModel.ErrorItemCount.ShouldBe(0),
-                () => viewModel.WarningItemCount.ShouldBe(1),
-                () => viewModel.MessageItemCount.ShouldBe(0)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(1),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(0),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(0),
+                () => _errorViewModel.WarningItemCount.ShouldBe(1),
+                () => _errorViewModel.MessageItemCount.ShouldBe(0)
             );
 
             logid.ShouldNotBe(Guid.Empty);
@@ -60,15 +73,14 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         [WpfFact]
         public void Should_Log_New_Message()
         {
-            var viewModel = CreateErrorViewModelFactory();
-            var logid = LogMessage(viewModel);
+            var logid = LogMessage(_errorViewModel);
 
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(1),
-                () => viewModel.FilteredItems.Count().ShouldBe(0),
-                () => viewModel.ErrorItemCount.ShouldBe(0),
-                () => viewModel.WarningItemCount.ShouldBe(0),
-                () => viewModel.MessageItemCount.ShouldBe(1)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(1),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(0),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(0),
+                () => _errorViewModel.WarningItemCount.ShouldBe(0),
+                () => _errorViewModel.MessageItemCount.ShouldBe(1)
             );
 
             logid.ShouldNotBe(Guid.Empty);
@@ -78,321 +90,282 @@ namespace Mjolnir.IDE.Core.UnitTests.ViewModels
         [WpfFact]
         public void Should_Remove_Error()
         {
-            var viewModel = CreateErrorViewModelFactory();
-            var logid = LogError(viewModel);
+            var logid = LogError(_errorViewModel);
 
-            viewModel.ErrorItemCount.ShouldBe(1);
+            _errorViewModel.ErrorItemCount.ShouldBe(1);
             logid.ShouldNotBe(Guid.Empty);
 
-            viewModel.RemoveError(logid);
+            _errorViewModel.RemoveError(logid);
 
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.ErrorItemCount.ShouldBe(0),
-                () => viewModel.WarningItemCount.ShouldBe(0),
-                () => viewModel.MessageItemCount.ShouldBe(0)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.ErrorItemCount.ShouldBe(0),
+                () => _errorViewModel.WarningItemCount.ShouldBe(0),
+                () => _errorViewModel.MessageItemCount.ShouldBe(0)
             );
         }
 
         [WpfFact]
         public void Should_Remove_Warning()
         {
-            var viewModel = CreateErrorViewModelFactory();
-            var logid = LogWarning(viewModel);
+            var logid = LogWarning(_errorViewModel);
 
-            viewModel.WarningItemCount.ShouldBe(1);
+            _errorViewModel.WarningItemCount.ShouldBe(1);
             logid.ShouldNotBe(Guid.Empty);
 
-            viewModel.RemoveError(logid);
+            _errorViewModel.RemoveError(logid);
 
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.ErrorItemCount.ShouldBe(0),
-                () => viewModel.WarningItemCount.ShouldBe(0),
-                () => viewModel.MessageItemCount.ShouldBe(0)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.ErrorItemCount.ShouldBe(0),
+                () => _errorViewModel.WarningItemCount.ShouldBe(0),
+                () => _errorViewModel.MessageItemCount.ShouldBe(0)
             );
         }
 
         [WpfFact]
         public void Should_Remove_Message()
         {
-            var viewModel = CreateErrorViewModelFactory();
-            var logid = LogMessage(viewModel);
+            var logid = LogMessage(_errorViewModel);
 
-            viewModel.MessageItemCount.ShouldBe(1);
+            _errorViewModel.MessageItemCount.ShouldBe(1);
             logid.ShouldNotBe(Guid.Empty);
 
-            viewModel.RemoveError(logid);
+            _errorViewModel.RemoveError(logid);
 
-            viewModel.ShouldSatisfyAllConditions(
-               () => viewModel.ErrorItemCount.ShouldBe(0),
-               () => viewModel.WarningItemCount.ShouldBe(0),
-               () => viewModel.MessageItemCount.ShouldBe(0)
+            _errorViewModel.ShouldSatisfyAllConditions(
+               () => _errorViewModel.ErrorItemCount.ShouldBe(0),
+               () => _errorViewModel.WarningItemCount.ShouldBe(0),
+               () => _errorViewModel.MessageItemCount.ShouldBe(0)
            );
         }
 
-        
+
         [WpfFact]
         public void Should_Log_Multiple_Types()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(3),
-                () => viewModel.FilteredItems.Count().ShouldBe(0),
-                () => viewModel.ErrorItemCount.ShouldBe(1),
-                () => viewModel.WarningItemCount.ShouldBe(1),
-                () => viewModel.MessageItemCount.ShouldBe(1)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(3),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(0),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(1),
+                () => _errorViewModel.WarningItemCount.ShouldBe(1),
+                () => _errorViewModel.MessageItemCount.ShouldBe(1)
             );
         }
 
         [WpfFact]
         public void Should_Log_Multiple_Types_Repeated()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
-
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(9),
-                () => viewModel.FilteredItems.Count().ShouldBe(0),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(9),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(0),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
         [WpfFact]
         public void Should_Remove_Single_Error_From_Multiple_Types()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
+            var log = _errorViewModel.Items.First(f => f.ItemType == ErrorListItemType.Error);
+            _errorViewModel.RemoveError(log.Id);
 
-            var log = viewModel.Items.First(f=>f.ItemType == ErrorListItemType.Error);
-            viewModel.RemoveError(log.Id);
-
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(8),
-                () => viewModel.FilteredItems.Count().ShouldBe(0),
-                () => viewModel.ErrorItemCount.ShouldBe(2),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(8),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(0),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(2),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
         [WpfFact]
         public void Should_Remove_Single_Warning_From_Multiple_Types()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
+            var log = _errorViewModel.Items.First(f => f.ItemType == ErrorListItemType.Warning);
+            _errorViewModel.RemoveError(log.Id);
 
-            var log = viewModel.Items.First(f => f.ItemType == ErrorListItemType.Warning);
-            viewModel.RemoveError(log.Id);
-
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(8),
-                () => viewModel.FilteredItems.Count().ShouldBe(0),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(2),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(8),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(0),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(2),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
         [WpfFact]
         public void Should_Remove_Single_Message_From_Multiple_Types()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
+            var log = _errorViewModel.Items.First(f => f.ItemType == ErrorListItemType.Message);
+            _errorViewModel.RemoveError(log.Id);
 
-            var log = viewModel.Items.First(f => f.ItemType == ErrorListItemType.Message);
-            viewModel.RemoveError(log.Id);
-
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(8),
-                () => viewModel.FilteredItems.Count().ShouldBe(0),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(2)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(8),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(0),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(2)
             );
         }
 
 
-        
+
         [WpfFact]
         public void Should_Show_Filtered_Errors()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
+            _errorViewModel.ShowErrors = true;
 
-            viewModel.ShowErrors = true;
-
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(9),
-                () => viewModel.FilteredItems.Count().ShouldBe(3),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(9),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(3),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
         [WpfFact]
         public void Should_Show_Filtered_Warnings()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
+            _errorViewModel.ShowWarnings = true;
 
-            viewModel.ShowWarnings = true;
-
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(9),
-                () => viewModel.FilteredItems.Count().ShouldBe(3),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(9),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(3),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
         [WpfFact]
         public void Should_Show_Filtered_Messages()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
+            _errorViewModel.ShowMessages = true;
 
-            viewModel.ShowMessages = true;
-
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(9),
-                () => viewModel.FilteredItems.Count().ShouldBe(3),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(9),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(3),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
-        
+
         [WpfFact]
         public void Should_Show_Filtered_Errors_And_Warnings()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
-
-            viewModel.ShowErrors = true;
-            viewModel.ShowWarnings = true;
+            _errorViewModel.ShowErrors = true;
+            _errorViewModel.ShowWarnings = true;
 
 
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(9),
-                () => viewModel.FilteredItems.Count().ShouldBe(6),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(9),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(6),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
         [WpfFact]
         public void Should_Show_Filtered_Errors_And_Messages()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
-
-            viewModel.ShowErrors = true;
-            viewModel.ShowMessages = true;
+            _errorViewModel.ShowErrors = true;
+            _errorViewModel.ShowMessages = true;
 
 
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(9),
-                () => viewModel.FilteredItems.Count().ShouldBe(6),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(9),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(6),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
         [WpfFact]
         public void Should_Show_Filtered_Warnings_And_Messages()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
-
-            viewModel.ShowWarnings = true;
-            viewModel.ShowMessages = true;
+           _errorViewModel.ShowWarnings = true;
+            _errorViewModel.ShowMessages = true;
 
 
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(9),
-                () => viewModel.FilteredItems.Count().ShouldBe(6),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(9),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(6),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
         [WpfFact]
         public void Should_Show_Filtered_All_Types()
         {
-            var viewModel = CreateErrorViewModelFactory();
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
+            LogItems(_errorViewModel);
 
-            LogItems(viewModel);
-            LogItems(viewModel);
-            LogItems(viewModel);
+            _errorViewModel.ShowErrors = true;
+            _errorViewModel.ShowWarnings = true;
+            _errorViewModel.ShowMessages = true;
 
-            viewModel.ShowErrors = true;
-            viewModel.ShowWarnings = true;
-            viewModel.ShowMessages = true;
-            
-            viewModel.ShouldSatisfyAllConditions(
-                () => viewModel.Items.Count.ShouldBe(9),
-                () => viewModel.FilteredItems.Count().ShouldBe(9),
-                () => viewModel.ErrorItemCount.ShouldBe(3),
-                () => viewModel.WarningItemCount.ShouldBe(3),
-                () => viewModel.MessageItemCount.ShouldBe(3)
+            _errorViewModel.ShouldSatisfyAllConditions(
+                () => _errorViewModel.Items.Count.ShouldBe(9),
+                () => _errorViewModel.FilteredItems.Count().ShouldBe(9),
+                () => _errorViewModel.ErrorItemCount.ShouldBe(3),
+                () => _errorViewModel.WarningItemCount.ShouldBe(3),
+                () => _errorViewModel.MessageItemCount.ShouldBe(3)
             );
         }
 
-        
+
 
         #region Private Methods
-        private ErrorViewModel CreateErrorViewModelFactory()
-        {
-            Mock<IErrorToolboxToolbarService> _errorToolboxToolbarService = new Mock<IErrorToolboxToolbarService>();
 
-            var errorListUpdatedEvent = new Mock<ErrorListUpdated>();
-
-            _eventAggregator.Setup(ea => ea.GetEvent<ErrorListUpdated>())
-                .Returns(errorListUpdatedEvent.Object);
-
-            return new ErrorViewModel(_workspace.Object,
-                                            _errorToolboxToolbarService.Object,
-                                            _eventAggregator.Object);
-        }
 
         private Guid LogError(ErrorViewModel viewModel)
         {
