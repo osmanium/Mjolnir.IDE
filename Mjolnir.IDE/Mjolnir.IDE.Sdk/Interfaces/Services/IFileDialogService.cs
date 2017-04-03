@@ -22,6 +22,8 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Services
 
         Stream ShowSelectFileDialog(FileMode fileMode);
 
-        string ShowSaveFileDialog(Func<byte[]> fileContent);
+        string ShowSaveFileDialog(Func<string, string> fileContent);
+
+        void SetConfiguraion(bool checkPathExists, string defaultExt, string filter, string initialDirectory, string title);
     }
 }

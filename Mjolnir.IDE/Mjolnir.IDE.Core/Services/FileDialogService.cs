@@ -32,12 +32,23 @@ namespace Mjolnir.IDE.Core.Services
             _saveFileDialog = new SaveFileDialog();
         }
 
+        public void SetConfiguraion(bool checkPathExists, string defaultExt, string filter, string initialDirectory, string title)
+        {
+            _saveFileDialog.CheckPathExists = _openFileDialog.CheckPathExists = this.CheckPathExists = checkPathExists;
+            _saveFileDialog.DefaultExt = _openFileDialog.DefaultExt = this.DefaultExt = defaultExt;
+            _saveFileDialog.Filter = _openFileDialog.Filter = this.Filter = filter;
+            _saveFileDialog.InitialDirectory = _openFileDialog.InitialDirectory = this.InitialDirectory = initialDirectory;
+            _saveFileDialog.Title = _openFileDialog.Title = this.Title = title;
+        }
+
+        
+
         #region Save File Dialog
-        public string ShowSaveFileDialog(Func<byte[]> fileContent)
+        public string ShowSaveFileDialog(Func<string, string> fileContent)
         {
             string filePath = string.Empty;
 
-            if (fileContent == null)
+            if (fileContent?.Method != null)
             {
                 var result = _saveFileDialog.ShowDialog();
                 if (result != null && result == true)
@@ -46,7 +57,7 @@ namespace Mjolnir.IDE.Core.Services
                     {
                         using (StreamWriter sw = new StreamWriter(_saveFileDialog.FileName, false, Encoding.UTF8))
                         {
-                            var content = fileContent();
+                            var content = fileContent(_saveFileDialog.FileName);
                             sw.Write(content);
                         }
 
