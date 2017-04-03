@@ -21,6 +21,7 @@ namespace Mjolnir.IDE.Core.Services
         public string FileName { get; set; }
         public string Filter { get; set; }
         public string InitialDirectory { get; set; }
+        public string Title { get; set; }
 
 
         public DefaultFileDialogService(IMessageDialogService iMessageDialogService)
@@ -32,21 +33,21 @@ namespace Mjolnir.IDE.Core.Services
         }
 
         #region Save File Dialog
-        public string ShowSaveFileDialog(byte[] fileContent)
+        public string ShowSaveFileDialog(Func<byte[]> fileContent)
         {
             string filePath = string.Empty;
 
-            if (fileContent != null)
+            if (fileContent == null)
             {
                 var result = _saveFileDialog.ShowDialog();
-
                 if (result != null && result == true)
                 {
                     try
                     {
                         using (StreamWriter sw = new StreamWriter(_saveFileDialog.FileName, false, Encoding.UTF8))
                         {
-                            sw.Write(fileContent);
+                            var content = fileContent();
+                            sw.Write(content);
                         }
 
                         filePath = _saveFileDialog.FileName;
@@ -54,11 +55,10 @@ namespace Mjolnir.IDE.Core.Services
                     catch (Exception ex)
                     {
                         //TODO : Move Error to constants
-                        _iMessageDialogService.ShowOkMessageBox("Error",ex.Message);
+                        _iMessageDialogService.ShowOkMessageBox("Error", ex.Message);
                     }
                 }
             }
-
             return filePath;
         }
         #endregion

@@ -17,10 +17,11 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Services
         string FileName { get; set; }
         string Filter { get; set; }
         string InitialDirectory { get; set; }
+        string Title { get; set; }
 
 
         Stream ShowSelectFileDialog(FileMode fileMode);
 
-        string ShowSaveFileDialog(byte[] fileContent);
+        string ShowSaveFileDialog(Func<byte[]> fileContent);
     }
 }
