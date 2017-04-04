@@ -20,9 +20,9 @@ namespace Mjolnir.IDE.Sdk.Interfaces.Services
         string Title { get; set; }
 
 
-        Stream ShowSelectFileDialog(FileMode fileMode);
+        string ShowSelectFileDialog();
 
-        string ShowSaveFileDialog(Func<string, string> fileContent);
+        string ShowSaveFileDialog();
 
         void SetConfiguraion(bool checkPathExists, string defaultExt, string filter, string initialDirectory, string title);
     }

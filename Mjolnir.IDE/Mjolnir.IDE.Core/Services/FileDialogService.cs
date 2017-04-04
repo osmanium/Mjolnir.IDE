@@ -41,46 +41,30 @@ namespace Mjolnir.IDE.Core.Services
             _saveFileDialog.Title = _openFileDialog.Title = this.Title = title;
         }
 
-        
+
 
         #region Save File Dialog
-        public string ShowSaveFileDialog(Func<string, string> fileContent)
+        public string ShowSaveFileDialog()
         {
             string filePath = string.Empty;
-
-            if (fileContent?.Method != null)
+            
+            var result = _saveFileDialog.ShowDialog();
+            if (result != null && result == true)
             {
-                var result = _saveFileDialog.ShowDialog();
-                if (result != null && result == true)
-                {
-                    try
-                    {
-                        using (StreamWriter sw = new StreamWriter(_saveFileDialog.FileName, false, Encoding.UTF8))
-                        {
-                            var content = fileContent(_saveFileDialog.FileName);
-                            sw.Write(content);
-                        }
-
-                        filePath = _saveFileDialog.FileName;
-                    }
-                    catch (Exception ex)
-                    {
-                        //TODO : Move Error to constants
-                        _iMessageDialogService.ShowOkMessageBox("Error", ex.Message);
-                    }
-                }
+                filePath = _saveFileDialog.FileName;
             }
+
             return filePath;
         }
         #endregion
 
         #region Open File Dialog
-        public Stream ShowSelectFileDialog(FileMode fileMode)
+        public string ShowSelectFileDialog()
         {
             var result = _openFileDialog.ShowDialog();
             if (result != null && result == true)
             {
-                return new FileStream(_openFileDialog.FileName, fileMode);
+                return _openFileDialog.FileName;
             }
             return null;
         }
